@@ -5,7 +5,7 @@ export class Veterinaria {
 
   private clientes: Cliente[] = [];
   private proveedores: Proveedores[] = [];
-  private pacientes: Placientes[] = [];
+  private pacientes: Pacientes[] = [];
 
   constructor(id: number, nombre: string, direccion: string) {
     this.id = id;
