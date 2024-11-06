@@ -1,11 +1,14 @@
+import { Cliente } from './Cliente.ts';
+import { Proveedor } from './Proveedor.ts';
+import { Paciente } from './Paciente'
 export class Veterinaria {
   private id: number;
   private nombre: string;
   private direccion: string;
 
   private clientes: Cliente[] = [];
-  private proveedores: Proveedores[] = [];
-  private pacientes: Pacientes[] = [];
+  private proveedores: Proveedor[] = [];
+  private pacientes: Paciente[] = [];
 
   constructor(id: number, nombre: string, direccion: string) {
     this.id = id;
