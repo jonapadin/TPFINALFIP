@@ -1,5 +1,5 @@
 import { Veterinaria } from "./Veterinaria";
-export class Proveedores {
+export class Proveedor {
     private id: string;
     private nombre: string;
     private telefono: number;
