@@ -1,9 +1,9 @@
 
 import { Veterinaria } from "./Veterinaria";
 export class Cliente extends Veterinaria {
-    private telefono: number
-    private esVip: boolean;
-    private cantVisitas: number;
+    protected telefono: number
+    protected esVip: boolean;
+    protected cantVisitas: number;
 
     constructor(id: number, nombre: string, direccion: string, telefono: number, esVip: boolean, cantVisitas: number) {
         super(id, nombre, direccion)
@@ -13,6 +13,6 @@ export class Cliente extends Veterinaria {
     }
 
  public getId(): number {
-    
+    return 
  }
 }
