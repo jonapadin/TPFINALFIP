@@ -16,6 +16,7 @@ export class Cliente extends Veterinaria {
     return this.id;
  }
  public setId(Id:number){
+    this.id = Id;
     
  }
 }
