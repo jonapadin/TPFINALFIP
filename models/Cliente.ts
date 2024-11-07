@@ -6,7 +6,7 @@ export class Cliente extends Veterinaria {
     protected cantVisitas: number;
 
     constructor(id: number, nombre: string, direccion: string, telefono: number, esVip: boolean, cantVisitas: number) {
-        super(id, nombre, direccion)
+        super(id, nombre, direccion,telefono)
         this.telefono = telefono;
         this.esVip = esVip;
         this.cantVisitas = cantVisitas

@@ -5,15 +5,17 @@ export class Veterinaria {
   protected id: number;
   protected nombre: string;
   protected direccion: string;
+  protected telefono:number;
 
   private clientes: Cliente[] = [];
   private proveedores: Proveedor[] = [];
   private pacientes: Paciente[] = [];
 
-  constructor(id: number, nombre: string, direccion: string) {
+  constructor(id: number, nombre: string, direccion: string,telefono:number) {
     this.id = id;
     this.nombre = nombre;
     this.direccion = direccion;
+    this.telefono= telefono;
   }
 
 
