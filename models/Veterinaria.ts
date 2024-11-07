@@ -1,4 +1,4 @@
-import { Cliente } from './Cliente.ts';
+import { Cliente}  from './Cliente.ts';
 import { Proveedor } from './Proveedor.ts';
 import { Paciente } from './Paciente'
 export class Veterinaria {
