@@ -2,9 +2,9 @@ import { Cliente } from './Cliente.ts';
 import { Proveedor } from './Proveedor.ts';
 import { Paciente } from './Paciente'
 export class Veterinaria {
-  private id: number;
-  private nombre: string;
-  private direccion: string;
+  protected id: number;
+  protected nombre: string;
+  protected direccion: string;
 
   private clientes: Cliente[] = [];
   private proveedores: Proveedor[] = [];
