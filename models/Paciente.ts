@@ -7,7 +7,7 @@ export class Paciente extends Cliente {
     protected idDuenio: number;
 
     constructor(id:number, nombre:string,especie:string,idDuenio:number){
-        super(id, nombre)
+        super(id,nombre,telefono,esVip,cantVisitas)
         this.especie = especie;
         this.idDuenio = idDuenio;
     }
