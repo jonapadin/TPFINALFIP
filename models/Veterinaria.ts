@@ -2,10 +2,10 @@ import { Cliente } from './Cliente';
 import { Proveedor } from './Proveedor';
 import { Paciente } from './Paciente'
 export class Veterinaria {
-  protected id: number;
-  protected nombre: string;
-  protected direccion: string;
-  protected telefono: number;
+  private id: number;
+  private nombre: string;
+  private direccion: string;
+  private telefono: number;
 
   private clientes: Cliente[] = [];
   private proveedores: Proveedor[] = [];
