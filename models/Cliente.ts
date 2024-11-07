@@ -12,11 +12,40 @@ export class Cliente extends Veterinaria {
         this.cantVisitas = cantVisitas
     }
 
- public getId(): number {
-    return this.id;
- }
- public setId(Id:number){
-    this.id = Id;
-    
- }
+    public getId(): number {
+        return this.id;
+    }
+    public setId(Id: number) {
+        this.id = Id;
+    }
+    getNombre(): string {
+        return this.nombre
+    }
+    setNombre(nombre: string): void {
+        this.nombre = nombre;
+    }
+    getDireccion(): string {
+        return this.direccion;
+    }
+    setDireccion(direccion: string): void {
+        this.direccion = direccion
+    }
+    getTelefono(): number {
+        return this.telefono
+    }
+    setTelefono(telefono: number): void {
+        this.telefono = telefono
+    }
+    getEsVip(): boolean {
+        return this.esVip
+    }
+    setEsVip(esVip: boolean): void {
+        this.esVip = esVip
+    }
+    getCantVisitas(): number {
+        return this.cantVisitas
+    }
+    setCantVisitas(cantVisitas: number): void {
+        this.cantVisitas = cantVisitas;
+    }
 }
