@@ -89,5 +89,4 @@ export class Veterinaria {
     return this.direccion;
   }
 
-
 }
