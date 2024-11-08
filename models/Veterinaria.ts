@@ -1,6 +1,7 @@
 import { Cliente } from './Cliente';
 import { Proveedor } from './Proveedor';
 import { Paciente } from './Paciente'
+
 export class Veterinaria {
   private id: number;
   private nombre: string;
@@ -18,7 +19,6 @@ export class Veterinaria {
     this.telefono = telefono;
   }
 
-
   agregarCliente(cliente: Cliente) {
     this.clientes.push(cliente);
   }
@@ -34,8 +34,8 @@ export class Veterinaria {
     this.clientes = this.clientes.filter((c => c.getId() !== id));
   }
 
-  agregarPaciente(paciente: Paciente) {
-    this.clientes.push(paciente);
+  agregarPaciente(pacientes: Paciente) {
+    this.pacientes.push(pacientes);
   }
 
   modificarPaciente(id: number, nombre?: string, telefono?: number) {
@@ -62,13 +62,9 @@ export class Veterinaria {
     }
   }
 
-
-
   eliminarProveedor(id: number) {
     this.proveedores = this.proveedores.filter((pr => pr.getId() !== id));
   }
-
-
 
   public setId(id: number): void {
     this.id = id;
@@ -81,6 +77,11 @@ export class Veterinaria {
     this.direccion = direccion;
   }
 
+  public setTelefono(telefono: number): void {
+    this.telefono = telefono;
+  }
+
+
   public getId(): number {
     return this.id;
   }
@@ -90,5 +91,9 @@ export class Veterinaria {
 
   public getDireccion(): string {
     return this.direccion;
+  }
+
+  public getTelefono():number{
+    return this.telefono;
   }
 }
