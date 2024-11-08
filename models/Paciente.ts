@@ -1,27 +1,86 @@
-<<<<<<< HEAD
-import {Cliente} from "./Cliente";
+export class Paciente{
+    private id:number;
+    private nombre:string;
+    private direccion:string;
+    private telefono:number;
+    private esVip:boolean;
+    private cantVisitas:number;
+    private especie: string;
+    private idDuenio: number;
 
-export class Paciente extends Cliente {
-    protected especie : string;
-    protected idDuenio: number;
-
-    constructor(id:number, nombre:string,especie:string,idDuenio:number){
-        super(id,nombre,direccion,telefono,esVip,cantVisitas)
+    constructor(id: number, nombre: string, direccion: string, telefono: number, esVip: boolean, cantVisitas: number, especie: string, idDuenio: number) {
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.esVip = esVip;
+        this.cantVisitas = cantVisitas;
         this.especie = especie;
         this.idDuenio = idDuenio;
     }
-}
-=======
-import { Cliente } from "./Cliente"
+    
 
-export class Paciente extends Cliente {
-  private especie: string;
-  private idDuenio: number;
+    public getId(): number {
+        return this.id;
+    }
 
-  constructor(id: number, nombre: string, direccion: string, telefono: number, esVip: boolean, cantVisitas: number, especie: string, idDuenio: number) {
-    super(id, nombre, direccion, telefono, esVip, cantVisitas)
-    this.especie = especie;
-    this.idDuenio = idDuenio;
-  }
+    public setId(id: number): void {
+        this.id = id;
+    }
+
+    public getNombre(): string {
+        return this.nombre;
+    }
+
+    public setNombre(nombre: string): void {
+        this.nombre = nombre;
+    }
+
+    public getDireccion(): string {
+        return this.direccion;
+    }
+
+    public setDireccion(direccion: string): void {
+        this.direccion = direccion;
+    }
+
+    public getTelefono(): number {
+        return this.telefono;
+    }
+
+    public setTelefono(telefono: number): void {
+        this.telefono = telefono;
+    }
+
+    public isEsVip(): boolean {
+        return this.esVip;
+    }
+
+    public setEsVip(esVip: boolean): void {
+        this.esVip = esVip;
+    }
+
+    public getCantVisitas(): number {
+        return this.cantVisitas;
+    }
+
+    public setCantVisitas(cantVisitas: number): void {
+        this.cantVisitas = cantVisitas;
+    }
+
+    public getEspecie(): string {
+        return this.especie;
+    }
+
+    public setEspecie(especie: string): void {
+        this.especie = especie;
+    }
+
+    public getIdDuenio(): number {
+        return this.idDuenio;
+    }
+
+    public setIdDuenio(idDuenio: number): void {
+        this.idDuenio = idDuenio;
+    }
 }
->>>>>>> refs/remotes/origin/main
