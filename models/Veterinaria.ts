@@ -12,8 +12,8 @@ export class Veterinaria {
   private proveedores: Proveedor[] = [];
   private pacientes: Paciente[] = [];
 
-  constructor(id: number, nombre: string, direccion: string,) {
-    this.id = id;
+  constructor(nombre: string, direccion: string,) {
+    this.id = Math.floor(Math.random() * 1000);
     this.nombre = nombre;
     this.direccion = direccion;
 

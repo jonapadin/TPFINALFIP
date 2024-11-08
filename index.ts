@@ -4,13 +4,13 @@ import { Proveedor } from "./models/Proveedor";
 import { Veterinaria } from "./models/Veterinaria";
 
 
-let veterinaria1 = new Veterinaria(1, "scooby", "Av libertador 2323");
+let veterinaria1 = new Veterinaria("scooby", "Av libertador 2323");
 
-let proveedor1 = new Proveedor(1, "Pedro", 665298);
+let proveedor1 = new Proveedor("Pedro", 665298);
 
-let cliente1 = new Cliente(1, "Omar", "AvBaltica 2323,54654", 3)
+let cliente1 = new Cliente("Omar", "AvBaltica 2323,54654", 3)
 
-let paciente1 = new Paciente(3, "Firulai", "anfiel2334", 545646, true, 6, "Perro", cliente1.getId())
+let paciente1 = new Paciente("Firulai", "anfiel2334", 545646, true, 6, "Perro", cliente1.getId())
 
 veterinaria1.agregarCliente(cliente1);
 veterinaria1.agregarProveedor(proveedor1);
@@ -22,7 +22,7 @@ veterinaria1.eliminarCliente(1);
 
 console.log(veterinaria1);
 
-veterinaria1.modificarProveedor(1, "pepe", 23232323);
+veterinaria1.modificarProveedor(proveedor1.getId(), "pepe", 23232323)
 
 console.log(veterinaria1);
 

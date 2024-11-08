@@ -3,8 +3,8 @@ export class Proveedor {
   private nombre: string;
   private telefono: number;
 
-  constructor(id: number, nombre: string, telefono: number) {
-    this.id = id;
+  constructor(nombre: string, telefono: number) {
+    this.id = Math.floor(Math.random() * 1000);
     this.nombre = nombre;
     this.telefono = telefono;
   }

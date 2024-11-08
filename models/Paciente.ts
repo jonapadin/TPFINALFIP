@@ -1,86 +1,86 @@
-export class Paciente{
-    private id:number;
-    private nombre:string;
-    private direccion:string;
-    private telefono:number;
-    private esVip:boolean;
-    private cantVisitas:number;
-    private especie: string;
-    private idDuenio: number;
+export class Paciente {
+  private id: number;
+  private nombre: string;
+  private direccion: string;
+  private telefono: number;
+  private esVip: boolean;
+  private cantVisitas: number;
+  private especie: string;
+  private idDuenio: number;
 
-    constructor(id: number, nombre: string, direccion: string, telefono: number, esVip: boolean, cantVisitas: number, especie: string, idDuenio: number) {
-        this.id = id;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.esVip = esVip;
-        this.cantVisitas = cantVisitas;
-        this.especie = especie;
-        this.idDuenio = idDuenio;
-    }
-    
+  constructor(nombre: string, direccion: string, telefono: number, esVip: boolean, cantVisitas: number, especie: string, idDuenio: number) {
+    this.id = Math.floor(Math.random() * 1000);
+    this.nombre = nombre;
+    this.direccion = direccion;
+    this.telefono = telefono;
+    this.esVip = esVip;
+    this.cantVisitas = cantVisitas;
+    this.especie = especie;
+    this.idDuenio = idDuenio;
+  }
 
-    public getId(): number {
-        return this.id;
-    }
 
-    public setId(id: number): void {
-        this.id = id;
-    }
+  public getId(): number {
+    return this.id;
+  }
 
-    public getNombre(): string {
-        return this.nombre;
-    }
+  public setId(id: number): void {
+    this.id = id;
+  }
 
-    public setNombre(nombre: string): void {
-        this.nombre = nombre;
-    }
+  public getNombre(): string {
+    return this.nombre;
+  }
 
-    public getDireccion(): string {
-        return this.direccion;
-    }
+  public setNombre(nombre: string): void {
+    this.nombre = nombre;
+  }
 
-    public setDireccion(direccion: string): void {
-        this.direccion = direccion;
-    }
+  public getDireccion(): string {
+    return this.direccion;
+  }
 
-    public getTelefono(): number {
-        return this.telefono;
-    }
+  public setDireccion(direccion: string): void {
+    this.direccion = direccion;
+  }
 
-    public setTelefono(telefono: number): void {
-        this.telefono = telefono;
-    }
+  public getTelefono(): number {
+    return this.telefono;
+  }
 
-    public isEsVip(): boolean {
-        return this.esVip;
-    }
+  public setTelefono(telefono: number): void {
+    this.telefono = telefono;
+  }
 
-    public setEsVip(esVip: boolean): void {
-        this.esVip = esVip;
-    }
+  public isEsVip(): boolean {
+    return this.esVip;
+  }
 
-    public getCantVisitas(): number {
-        return this.cantVisitas;
-    }
+  public setEsVip(esVip: boolean): void {
+    this.esVip = esVip;
+  }
 
-    public setCantVisitas(cantVisitas: number): void {
-        this.cantVisitas = cantVisitas;
-    }
+  public getCantVisitas(): number {
+    return this.cantVisitas;
+  }
 
-    public getEspecie(): string {
-        return this.especie;
-    }
+  public setCantVisitas(cantVisitas: number): void {
+    this.cantVisitas = cantVisitas;
+  }
 
-    public setEspecie(especie: string): void {
-        this.especie = especie;
-    }
+  public getEspecie(): string {
+    return this.especie;
+  }
 
-    public getIdDuenio(): number {
-        return this.idDuenio;
-    }
+  public setEspecie(especie: string): void {
+    this.especie = especie;
+  }
 
-    public setIdDuenio(idDuenio: number): void {
-        this.idDuenio = idDuenio;
-    }
+  public getIdDuenio(): number {
+    return this.idDuenio;
+  }
+
+  public setIdDuenio(idDuenio: number): void {
+    this.idDuenio = idDuenio;
+  }
 }
