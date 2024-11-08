@@ -4,7 +4,7 @@ import { Proveedor } from "./models/Proveedor";
 import { Veterinaria } from "./models/Veterinaria";
 
 
-let veterinaria1 = new Veterinaria(1, "scooby", "Libertador 3200", 6545646);
+let veterinaria1 = new Veterinaria(1, "scooby", "Av libertador 2323");
 
 let proveedor1 = new Proveedor(1, "Pedro", 665298);
 
@@ -17,4 +17,14 @@ veterinaria1.agregarProveedor(proveedor1);
 veterinaria1.agregarPaciente(paciente1);
 
 console.log(veterinaria1);
+
+veterinaria1.eliminarCliente(1);
+
+console.log(veterinaria1);
+
+veterinaria1.modificarProveedor(1, "pepe", 23232323);
+
+console.log(veterinaria1);
+
+
 

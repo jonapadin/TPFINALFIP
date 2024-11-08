@@ -38,8 +38,8 @@ export class Veterinaria {
     this.pacientes.push(pacientes);
   }
 
-  modificarPaciente(id: number, nombre?: string, especie: string) {
-    const paciente = this.clientes.find(pac => pac.getId() === id);
+  modificarPaciente(id: number, nombre?: string, especie?: string) {
+    const paciente = this.pacientes.find(pac => pac.getId() === id);
     if (paciente) {
       if (nombre) paciente.setNombre(nombre);
       if (especie) paciente.setEspecie(especie);
@@ -55,7 +55,7 @@ export class Veterinaria {
   }
 
   modificarProveedor(id: number, nombre?: string, telefono?: number) {
-    const proveedor = this.clientes.find(pr => pr.getId() === id);
+    const proveedor = this.proveedores.find(pr => pr.getId() === id);
     if (proveedor) {
       if (nombre) proveedor.setNombre(nombre);
       if (telefono) proveedor.setTelefono(telefono);
@@ -77,10 +77,6 @@ export class Veterinaria {
     this.direccion = direccion;
   }
 
-  public setTelefono(telefono: number): void {
-    this.telefono = telefono;
-  }
-
 
   public getId(): number {
     return this.id;
@@ -93,7 +89,5 @@ export class Veterinaria {
     return this.direccion;
   }
 
-  public getTelefono():number{
-    return this.telefono;
-  }
+
 }
