@@ -5,17 +5,17 @@ export class Veterinaria {
   private id: number;
   private nombre: string;
   private direccion: string;
-  private telefono: number;
+
 
   private clientes: Cliente[] = [];
   private proveedores: Proveedor[] = [];
   private pacientes: Paciente[] = [];
 
-  constructor(id: number, nombre: string, direccion: string, telefono: number) {
+  constructor(id: number, nombre: string, direccion: string,) {
     this.id = id;
     this.nombre = nombre;
     this.direccion = direccion;
-    this.telefono = telefono;
+
   }
 
 
@@ -38,11 +38,11 @@ export class Veterinaria {
     this.clientes.push(paciente);
   }
 
-  modificarPaciente(id: number, nombre?: string, telefono?: number) {
+  modificarPaciente(id: number, nombre?: string, especie: string) {
     const paciente = this.clientes.find(pac => pac.getId() === id);
     if (paciente) {
       if (nombre) paciente.setNombre(nombre);
-      if (telefono) paciente.setTelefono(telefono);
+      if (especie) paciente.setEspecie(especie);
     }
   }
 
