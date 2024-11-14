@@ -1,7 +1,6 @@
 export class Cliente {
   private id: number;
   private nombre: string;
-  private direccion: string;
   private telefono: number;
   private esVip: boolean;
   private cantVisitas: number;
@@ -9,7 +8,6 @@ export class Cliente {
   constructor(nombre: string, direccion: string, telefono: number, esVip: boolean = false, cantVisitas: number = 0) {
     this.id = Math.floor(Math.random() * 1000);
     this.nombre = nombre;
-    this.direccion = direccion;
     this.telefono = telefono;
     this.esVip = esVip;
     this.cantVisitas = cantVisitas;
@@ -31,13 +29,8 @@ export class Cliente {
     this.nombre = nombre;
   }
 
-  public getDireccion(): string {
-    return this.direccion;
-  }
 
-  public setDireccion(direccion: string): void {
-    this.direccion = direccion;
-  }
+
 
   public getTelefono(): number {
     return this.telefono;

@@ -1,32 +1,16 @@
 export class Paciente {
-  private id: number;
+
   private nombre: string;
-  private direccion: string;
-  private telefono: number;
-  private esVip: boolean;
-  private cantVisitas: number;
+
   private especie: string;
   private idDuenio: number;
 
-  constructor(nombre: string, direccion: string, telefono: number, esVip: boolean, cantVisitas: number, especie: string, idDuenio: number) {
-    this.id = Math.floor(Math.random() * 1000);
+  constructor(nombre: string, especie: string, idDuenio: number) {
     this.nombre = nombre;
-    this.direccion = direccion;
-    this.telefono = telefono;
-    this.esVip = esVip;
-    this.cantVisitas = cantVisitas;
-    this.especie = especie;
+    this.especie = (especie === "Perro" || especie === "Gato") ? especie : "Exotica";
     this.idDuenio = idDuenio;
   }
 
-
-  public getId(): number {
-    return this.id;
-  }
-
-  public setId(id: number): void {
-    this.id = id;
-  }
 
   public getNombre(): string {
     return this.nombre;
@@ -34,38 +18,6 @@ export class Paciente {
 
   public setNombre(nombre: string): void {
     this.nombre = nombre;
-  }
-
-  public getDireccion(): string {
-    return this.direccion;
-  }
-
-  public setDireccion(direccion: string): void {
-    this.direccion = direccion;
-  }
-
-  public getTelefono(): number {
-    return this.telefono;
-  }
-
-  public setTelefono(telefono: number): void {
-    this.telefono = telefono;
-  }
-
-  public isEsVip(): boolean {
-    return this.esVip;
-  }
-
-  public setEsVip(esVip: boolean): void {
-    this.esVip = esVip;
-  }
-
-  public getCantVisitas(): number {
-    return this.cantVisitas;
-  }
-
-  public setCantVisitas(cantVisitas: number): void {
-    this.cantVisitas = cantVisitas;
   }
 
   public getEspecie(): string {

@@ -1,5 +1,4 @@
 import { Cliente } from './Cliente';
-import { Proveedor } from './Proveedor';
 import { Paciente } from './Paciente'
 
 export class Veterinaria {
@@ -9,7 +8,6 @@ export class Veterinaria {
 
 
   private clientes: Cliente[] = [];
-  private proveedores: Proveedor[] = [];
   private pacientes: Paciente[] = [];
 
   constructor(nombre: string, direccion: string,) {
@@ -39,7 +37,7 @@ export class Veterinaria {
   }
 
   modificarPaciente(id: number, nombre?: string, especie?: string) {
-    const paciente = this.pacientes.find(pac => pac.getId() === id);
+    const paciente = this.pacientes.find(pac => pac.getIdDuenio() === id);
     if (paciente) {
       if (nombre) paciente.setNombre(nombre);
       if (especie) paciente.setEspecie(especie);
@@ -47,24 +45,10 @@ export class Veterinaria {
   }
 
   eliminarPaciente(id: number) {
-    this.pacientes = this.pacientes.filter((pac => pac.getId() !== id));
+    this.pacientes = this.pacientes.filter((pac => pac.getIdDuenio() !== id));
   }
 
-  agregarProveedor(proveedor: Proveedor) {
-    this.proveedores.push(proveedor);
-  }
 
-  modificarProveedor(id: number, nombre?: string, telefono?: number) {
-    const proveedor = this.proveedores.find(pr => pr.getId() === id);
-    if (proveedor) {
-      if (nombre) proveedor.setNombre(nombre);
-      if (telefono) proveedor.setTelefono(telefono);
-    }
-  }
-
-  eliminarProveedor(id: number) {
-    this.proveedores = this.proveedores.filter((pr => pr.getId() !== id));
-  }
 
   public setId(id: number): void {
     this.id = id;
