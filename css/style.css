@@ -1,5 +1,11 @@
 .ocultar {
-    display: none;
-    
-    }
+  display: none;
+}
 
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+.input-error {
+  border-color: red;
+}

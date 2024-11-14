@@ -1,23 +1,36 @@
-const form = document.getElementById("formInicio");
-const usuario= document.getElementById("usuario");
-const pass= document.getElementById("pass")
-const btn = document.getElementById("btn")
-const errorU = document.getElementById("errorUsuario");
-const errorP = document.getElementById ("errorPass")
+const form = document.getElementById("formInicio") as HTMLFormElement;
+const usuario = document.getElementById("usuario") as HTMLInputElement;
+const pass = document.getElementById("pass") as HTMLInputElement;
+const btn = document.getElementById("btn") as HTMLButtonElement ;
+const errorU = document.getElementById("errorUsuario") as HTMLSpanElement;
+const errorP = document.getElementById("errorPass") as HTMLSpanElement;
 
+function validarForm(): boolean {
+    let esValido = true;
+    if(!usuario.value.trim()){
+         errorU.classList.remove("ocultar");
+         esValido = false;
+    } else {
+        errorU.classList.add("ocultar");
+    }
 
-function validarForm(){
-    let validar:boolean = true;
-    errorU.remove("ocultar")   
+    if(!pass.value.trim()){
+        errorP.classList.remove("ocultar");
+        esValido = false;
+   } else {
+       errorP.classList.add("ocultar");
+   }
 
+   return esValido
 }
 
-
-
-/*const btn = document.getElementById("btn");
-console.log(btn);*/
 form?.addEventListener("submit", function(event){
-    event.preventDefault()
+    event.preventDefault();
+
+    if(!validarForm){
+        return
+    }
+
     const formData = new FormData(form as HTMLFormElement, btn as HTMLElement);
     console.log(formData);
 
