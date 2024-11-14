@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Document</title>
 </head>
 <body>
@@ -12,13 +14,15 @@
                 <label for="usuario">
                     <h2>Usuario: </h2>
                 </label>
-                <input type="text" placeholder="Ej. Esteban">
+                <input type="text" id="usuario"placeholder="Ej.Usuario" required>
+                <span id="errorUsuario" class="ocultar">Usuario incorrecto</span>
             </div>
             <div>
                 <label for="contraseña">
                     <h2>contraseña: </h2>
                 </label>
-                <input type="password" placeholder="*****">
+                <input type="password" id="pass" placeholder="contraseña" required>
+                <span id="errorPass" class="ocultar">Contraseña incorrecto</span>
             </div>
             <button type="submit" id="btn">login</button>
         </form>
