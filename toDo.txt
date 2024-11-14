@@ -1,0 +1,2 @@
+crear menu principal - administra veterinarias y proveedor
+crear menu vetrinaria - mostrar lista de pacientes - agregar/eliminar cliente/paciente
