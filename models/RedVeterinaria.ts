@@ -1,5 +1,6 @@
 import { Veterinaria } from "./Veterinaria"
 import { Proveedor } from "./Proveedor"
+
 export class RedVeterinaria{
     private veterinarias : Veterinaria [];
     private proveedores : Proveedor [];

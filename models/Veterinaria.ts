@@ -2,11 +2,10 @@ import { Cliente } from './Cliente';
 import { Paciente } from './Paciente'
 
 export class Veterinaria {
+
   private id: number;
   private nombre: string;
   private direccion: string;
-
-
   private clientes: Cliente[] = [];
   private pacientes: Paciente[] = [];
 
@@ -14,7 +13,6 @@ export class Veterinaria {
     this.id = Math.floor(Math.random() * 1000);
     this.nombre = nombre;
     this.direccion = direccion;
-
   }
 
   agregarCliente(cliente: Cliente) {
@@ -48,8 +46,6 @@ export class Veterinaria {
     this.pacientes = this.pacientes.filter((pac => pac.getIdDuenio() !== id));
   }
 
-
-
   public setId(id: number): void {
     this.id = id;
   }
@@ -61,7 +57,6 @@ export class Veterinaria {
     this.direccion = direccion;
   }
 
-
   public getId(): number {
     return this.id;
   }
@@ -72,5 +67,4 @@ export class Veterinaria {
   public getDireccion(): string {
     return this.direccion;
   }
-
 }

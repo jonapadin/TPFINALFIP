@@ -1,4 +1,5 @@
 export class Proveedor {
+
   private id: number;
   private nombre: string;
   private telefono: number;
@@ -33,4 +34,3 @@ export class Proveedor {
     this.telefono = telefono;
   }
 }
-

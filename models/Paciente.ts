@@ -1,7 +1,6 @@
 export class Paciente {
 
   private nombre: string;
-
   private especie: string;
   private idDuenio: number;
 
@@ -10,7 +9,6 @@ export class Paciente {
     this.especie = (especie === "Perro" || especie === "Gato") ? especie : "Exotica";
     this.idDuenio = idDuenio;
   }
-
 
   public getNombre(): string {
     return this.nombre;
