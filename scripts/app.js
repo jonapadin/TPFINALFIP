@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultadoDiv = document.getElementById("resultado");
   function mostrarPanel(){
     const contenedor = document.createElement("section");
+    contenedor.classList.add("modal-agregar");
     const div = document.createElement("div");
+    
     const divContenedorDireccion = document.createElement("div");
     const labelDireccion = document.createElement("label");
     labelDireccion.textContent = "Direccion:"
@@ -41,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     divContenedorNombre.appendChild(labelNombre);
     divContenedorNombre.appendChild(inputNombre);
 
+    document.body.appendChild(contenedor);
   } 
 
   // Crear instancia de Veterinaria
@@ -110,6 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnAgregarVet = crearBoton("Agregar", "Agregar", "btn-primario");
   const btnModificarVet = crearBoton("Modificar", "modificar", "btn-modificar");
   const btnEliminarVet = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
+  btnAgregarVet.addEventListener("click", ()=>{
+      mostrarPanel()
+  })
 
   desplegable1.appendChild(btnMostrarVet);
   desplegable1.appendChild(btnAgregarVet);
