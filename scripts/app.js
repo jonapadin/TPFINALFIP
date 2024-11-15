@@ -57,16 +57,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  const btnMostrar = crearBoton("Mostrar Lista", "Mostrar", "btn-mostrar");
-  const btnAgregar = crearBoton("Agregar", "Agregar", "btn-primario");
-  const btnModificar = crearBoton("Modificar", "modificar", "btn-modificar");
-  const btnEliminar = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
+  const btnMostrarVet = crearBoton("Mostrar Lista", "Mostrar", "btn-mostrar");
+  const btnAgregarVet = crearBoton("Agregar", "Agregar", "btn-primario");
+  const btnModificarVet = crearBoton("Modificar", "modificar", "btn-modificar");
+  const btnEliminarVet = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
 
-  desplegable1.appendChild(btnMostrar);
-  desplegable1.appendChild(btnAgregar);
-  desplegable1.appendChild(btnModificar)
-  desplegable1.appendChild(btnEliminar);
+  desplegable1.appendChild(btnMostrarVet);
+  desplegable1.appendChild(btnAgregarVet);
+  desplegable1.appendChild(btnModificarVet)
+  desplegable1.appendChild(btnEliminarVet);
 
+  const btnMostrarProv = crearBoton("Mostrar Lista", "Mostrar", "btn-mostrar");
+  const btnAgregarProv = crearBoton("Agregar", "Agregar", "btn-primario");
+  const btnModificarProv = crearBoton("Modificar", "modificar", "btn-modificar");
+  const btnEliminarProv = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
+
+  desplegable2.appendChild(btnMostrarProv);
+  desplegable2.appendChild(btnAgregarProv);
+  desplegable2.appendChild(btnModificarProv)
+  desplegable2.appendChild(btnEliminarProv);
 
   //Eventos
   mostrarMenu1.addEventListener("click", () => {
