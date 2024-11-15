@@ -10,35 +10,36 @@
 </head>
 
 <body>
-  <nav>
-    <div id="nav-bar"><span>
-        Logo
-      </span>
-      <div>
+  <header>
+    <nav class="nav-bar">
+        <div class="logo">Logo</div>
         <ul class="nav-list">
-          <li class="nav-item">
-            <a href="./pages/veterinaria.html">Panel Veterinaria</a>
-          </li>
-          <li class="nav-item"><a href="./pages/provedoores.html">Panel proveedores</a></li>
+            <li><a href="./pages/veterinaria.html">Panel de veterinarias</a></li>
         </ul>
-      </div>
-    </div>
-  </nav>
-  <section>
-    <div>
-      <div>
-        <label for="nombre">Nombre:</label>
-        <input id="veterinaria" type="text" name="nombre">
-      </div>
-      <div>
-        <label for="direccion">Direccion:</label>
-        <input id="direccionVet" type="text" name="direccion">
-      </div>
-      <button id="btnAgregarVet" type="button">Agregar Veterinaria</button>
+    </nav>
+</header>
 
+
+<main>
+<section>
+  <div>
+<ul class="centrar-contenedor">
+  <li class="flex"><h2>Menú de Veterinarias</h2> <button class="btn-primario">Ingresar al menú</button></li>
+  <li class="flex"><h2>Menú de Proveedores</h2> <button class="btn-primario">Ingresar al menú</button></li>
+</ul>
+  </div>
+</section>
+
+</main>
+  
+  <footer>
+    <div class="nav-bar">
+        <div class="logo">Logo</div>
+        <ul class="nav-list">
+        <li><a href="instagram.com">Redes</a></li>
     </div>
-    <div id="resultado"></div>
-  </section>
+</footer>
+
   <script type="module" src="../scripts/app.js"></script>
 </body>
 
