@@ -1,7 +1,9 @@
-import { Veterinaria } from "../models/Veterinaria"
-
+import { testFunction } from '../models/test.ts';
+import { Veterinaria } from '../models/veterinaria.ts'
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Hello world");
+
+  testFunction()
 
   const nombreVet = document.getElementById("veterinaria");
   const direccionVet = document.getElementById("direccionVet");
