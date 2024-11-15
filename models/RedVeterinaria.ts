@@ -1,5 +1,5 @@
 import { Proveedor } from "./Proveedor"
-import Veterinaria from "./veterinaria";
+import {Veterinaria} from "./veterinaria";
 
 export class RedVeterinaria {
   private veterinarias: Veterinaria[];
