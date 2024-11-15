@@ -1,57 +1,57 @@
-import { Veterinaria } from "./Veterinaria"
 import { Proveedor } from "./Proveedor"
+import {Veterinaria} from "./veterinaria";
 
-export class RedVeterinaria{
-    private veterinarias : Veterinaria [];
-    private proveedores : Proveedor [];
+export class RedVeterinaria {
+  private veterinarias: Veterinaria[];
+  private proveedores: Proveedor[];
 
-    constructor (veterinaria:Veterinaria[],proveedor:Proveedor[]){
-        this.veterinarias = veterinaria;
-        this.proveedores = proveedor;
+  constructor(veterinaria: Veterinaria[], proveedor: Proveedor[]) {
+    this.veterinarias = veterinaria;
+    this.proveedores = proveedor;
+  }
+
+  public darAltaVeterinaria(veterinaria: Veterinaria) {
+    this.veterinarias.push(veterinaria)
+  }
+  public darBajaVeterinaria(id: number) {
+    if (id) {
+      this.veterinarias.filter(vet => vet.getId() !== id)
+    } else {
+      console.error("No se encuentra el ID")
     }
+  }
 
-    public darAltaVeterinaria(veterinaria:Veterinaria){
-        this.veterinarias.push (veterinaria)
+  public modificarVeterinaria(id?: number, nombre?: string, direccion?: string) {
+    const veterinaria = this.veterinarias.find(veterinaria => veterinaria.getId() === id)
+    if (veterinaria) {
+      if (nombre) veterinaria.setNombre(nombre);
+      if (direccion) veterinaria.setDireccion(direccion);
     }
-    public darBajaVeterinaria(id:number){
-        if(id){
-            this.veterinarias.filter(vet => vet.getId() !== id)
-        } else{
-            console.error("No se encuentra el ID")
-        }
+  }
+
+  agregarProveedor(proveedor: Proveedor) {
+    this.proveedores.push(proveedor);
+  }
+
+  modificarProveedor(id: number, nombre?: string, telefono?: number) {
+    const proveedor = this.proveedores.find(pr => pr.getId() === id);
+    if (proveedor) {
+      if (nombre) proveedor.setNombre(nombre);
+      if (telefono) proveedor.setTelefono(telefono);
     }
+  }
 
-    public modificarVeterinaria(id?:number,nombre?:string,direccion?:string){
-        const veterinaria = this.veterinarias.find(veterinaria => veterinaria.getId() === id)
-        if (veterinaria){
-            if (nombre) veterinaria.setNombre(nombre);
-            if (direccion) veterinaria.setDireccion(direccion);
-        }
-    }
+  eliminarProveedor(id: number) {
+    this.proveedores = this.proveedores.filter((pr => pr.getId() !== id));
+  }
 
-    agregarProveedor(proveedor: Proveedor) {
-        this.proveedores.push(proveedor);
-      }
-    
-      modificarProveedor(id: number, nombre?: string, telefono?: number) {
-        const proveedor = this.proveedores.find(pr => pr.getId() === id);
-        if (proveedor) {
-          if (nombre) proveedor.setNombre(nombre);
-          if (telefono) proveedor.setTelefono(telefono);
-        }
-      }
-    
-      eliminarProveedor(id: number) {
-        this.proveedores = this.proveedores.filter((pr => pr.getId() !== id));
-      }
+  getVeterinarias() {
+    return this.veterinarias
+  }
 
-      getVeterinarias(){
-        return this.veterinarias
-      }
-
-      getProveedores(){
-        return this.proveedores
-      }
+  getProveedores() {
+    return this.proveedores
+  }
 
 
 

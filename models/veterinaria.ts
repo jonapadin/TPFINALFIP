@@ -3,6 +3,7 @@ import { Paciente } from './Paciente'
 
 export class Veterinaria {
 
+
   private id: number;
   private nombre: string;
   private direccion: string;
@@ -68,3 +69,4 @@ export class Veterinaria {
     return this.direccion;
   }
 }
+

@@ -1,11 +1,20 @@
-.ocultar {
-  display: none;
+*{
+padding: 0.1rem;
+margin:0;
+box-sizing: border-box; 
 }
 
-.error {
-  color: red;
-  font-size: 0.9em;
+.nav-bar{
+  font-size: 1.2 rem;
+  display: flex;
+
 }
-.input-error {
-  border-color: red;
+.nav-list{
+  justify-content: center;
+  padding :1.2rem;
+  display: flex;
+  background-color: red;
+  gap: 1rem;
+  align-items: center;
+  list-style-type: none;
 }
