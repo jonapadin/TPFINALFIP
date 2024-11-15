@@ -30,8 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const div2 = document.createElement("div");
     const divContenedorNombre = document.createElement("div");
     const labelNombre = document.createElement("label");
-    labelDireccion.textContent = "Direccion:"
+    labelNombre.textContent = "Nombre:"
     const inputNombre = document.createElement("input");
+    inputNombre.type = "text"
+    inputNombre.id = "inputNombre"
+    inputNombre.placeholder = "Juan Perez"
 
     contenedor.appendChild(div2);
     div2.appendChild(divContenedorNombre);
