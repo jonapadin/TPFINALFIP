@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nombreVet = document.getElementById("veterinaria");
   const direccionVet = document.getElementById("direccionVet");
   const btnAgreVet = document.getElementById("btnAgregarVet");
-  const resultadoDiv = document.getElementById("resultado"); // Asegúrate de tener un div con id="resultado"
+  const resultadoDiv = document.getElementById("resultado");
 
   // Crear instancia de Veterinaria
   const veterinaria1 = new Veterinaria();
@@ -18,8 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const direccion = direccionVet.value.trim();
 
     if (nombre && direccion) {
-      // Aquí puedes agregar la lógica para almacenar la veterinaria1
-      // Por ejemplo, puedes agregar los valores al objeto veterinaria1
+
       veterinaria1.nombre = nombre;
       veterinaria1.direccion = direccion;
 
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     direccionVet.value = '';
   }
 
-  // Aquí corregimos el eventListener, pasamos la función como referencia
+
   btnAgreVet.addEventListener("click", agregarVeterinaria);
 
 });
