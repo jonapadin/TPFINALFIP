@@ -1,14 +1,14 @@
-import { testFunction } from '../models/test.ts';
+
 import { Veterinaria } from '../models/veterinaria.ts'
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Hello world");
 
-  testFunction()
+  const mostrarMenu1 = document.getElementById("mostrarMenu1");
+  const mostrarMenu2 = document.getElementById("mostrarMenu2");
 
-  const nombreVet = document.getElementById("veterinaria");
-  const direccionVet = document.getElementById("direccionVet");
-  const btnAgreVet = document.getElementById("btnAgregarVet");
   const resultadoDiv = document.getElementById("resultado");
+  const desplegable1 = document.getElementById("desplegable1");
+  const desplegable2 = document.getElementById("desplegable2");
+
 
   // Crear instancia de Veterinaria
   const veterinaria1 = new Veterinaria();
@@ -38,7 +38,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  btnAgreVet.addEventListener("click", agregarVeterinaria);
+
+  function crearBoton(label = "", id = "", clase = '') {
+
+    const btn = document.createElement("button");
+
+    // Asignar el id al botón
+    btn.id = id;
+
+    btn.classList.add(clase);
+
+    // Asignar el texto del botón
+    btn.textContent = label;
+
+
+    // Devolver el botón creado
+    return btn;
+  }
+
+
+  const btnMostrar = crearBoton("Mostrar Lista", "Mostrar", "btn-mostrar");
+  const btnAgregar = crearBoton("Agregar", "Agregar", "btn-primario");
+  const btnModificar = crearBoton("Modificar", "modificar", "btn-modificar");
+  const btnEliminar = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
+
+  desplegable1.appendChild(btnMostrar);
+  desplegable1.appendChild(btnAgregar);
+  desplegable1.appendChild(btnModificar)
+  desplegable1.appendChild(btnEliminar);
+
+
+  //Eventos
+  mostrarMenu1.addEventListener("click", () => {
+    desplegable1.classList.toggle("ocultar")
+  })
+
+  mostrarMenu2.addEventListener("click", () => {
+    desplegable2.classList.toggle("ocultar")
+  })
+
 
 });
 

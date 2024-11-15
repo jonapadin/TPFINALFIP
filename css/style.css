@@ -53,6 +53,9 @@ body {
 .flex{
   display: flex;
 }
+.ocultar {
+  display: none;
+}
 
 /* Botones */
 .btn-primario {
@@ -78,3 +81,73 @@ body {
 	position:relative;
 	top:1px;
 }
+
+.btn-mostrar {
+	box-shadow: 0px 0px 0px 2px #3dc21b;
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	background-color:#44c767;
+	border-radius:10px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+  padding:6px 4px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.btn-mostrar:hover {
+	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+	background-color:#5cbf2a;
+}
+.btn-mostrar:active {
+	position:relative;
+	top:1px;
+}
+
+.btn-eliminar {
+	box-shadow: 0px 0px 0px 2px #c21b1b;
+	background-color:#eb0915;
+	border-radius:10px;
+	border:1px solid #db1515;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+  padding:6px 4px;
+  text-decoration:none;
+	text-shadow:0px 1px 0px #de2c2c;
+}
+.btn-eliminar:hover {
+	background-color:#bd2a36;
+}
+.btn-eliminar:active {
+	position:relative;
+	top:1px;
+}
+
+.btn-modificar {
+	box-shadow: 0px 0px 0px 2px #f5a720;
+	background-color:#f5a720;
+	border-radius:10px;
+	border:1px solid #e5e6ca;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+  padding:6px 4px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #f5a720;
+}
+.btn-modificar:hover {
+	background-color:#f5a720;
+}
+.btn-modificar:active {
+	position:relative;
+	top:1px;
+}
+
+        

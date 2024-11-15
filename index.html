@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/style.css">
-  <title>Gestor de veterinarias</title>
+  <title>Panel de gestion</title>
 </head>
 
 <body>
@@ -23,10 +23,15 @@
 <main>
 <section>
   <div>
-<ul class="centrar-contenedor">
-  <li class="flex"><h2>Menú de Veterinarias</h2> <button class="btn-primario">Ingresar al menú</button></li>
-  <li class="flex"><h2>Menú de Proveedores</h2> <button class="btn-primario">Ingresar al menú</button></li>
-</ul>
+  <ul class="centrar-contenedor">
+      <div>
+        <li class="flex"><h2>Menú de Veterinarias</h2> <button class="btn-primario" id="mostrarMenu1">Ingresar al menú</button></li>
+       
+         <div id="desplegable1" class="ocultar"></div>
+      </div>
+    <li class="flex"><h2>Menú de Proveedores</h2> <button class="btn-primario" id="mostrarMenu2">Ingresar al menú</button></li>
+    <div id="desplegable2"></div>
+  </ul>
   </div>
 </section>
 
