@@ -50,6 +50,20 @@ body {
   align-items: center;
   justify-content: center;
 }
+// panel lista
+.fondo-blanco {
+  background-color: #fff;
+}
+.divContenedor {
+  margin: 100px 100px;
+  padding: 40px 40px;
+ background-color:#fff;
+}
+
+.item {
+  border-style: solid;
+  padding: 10px;
+}
 
 .flex{
   display: flex;

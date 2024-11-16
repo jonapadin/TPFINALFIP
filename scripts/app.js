@@ -43,10 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mostrarMenu1.addEventListener("click", () => {
     const modalExistente = document.querySelector("mostrarMenu1");
-  
+
     if (!modalExistente) {
       verListaVeterinaria();
     }
   })
+
 
 });

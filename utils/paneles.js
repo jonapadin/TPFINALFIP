@@ -1,5 +1,7 @@
 import { crearBoton, crearDiv, crearInput, crearLabel, crearSection, crearUl } from "./elementos";
 
+import { obtenerVeterinarias } from "./funciones";
+
 // paneles
 export function panelAgregarVet() {
   const contenedor = crearSection("modal-agregar-vet", "modal-agregar");
@@ -40,41 +42,81 @@ export function panelAgregarVet() {
   document.body.appendChild(contenedor);
 }
 
-export function verListaVeterinaria(){
-  const contenedorLayout = crearSection("contenedorLayout", "modal-panel");
-  const divContenedor = crearDiv("div-contenedor","centrar-contenedor");
-  const contenedor = crearSection("contenedorVet", "centrar-contenedor")
-  const div = crearDiv();
-  const contenedorDeLista = crearUl("listaVet","")
-  const li = document.createElement("li");
-  li.classList.add("flex");
-  const nombreVet = document.createElement("h2");
-  nombreVet.textContent = "Juancho";
-  const direcVet = document.createElement("h2")
-  direcVet.textContent = "Juancho123";
+export async function verListaVeterinaria() {
 
-  const btnModificarVet = crearBoton("Modificar", "modificar", "btn-modificar");
-  const btnEliminarVet = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
-  
-  const btnAgregarVet = crearBoton("Agregar", "Agregar", "btn-primario");
-  const btnBorrarList = crearBoton("Borrar", "Agregar", "btn-eliminar");
-  const btnCancelarList = crearBoton("Cancelar", "Agregar", "btn-mostrar");
+  try {
+    const listaVeterinas = await obtenerVeterinarias();
 
-  contenedorLayout.appendChild(divContenedor);
-  
-  divContenedor.appendChild(contenedor);
-  contenedor.appendChild(contenedorDeLista);
-  
-  contenedor.appendChild(div);
-  div.appendChild(btnAgregarVet);
-  div.appendChild(btnBorrarList);
-  div.appendChild(btnCancelarList);
+    console.log(listaVeterinas);
+    const contenedorLayout = crearSection("contenedorLayout", "modal-panel");
+    const divContenedor = crearDiv("div-contenedor", "centrar-contenedor");
+    divContenedor.classList.add("divContenedor")
 
-  contenedorDeLista.appendChild(li);
-  li.appendChild(nombreVet);
-  li.appendChild(direcVet);
-  li.appendChild(btnModificarVet);
-  li.appendChild(btnEliminarVet);
+    const contenedor = crearSection("contenedorVet", "centrar-contenedor")
+    const div = crearDiv();
+    const contenedorDeLista = crearUl("listaVet", "")
 
-  document.body.appendChild(contenedorLayout);
+    listaVeterinas.forEach(veterinaria => {
+      const li = document.createElement("li");
+      li.classList.add("flex");
+      li.classList.add("item");
+      const nombreVet = document.createElement("h2");
+      nombreVet.textContent = veterinaria.nombre
+      nombreVet.classList.add("mx-2")
+      const direcVet = document.createElement("h2")
+      direcVet.classList.add("mx-2")
+      direcVet.textContent = veterinaria.direccion;
+      const btnModificarVet = crearBoton("Modificar", "modificar", "btn-modificar");
+      btnModificarVet.classList.add("mx-2")
+      const btnEliminarVet = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
+
+
+      li.appendChild(nombreVet);
+      li.appendChild(direcVet);
+      li.appendChild(btnModificarVet);
+      li.appendChild(btnEliminarVet);
+      contenedorDeLista.appendChild(li);
+
+    });
+
+
+
+    const btnAgregarVet = crearBoton("Agregar", "Agregar", "btn-mostrar");
+    btnAgregarVet.classList.add("mx-2");
+    const btnBorrarList = crearBoton("Borrar lista", "btnSalirModal", "btn-eliminar");
+    btnBorrarList.classList.add("mx-2");
+    const btnCancelarList = crearBoton("Salir", "btnSalir", "btn-primario");
+    btnCancelarList.classList.add("mx-2");
+
+    contenedorLayout.appendChild(divContenedor);
+
+    divContenedor.appendChild(contenedor);
+    contenedor.appendChild(contenedorDeLista);
+
+    contenedor.appendChild(div);
+    div.appendChild(btnAgregarVet);
+    div.appendChild(btnBorrarList);
+    div.appendChild(btnCancelarList);
+
+    btnAgregarVet.addEventListener("click", () => {
+      const modal = document.getElementById("modal-agregar-vet");
+      if (!modal) {
+        panelAgregarVet();
+      }
+    })
+
+    btnCancelarList.addEventListener("click", () => {
+      const modal = document.getElementById("contenedorLayout");
+      if (modal) {
+        modal.remove();
+      }
+
+    })
+
+    document.body.appendChild(contenedorLayout);
+
+  } catch (error) {
+    console.error('Error al cargar veterinarias:', error);
+  }
+
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "Veterinaria El Refugio",
+    "direccion": "Av. Corrientes 1234, Buenos Aires, Argentina"
+  },
+  {
+    "nombre": "Clínica Veterinaria San Jorge",
+    "direccion": "Calle 45, N° 678, Mar del Plata, Buenos Aires, Argentina"
+  },
+  {
+    "nombre": "Hospital Veterinario AnimalCare",
+    "direccion": "Avenida Libertador 2000, Córdoba, Argentina"
+  },
+  {
+    "nombre": "Veterinaria Villa Urquiza",
+    "direccion": "Calle Río de Janeiro 987, Villa Urquiza, Buenos Aires, Argentina"
+  },
+  {
+    "nombre": "Clinica Veterinaria Vida Animal",
+    "direccion": "Calle San Martín 4567, Mendoza, Argentina"
+  }
+]
