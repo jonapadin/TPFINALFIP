@@ -2,7 +2,7 @@ import { Veterinaria } from '../models/veterinaria.ts'
 import { RedVeterinaria } from '../models/RedVeterinaria.ts'
 
 const url = "../bd/data.json";
-
+// obtener datos
 export async function obtenerVeterinarias() {
 
   try {
@@ -19,6 +19,27 @@ export async function obtenerVeterinarias() {
   }
 
 }
+export async function cargarRedVeterinarias() {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(`HTTP Error: ${response.status}`);
+    }
+
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+
+
+
+
+
+
 
 // Crear instancia de Veterinaria
 const veterinaria1 = new Veterinaria("trim", "Juan");

@@ -1,5 +1,5 @@
 import { Proveedor } from "./Proveedor"
-import {Veterinaria} from "./veterinaria";
+import { Veterinaria } from "./veterinaria";
 
 export class RedVeterinaria {
   private veterinarias: Veterinaria[];
@@ -9,6 +9,8 @@ export class RedVeterinaria {
     this.veterinarias = veterinaria;
     this.proveedores = proveedor;
   }
+
+
 
   public darAltaVeterinaria(veterinaria: Veterinaria) {
     this.veterinarias?.push(veterinaria)
@@ -45,14 +47,8 @@ export class RedVeterinaria {
     this.proveedores = this.proveedores.filter((pr => pr.getId() !== id));
   }
 
-  getVeterinarias() {
-    return this.veterinarias
-  }
-
-  getProveedores() {
-    return this.proveedores
-  }
-
-
 
 }
+
+
+
