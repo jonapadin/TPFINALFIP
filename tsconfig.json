@@ -3,7 +3,6 @@
     "target": "ESNext",
     "module": "ESNext", // Usar módulos ESNext
     "moduleResolution": "Node", // Asegura que se resuelvan correctamente los módulos
-    "jsx": "react", // Si usas React, de lo contrario elimina esta línea
     "strict": true,
     "esModuleInterop": true, // Asegura compatibilidad con importaciones
     "skipLibCheck": true,
