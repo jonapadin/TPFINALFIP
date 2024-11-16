@@ -1,4 +1,4 @@
-import { crearBoton, crearDiv, crearInput, crearLabel, crearSection } from "./elementos";
+import { crearBoton, crearDiv, crearInput, crearLabel, crearSection, crearUl } from "./elementos";
 
 // paneles
 export function panelAgregarVet() {
@@ -40,4 +40,41 @@ export function panelAgregarVet() {
   document.body.appendChild(contenedor);
 }
 
+export function verListaVeterinaria(){
+  const contenedorLayout = crearSection("contenedorLayout", "modal-panel");
+  const divContenedor = crearDiv("div-contenedor","centrar-contenedor");
+  const contenedor = crearSection("contenedorVet", "centrar-contenedor")
+  const div = crearDiv();
+  const contenedorDeLista = crearUl("listaVet","")
+  const li = document.createElement("li");
+  li.classList.add("flex");
+  const nombreVet = document.createElement("h2");
+  nombreVet.textContent = "Juancho";
+  const direcVet = document.createElement("h2")
+  direcVet.textContent = "Juancho123";
 
+  const btnModificarVet = crearBoton("Modificar", "modificar", "btn-modificar");
+  const btnEliminarVet = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
+  
+  const btnAgregarVet = crearBoton("Agregar", "Agregar", "btn-primario");
+  const btnBorrarList = crearBoton("Borrar", "Agregar", "btn-eliminar");
+  const btnCancelarList = crearBoton("Cancelar", "Agregar", "btn-mostrar");
+
+  contenedorLayout.appendChild(divContenedor);
+  
+  divContenedor.appendChild(contenedor);
+  contenedor.appendChild(contenedorDeLista);
+  
+  contenedor.appendChild(div);
+  div.appendChild(btnAgregarVet);
+  div.appendChild(btnBorrarList);
+  div.appendChild(btnCancelarList);
+
+  contenedorDeLista.appendChild(li);
+  li.appendChild(nombreVet);
+  li.appendChild(direcVet);
+  li.appendChild(btnModificarVet);
+  li.appendChild(btnEliminarVet);
+
+  document.body.appendChild(contenedorLayout);
+}

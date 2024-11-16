@@ -43,6 +43,16 @@ export function crearLabel(etiqueta = "", id = "", clase = "") {
   return label;
 }
 
+export function crearUl(id = "", clase = "") {
+  const ul = document.createElement("ul");
+
+  ul.id = id;
+
+  if (clase) ul.classList.add(clase);
+
+  return ul;
+}
+
 export function crearBoton(label = "", id = "", clase = "", type = "") {
   const btn = document.createElement("button");
 
