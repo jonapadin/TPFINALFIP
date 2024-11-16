@@ -11,7 +11,7 @@ export class RedVeterinaria {
   }
 
   public darAltaVeterinaria(veterinaria: Veterinaria) {
-    this.veterinarias.push(veterinaria)
+    this.veterinarias?.push(veterinaria)
   }
   public darBajaVeterinaria(id: number) {
     if (id) {

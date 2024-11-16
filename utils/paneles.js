@@ -24,6 +24,9 @@ export function panelAgregarVet() {
 
   const btnAgregar = crearBoton("Agregar", "btnAgregar", "btn-primario", "button");
   btnAgregar.classList.add("mx-2");
+  btnAgregar.addEventListener("click", ()=>{
+      console.log("diste click");
+  })
   const btnCancelar = crearBoton("Cancelar", "btnCancelar", "btn-eliminar", "button");
   btnCancelar.addEventListener("click", () => {
     const modal = document.getElementById("modal-agregar-vet");
