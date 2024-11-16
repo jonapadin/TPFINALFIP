@@ -21,16 +21,16 @@ export async function obtenerVeterinarias() {
 }
 
  // Crear instancia de Veterinaria
-const veterinaria1 = new Veterinaria("trim", "Juan");
 const gestor1 = new RedVeterinaria();
+const veterinaria1 = new Veterinaria("trim", "Juan");
 
 export function agregarVeterinaria() {
-  gestor1.darAltaVeterinaria(veterinaria1);
-  gestor1.getVeterinarias()
-  console.log(gestor1);
+  const inputNombre = document.getElementById("inputNombre");
+  const inputDireccion = document.getElementById("inputDireccion");
+  console.log(inputDireccion, inputNombre);
   
 
     // Limpiar los campos
-  nombreVet.value = '';
-  direccionVet.value = '';
+  /*nombreVet.value = '';
+  direccionVet.value = '';*/
 }

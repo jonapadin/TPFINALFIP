@@ -2,12 +2,12 @@ import { Proveedor } from "./Proveedor"
 import {Veterinaria} from "./veterinaria";
 
 export class RedVeterinaria {
-  private veterinarias: Veterinaria[];
-  private proveedores: Proveedor[];
+  private veterinarias: Veterinaria[] = [];
+  private proveedores: Proveedor[] = [];
 
-  constructor(veterinaria: Veterinaria[], proveedor: Proveedor[]) {
-    this.veterinarias = veterinaria;
-    this.proveedores = proveedor;
+  constructor(veterinarias: Veterinaria[], proveedores: Proveedor[]) {
+    this.veterinarias = veterinarias;
+    this.proveedores = proveedores;
   }
 
   public darAltaVeterinaria(veterinaria: Veterinaria) {
@@ -15,7 +15,7 @@ export class RedVeterinaria {
   }
   public darBajaVeterinaria(id: number) {
     if (id) {
-      this.veterinarias.filter(vet => vet.getId() !== id)
+      this.veterinarias = this.veterinarias.filter(vet => vet.getId() !== id)
     } else {
       console.error("No se encuentra el ID")
     }

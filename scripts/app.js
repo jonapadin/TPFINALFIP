@@ -1,5 +1,5 @@
 import { verListaVeterinaria } from '../utils/paneles.js';
-import { agregarVeterinaria } from '../utils/funciones.js';
+
 
 
 
@@ -21,7 +21,5 @@ document.addEventListener("DOMContentLoaded", () => {
       verListaVeterinaria();
     }
   })
-
-agregarVeterinaria()
 
 });

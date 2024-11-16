@@ -1,6 +1,6 @@
 import { crearBoton, crearDiv, crearInput, crearLabel, crearSection, crearUl } from "./elementos";
-
 import { obtenerVeterinarias } from "./funciones";
+import { agregarVeterinaria } from '../utils/funciones.js';
 
 // paneles
 export function panelAgregarVet() {
@@ -32,7 +32,8 @@ export function panelAgregarVet() {
     const modal = document.getElementById("modal-agregar-vet");
     if (modal) {
       modal.remove();
-    }
+    }  
+  agregarVeterinaria();
   })
 
   contenedor.appendChild(div2);
