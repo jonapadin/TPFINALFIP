@@ -1,0 +1,26 @@
+{
+  "veterinarias": [
+    {
+      "id": 1,
+      "nombre": "Veterinaria A",
+      "direccion": "Calle 123"
+    },
+    {
+      "id": 2,
+      "nombre": "Veterinaria B",
+      "direccion": "Calle 456"
+    }
+  ],
+  "proveedores": [
+    {
+      "id": 1,
+      "nombre": "Proveedor A",
+      "telefono": "123456789"
+    },
+    {
+      "id": 2,
+      "nombre": "Proveedor B",
+      "telefono": "987654321"
+    }
+  ]
+}
