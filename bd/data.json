@@ -2,24 +2,24 @@
   "veterinarias": [
     {
       "id": 1,
-      "nombre": "Veterinaria A",
+      "nombre": "Patitas",
       "direccion": "Calle 123"
     },
     {
       "id": 2,
-      "nombre": "Veterinaria B",
+      "nombre": "Veterinaria Scooby",
       "direccion": "Calle 456"
     }
   ],
   "proveedores": [
     {
       "id": 1,
-      "nombre": "Proveedor A",
+      "nombre": "Productos Veterinarios Córdoba",
       "telefono": "123456789"
     },
     {
       "id": 2,
-      "nombre": "Proveedor B",
+      "nombre": "Alimentos y Medicamentos del Sur",
       "telefono": "987654321"
     }
   ]

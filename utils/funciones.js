@@ -1,32 +1,40 @@
-import { Veterinaria } from '../models/veterinaria.ts'
-import { RedVeterinaria } from '../models/RedVeterinaria.ts'
-import { Proveedor } from '../models/Proveedor.ts';
+import { Veterinaria } from "../models/Veterinaria.js"
+import { Proveedor } from "../models/Proveedor.js";
 
 
 
-export async function cargarDatosDesdeArchivo(archivo, redVeterinaria) {
+export async function cargarDatosDesdeArchivo(archivo, red) {
   try {
-    const response = await fetch(archivo); // Espera la respuesta de fetch
-    if (!response.ok) {
-      throw new Error('No se pudo cargar el archivo JSON');
-    }
-
+    const response = await fetch(archivo);
     const data = await response.json();
 
-    data.proveedores.forEach(proveedorData => {
-      const proveedor = new Proveedor(proveedorData.id, proveedorData.nombre, proveedorData.telefono);
-      redVeterinaria.proveedores.push(proveedor);
-    });
+    // Llenar la red de veterinarias y proveedores con los datos del archivo
+    const veterinarias = data.veterinarias.map(vetData => new Veterinaria(vetData.id, vetData.nombre, vetData.direccion));
+    const proveedores = data.proveedores.map(prData => new Proveedor(prData.id, prData.nombre, prData.telefono));
 
-    data.veterinarias.forEach(veterinariaData => {
-      const veterinaria = new Veterinaria(veterinariaData.id, veterinariaData.nombre, veterinariaData.direccion);
-      redVeterinaria.veterinarias.push(veterinaria);
-    });
-
-
-
+    // Actualizar la red
+    red.veterinarias = veterinarias;
+    red.proveedores = proveedores;
   } catch (error) {
-    console.error('Error cargando el archivo JSON:', error);
+    console.error("Error al cargar los datos:", error);
+  }
+}
+
+
+export function mostrarMensaje(mensaje) {
+  console.log(mensaje);
+}
+
+export async function obtenerVeterinarias() {
+  try {
+    const response = await fetch('../bd/data.json');
+    if (!response.ok) {
+      throw new Error(`Error al obtener datos: ${response.status} ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data.veterinarias;
+  } catch (error) {
+    console.error('Error al obtener veterinarias:', error);
   }
 }
 
@@ -34,16 +42,16 @@ export async function cargarDatosDesdeArchivo(archivo, redVeterinaria) {
 
 
 // Crear instancia de Veterinaria
-const veterinaria1 = new Veterinaria("trim", "Juan");
-const gestor1 = new RedVeterinaria();
+//const veterinaria1 = new Veterinaria("trim", "Juan");
+//const gestor1 = new RedVeterinaria();
 
-export function agregarVeterinaria() {
-  gestor1.darAltaVeterinaria(veterinaria1);
-  gestor1.getVeterinarias()
-  console.log(gestor1);
-
-
-  // Limpiar los campos
-  nombreVet.value = '';
-  direccionVet.value = '';
-}
+// export function agregarVeterinaria() {
+//   gestor1.darAltaVeterinaria(veterinaria1);
+//   gestor1.getVeterinarias()
+//   console.log(gestor1);
+//
+//
+//   // Limpiar los campos
+//   nombreVet.value = '';
+//   direccionVet.value = '';
+// }

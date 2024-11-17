@@ -1,6 +1,6 @@
 import { crearBoton, crearDiv, crearInput, crearLabel, crearSection, crearUl } from "./elementos";
+import { mostrarMensaje, obtenerVeterinarias } from "./funciones";
 
-import { obtenerVeterinarias } from "./funciones";
 
 // paneles
 export function panelAgregarVet() {
@@ -24,8 +24,8 @@ export function panelAgregarVet() {
 
   const btnAgregar = crearBoton("Agregar", "btnAgregar", "btn-primario", "button");
   btnAgregar.classList.add("mx-2");
-  btnAgregar.addEventListener("click", ()=>{
-      console.log("diste click");
+  btnAgregar.addEventListener("click", () => {
+    console.log("diste click");
   })
   const btnCancelar = crearBoton("Cancelar", "btnCancelar", "btn-eliminar", "button");
   btnCancelar.addEventListener("click", () => {
@@ -45,7 +45,10 @@ export function panelAgregarVet() {
   document.body.appendChild(contenedor);
 }
 
-export async function verListaVeterinaria() {
+
+
+
+export async function verListaVeterinaria(red) {
 
   try {
     const listaVeterinas = await obtenerVeterinarias();
@@ -63,9 +66,11 @@ export async function verListaVeterinaria() {
       const li = document.createElement("li");
       li.classList.add("flex");
       li.classList.add("item");
+      const lNombre = crearLabel("Nombre:", "", "lNombre");
       const nombreVet = document.createElement("h2");
       nombreVet.textContent = veterinaria.nombre
       nombreVet.classList.add("mx-2")
+      const lDireccion = crearLabel("Direccion:", "", "lDireccion");
       const direcVet = document.createElement("h2")
       direcVet.classList.add("mx-2")
       direcVet.textContent = veterinaria.direccion;
@@ -74,11 +79,19 @@ export async function verListaVeterinaria() {
       const btnEliminarVet = crearBoton("Eliminar", "Eliminar", "btn-eliminar");
 
 
+      li.appendChild(lNombre);
       li.appendChild(nombreVet);
+      li.appendChild(lDireccion);
       li.appendChild(direcVet);
       li.appendChild(btnModificarVet);
       li.appendChild(btnEliminarVet);
       contenedorDeLista.appendChild(li);
+
+      btnEliminarVet.addEventListener("click", () => {
+        red.darBajaVeterinaria(veterinaria.id)
+        li.remove();
+        mostrarMensaje(`Veterinaria ${veterinaria.nombre} eliminada!`)
+      })
 
     });
 

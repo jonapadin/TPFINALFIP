@@ -1,9 +1,10 @@
 import { verListaVeterinaria } from '../utils/paneles.js';
-import { agregarVeterinaria } from '../utils/funciones.js';
+import { cargarDatosDesdeArchivo, mostrarMensaje } from '../utils/funciones.js';
+import { RedVeterinaria } from '../models/RedVeterinaria.js';
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
   // menu desplegable
   const mostrarMenu1 = document.getElementById("mostrarMenu1");
@@ -13,15 +14,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const resultadoDiv = document.getElementById("resultado");
 
+  const red = new RedVeterinaria();
+
+  await cargarDatosDesdeArchivo('../bd/data.json', red);
+
+  mostrarMensaje("Datos cargados exitosamente:");
+
+  console.log("Veterinarias:", red.veterinarias);
+  console.log("Proveedores:", red.proveedores);
+
 
   mostrarMenu1.addEventListener("click", () => {
     const modalExistente = document.querySelector("mostrarMenu1");
 
     if (!modalExistente) {
-      verListaVeterinaria();
+      verListaVeterinaria(red);
     }
   })
 
-agregarVeterinaria()
+
 
 });
