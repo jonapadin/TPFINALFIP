@@ -1,42 +1,34 @@
 import { Veterinaria } from '../models/veterinaria.ts'
 import { RedVeterinaria } from '../models/RedVeterinaria.ts'
+import { Proveedor } from '../models/Proveedor.ts';
 
-const url = "../bd/data.json";
-// obtener datos
-export async function obtenerVeterinarias() {
 
+
+export async function cargarDatosDesdeArchivo(archivo, redVeterinaria) {
   try {
-    const response = await fetch(url);
-    const data = await response.json();
+    const response = await fetch(archivo); // Espera la respuesta de fetch
     if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status}`);
+      throw new Error('No se pudo cargar el archivo JSON');
     }
 
-    return data;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-
-}
-export async function cargarRedVeterinarias() {
-  try {
-    const response = await fetch(url);
     const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status}`);
-    }
+    data.proveedores.forEach(proveedorData => {
+      const proveedor = new Proveedor(proveedorData.id, proveedorData.nombre, proveedorData.telefono);
+      redVeterinaria.proveedores.push(proveedor);
+    });
 
-    return data;
-  } catch (err) {
-    console.error(err);
+    data.veterinarias.forEach(veterinariaData => {
+      const veterinaria = new Veterinaria(veterinariaData.id, veterinariaData.nombre, veterinariaData.direccion);
+      redVeterinaria.veterinarias.push(veterinaria);
+    });
+
+
+
+  } catch (error) {
+    console.error('Error cargando el archivo JSON:', error);
   }
 }
-
-
-
-
 
 
 

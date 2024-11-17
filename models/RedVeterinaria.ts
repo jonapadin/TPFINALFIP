@@ -10,7 +10,9 @@ export class RedVeterinaria {
     this.proveedores = proveedor;
   }
 
-
+  async cargarDatos(archivo: any) {
+    await cargarDatosDesdeArchivo(archivo, this);
+  }
 
   public darAltaVeterinaria(veterinaria: Veterinaria) {
     this.veterinarias?.push(veterinaria)
