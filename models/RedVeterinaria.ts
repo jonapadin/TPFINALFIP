@@ -5,14 +5,10 @@ export class RedVeterinaria {
   private veterinarias: Veterinaria[];
   private proveedores: Proveedor[];
 
-  constructor(veterinaria: Veterinaria[], proveedor: Proveedor[]) {
-    this.veterinarias = veterinaria;
-    this.proveedores = proveedor;
-  }
 
-  async cargarDatos(archivo: any) {
-    await cargarDatosDesdeArchivo(archivo, this);
-  }
+constructor (){}
+
+
 
   public darAltaVeterinaria(veterinaria: Veterinaria) {
     this.veterinarias?.push(veterinaria)
