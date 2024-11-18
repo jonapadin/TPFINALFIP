@@ -4,33 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Panel de Veterinarias</title>
 </head>
 
 <body>
     <header>
-        <nav class="nav-bar">
-            <div class="logo">Logo</div>
-            <ul class="nav-list">
-                <li><a href="../index.html">Gestiones de Red</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="veterinarias" class="content-section">
-            <h1>Panel Veterinarias</h1>
-            <p>Bienvenido al panel de gestión de veterinarias.</p>
-        </section>
-    </main>
-
-    <footer>
-        <div class="nav-bar">
-            <div class="logo">
-                <img src="../images/Designer1.PNG" alt=""></div>
-            <ul class="nav-list">
-            <li><a href="instagram.com">Redes</a></li>
+      <nav class="flex nav-bar">
+        <div>
+          <img src="../images/Designer1.PNG" alt="" height="200px" class="logoHead">
         </div>
+        <div>
+          <ul>
+            <li class="pl-5">
+              <a href="../index.html">Panel de gestor</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  
+  
+    <main>
+      <section style="margin: 100px 0">
+        <div>
+          <ul class="centrar-contenedor gap-5">
+            <li class="flex gap-2">
+              <h2>Clientes</h2> <button class="btn-mostrar" id="mostrarMenu1">Ver clientes</button>
+            </li>
+            <div id="desplegable1" class="ocultar"></div>
+  
+            <li class="flex gap-2">
+              <h2>Pacientes</h2> <button class="btn-mostrar" id="mostrarMenu2">Ver pacientes</button>
+            </li>
+            <div id="desplegable2" class="ocultar"></div>
+          </ul>
+        </div>
+      </section>
+  
+    </main>
+  
+    <footer class="footer">
+      <section>
+        <div class="centrar-foot">
+          <img src="../images/Designer1.PNG" alt="" height="200px" class="logoFoot">
+        </div>
+  
     </footer>
-</body>
+    </section>
+  </body>
+  <script type="module" src="../scripts/app.js"></script>
+  </body>
 </html>
