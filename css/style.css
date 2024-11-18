@@ -235,23 +235,61 @@ li:hover{
   }
 /*Footer*/
 
-.logoFoot{
-	height: auto;
-	width: 15%;
-	margin-top: 5%;
-	
-}
-
-.centrar-foot{
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		background-color:#8e7050;
-}
-
-.footer{
+.footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-}
+	background-color: #8e7050;
+	padding: 20px 0;
+	color: #fff;
+  }
+  
+  .centrar-foot {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .logoFoot {
+	width: 15%;
+	margin-bottom: 10px;
+  }
+  
+  .redes {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	margin-top: 10px;
+  }
+  
+  .red-social img {
+	width: 40px;
+	height: 40px;
+	transition: transform 0.3s;
+  }
+  
+  .red-social img:hover {
+	transform: scale(1.1);
+  }
+  
+  .informacion-footer {
+	text-align: center;
+	margin-top: 20px;
+  }
+  
+  .informacion-footer p {
+	margin: 5px 0;
+  }
+  
+  .link-footer {
+	color: #fff;
+	text-decoration: none;
+	margin: 5px;
+	font-size: 14px;
+  }
+  
+  .link-footer:hover {
+	text-decoration: underline;
+  }
+  
