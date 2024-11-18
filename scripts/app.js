@@ -1,7 +1,6 @@
-import { verListaVeterinaria } from '../utils/paneles.js';
+import { verListaVeterinaria, panelAgregarVet } from '../utils/paneles.js';
 import { cargarDatosDesdeArchivo, mostrarMensaje } from '../utils/funciones.js';
 import { RedVeterinaria } from '../models/RedVeterinaria.js';
-
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -33,5 +32,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   })
 
 
-
+  // const panel = panelAgregarVet(red)
+  // if (panel instanceof Node) { // Verifica que sea un nodo antes de agregarlo
+  //   document.body.appendChild(panel);
+  // } else {
+  //   console.error("panelAgregarVet no devolvió un nodo válido");
+  // };
 });

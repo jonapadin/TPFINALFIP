@@ -1,9 +1,10 @@
 import { crearBoton, crearDiv, crearInput, crearLabel, crearSection, crearUl } from "./elementos";
 import { mostrarMensaje, obtenerVeterinarias } from "./funciones";
+import { Veterinaria } from "../models/Veterinaria";
 
 
 // paneles
-export function panelAgregarVet() {
+export function panelAgregarVet(red) {
   const contenedor = crearSection("modal-agregar-vet", "modal-agregar");
   const div = crearDiv();
 
@@ -24,9 +25,40 @@ export function panelAgregarVet() {
 
   const btnAgregar = crearBoton("Agregar", "btnAgregar", "btn-primario", "button");
   btnAgregar.classList.add("mx-2");
+
   btnAgregar.addEventListener("click", () => {
-    console.log("diste click");
-  })
+    const nombre = inputNombre.value.trim();
+    const direccion = inputDireccion.value.trim();
+  
+    if (!nombre || !direccion) {
+      alert("Por favor, completa todos los campos.");
+      return;
+    }
+  
+    // Generar un ID único para la nueva veterinaria
+    const id = `vet-${Date.now()}`;
+  
+    // Crear una nueva instancia de Veterinaria
+    const nuevaVeterinaria = new Veterinaria(id, nombre, direccion);
+  
+    // Agregar la nueva veterinaria a la red
+    red.darAltaVeterinaria(nuevaVeterinaria);
+  
+    // Actualizar la lista visualmente
+    const listaVeterinarias = document.getElementById("listaVeterinarias");
+    if (listaVeterinarias) {
+      const li = document.createElement("li");
+      li.classList.add("flex", "item");
+      li.innerText = `ID: ${id}, Nombre: ${nuevaVeterinaria.nombre}, Dirección: ${nuevaVeterinaria.direccion}`;
+      listaVeterinarias.appendChild(li);
+    }
+  
+    // Limpiar los campos de entrada
+    inputNombre.value = "";
+    inputDireccion.value = "";
+  });
+  
+
   const btnCancelar = crearBoton("Cancelar", "btnCancelar", "btn-eliminar", "button");
   btnCancelar.addEventListener("click", () => {
     const modal = document.getElementById("modal-agregar-vet");
@@ -43,6 +75,8 @@ export function panelAgregarVet() {
   divContenedorNombre.appendChild(inputNombre);
 
   document.body.appendChild(contenedor);
+
+  return contenedor;
 }
 
 
