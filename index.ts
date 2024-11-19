@@ -6,9 +6,11 @@ import { Cliente } from './models/Cliente';
 import { Paciente } from './models/Paciente';
 
 // Instancia de RedVeterinaria
-const redVeterinaria = new RedVeterinaria([], []);
+const veterinarias = new Veterinaria("Scooby-Doo", "Calle123");
+const proveedores = new Proveedor("Juan Carlos", 2284211215);
+const redVeterinaria = new RedVeterinaria([veterinarias], [proveedores]);
 
-//Menu
+// Menú
 function mostrarMenuPrincipal(): void {
     console.log("\n--- Menú Principal del Gestor ---");
     console.log("1. Gestionar Veterinarias");
@@ -125,13 +127,15 @@ function gestionarProveedores(): void {
 function gestionarClientes(): void {
     console.log("\n--- Gestión de Clientes ---");
 
-    if (redVeterinaria["veterinarias"].length === 0) {
+    const veterinarias = redVeterinaria.getVeterinarias(); // Usamos getVeterinarias para obtener las veterinarias
+
+    if (veterinarias.length === 0) {
         console.log("No hay veterinarias disponibles. Agregue una antes de gestionar clientes.");
         return;
     }
 
     const idVeterinaria = parseInt(readlineSync.question("Ingrese el ID de la veterinaria: "), 10);
-    const veterinaria = redVeterinaria["veterinarias"].find(vet => vet.getId() === idVeterinaria);
+    const veterinaria = veterinarias.find(vet => vet.getId() === idVeterinaria);
 
     if (!veterinaria) {
         console.log("Veterinaria no encontrada.");
@@ -180,13 +184,15 @@ function gestionarClientes(): void {
 function gestionarPacientes(): void {
     console.log("\n--- Gestión de Pacientes ---");
 
-    if (redVeterinaria["veterinarias"].length === 0) {
+    const veterinarias = redVeterinaria.getVeterinarias(); // Usamos getVeterinarias para obtener las veterinarias
+
+    if (veterinarias.length === 0) {
         console.log("No hay veterinarias disponibles. Agregue una antes de gestionar pacientes.");
         return;
     }
 
     const idVeterinaria = parseInt(readlineSync.question("Ingrese el ID de la veterinaria: "), 10);
-    const veterinaria = redVeterinaria["veterinarias"].find(vet => vet.getId() === idVeterinaria);
+    const veterinaria = veterinarias.find(vet => vet.getId() === idVeterinaria);
 
     if (!veterinaria) {
         console.log("Veterinaria no encontrada.");
@@ -220,7 +226,7 @@ function gestionarPacientes(): void {
             console.log("Paciente modificado con éxito.");
             break;
         case "3":
-            const idPacienteEliminar = parseInt(readlineSync.question("ID del dueño del paciente a eliminar: "), 10);
+            const idPacienteEliminar = parseInt(readlineSync.question("ID del paciente a eliminar: "), 10);
             veterinaria.eliminarPaciente(idPacienteEliminar);
             console.log("Paciente eliminado con éxito.");
             break;
@@ -233,5 +239,5 @@ function gestionarPacientes(): void {
     gestionarPacientes();
 }
 
-// Inicia la aplicación
+// Iniciar el menú
 mostrarMenuPrincipal();

@@ -65,8 +65,24 @@ export class Veterinaria {
     return this.nombre;
   }
 
+  public getDatosVeterinaria(): string {
+    return `
+    Veterinaria:
+        ID: ${this.id}
+        Nombre: ${this.nombre}
+        Dirección: ${this.direccion};`
+}
+
   public getDireccion(): string {
     return this.direccion;
+  }
+
+  public getClientes(){
+    return this.clientes;
+  }
+
+  public getPacientes(){
+    return this.pacientes;
   }
 }
 
