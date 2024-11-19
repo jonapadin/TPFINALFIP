@@ -1,11 +1,11 @@
 export class Cliente {
   private id: number;
   private nombre: string;
-  private telefono: number;
+  private telefono: string;
   private esVip: boolean;
   private cantVisitas: number;
 
-  constructor(nombre: string, telefono: number, esVip: boolean = false, cantVisitas: number = 0) {
+  constructor(nombre: string, telefono: string, esVip: boolean = false, cantVisitas: number = 0) {
     this.id = Math.floor(Math.random() * 1000);
     this.nombre = nombre;
     this.telefono = telefono;
@@ -29,11 +29,11 @@ export class Cliente {
     this.nombre = nombre;
   }
 
-  public getTelefono(): number {
+  public getTelefono(): string {
     return this.telefono;
   }
 
-  public setTelefono(telefono: number): void {
+  public setTelefono(telefono: string): void {
     this.telefono = telefono;
   }
 

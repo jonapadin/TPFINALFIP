@@ -2,23 +2,29 @@ import { Proveedor } from "./Proveedor"
 import { Veterinaria } from "./Veterinaria";
 
 export class RedVeterinaria {
-  private veterinarias: Veterinaria[];
-  private proveedores: Proveedor[];
+   veterinarias: Veterinaria[] = [];
+ proveedores: Proveedor[] = [];
 
-  constructor(veterinaria: Veterinaria[], proveedor: Proveedor[]) {
-    this.veterinarias = veterinaria;
-    this.proveedores = proveedor;
-  }
+
+  constructor() {
+    this.veterinarias = [];  
+    this.proveedores = [];   
+}
 
   public darAltaVeterinaria(veterinaria: Veterinaria) {
-    this.veterinarias?.push(veterinaria);
+    this.veterinarias.push(veterinaria); 
   }
 
   public darBajaVeterinaria(id: number) {
-    if (id) {
-      this.veterinarias = this.veterinarias.filter(vet => vet.getId() !== id);  // Corregido aquí
+    const veterinaria = this.veterinarias.find(vet => vet.getId() === id);
+    if (veterinaria) {
+      // Eliminar veterinaria
+      this.veterinarias = this.veterinarias.filter(vet => vet.getId() !== id);
+  
+      // Mostrar detalles de la veterinaria eliminada
+      console.log(`Veterinaria ${veterinaria.getNombre()} eliminada con éxito!`);
     } else {
-      console.error("No se encuentra el ID");
+      console.error("No se encuentra la veterinaria con el ID proporcionado.");
     }
   }
 
@@ -34,7 +40,7 @@ export class RedVeterinaria {
     this.proveedores.push(proveedor);
   }
 
-  modificarProveedor(id: number, nombre?: string, telefono?: number) {
+  modificarProveedor(id: number, nombre?: string, telefono?: string) {
     const proveedor = this.proveedores.find(pr => pr.getId() === id);
     if (proveedor) {
       if (nombre) proveedor.setNombre(nombre);
@@ -47,7 +53,7 @@ export class RedVeterinaria {
   }
 
   public getVeterinarias(): Veterinaria[] {
-    return this.veterinarias;
+    return this.veterinarias; 
   }
 
   public getProveedores():Proveedor[] {

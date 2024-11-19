@@ -10,6 +10,7 @@ export class Veterinaria {
   private clientes: Cliente[] = [];
   private pacientes: Paciente[] = [];
 
+
   constructor(nombre: string, direccion: string,) {
     this.id = Math.floor(Math.random() * 1000);
     this.nombre = nombre;
@@ -20,7 +21,7 @@ export class Veterinaria {
     this.clientes.push(cliente);
   }
 
-  modificarCliente(id: number, nombre?: string, telefono?: number) {
+  modificarCliente(id: number, nombre?: string, telefono?: string) {
     const cliente = this.clientes.find(c => c.getId() === id);
     if (cliente) {
       if (nombre) cliente.setNombre(nombre);
@@ -65,13 +66,7 @@ export class Veterinaria {
     return this.nombre;
   }
 
-  public getDatosVeterinaria(): string {
-    return `
-    Veterinaria:
-        ID: ${this.id}
-        Nombre: ${this.nombre}
-        Dirección: ${this.direccion};`
-}
+
 
   public getDireccion(): string {
     return this.direccion;

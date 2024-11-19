@@ -2,9 +2,9 @@ export class Proveedor {
 
   private id: number;
   private nombre: string;
-  private telefono: number;
+  private telefono: string;
 
-  constructor(nombre: string, telefono: number) {
+  constructor(nombre: string, telefono: string) {
     this.id = Math.floor(Math.random() * 1000);
     this.nombre = nombre;
     this.telefono = telefono;
@@ -26,11 +26,11 @@ export class Proveedor {
     this.nombre = nombre;
   }
 
-  public getTelefono(): number {
+  public getTelefono(): string {
     return this.telefono;
   }
 
-  public setTelefono(telefono: number): void {
+  public setTelefono(telefono: string): void {
     this.telefono = telefono;
   }
 }
