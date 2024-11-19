@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import * as readlineSync from 'readline-sync';
 import { RedVeterinaria } from './models/RedVeterinaria';
 import { Veterinaria } from './models/Veterinaria';
@@ -59,7 +58,7 @@ function gestionarVeterinarias(): void {
                 if (siguienteOpcion === "c") {
                     gestionarClientes(nuevaVeterinaria);  // Si elige 'c', gestionar clientes para esta veterinaria
                 } else if (siguienteOpcion === "p") {
-                    gestionarPacientes();  // Si elige 'p', gestionar pacientes para esta veterinaria
+                    gestionarPacientes(nuevaVeterinaria);  // Si elige 'p', gestionar pacientes para esta veterinaria
                 } else if (siguienteOpcion === "0") {
                     gestionarVeterinarias();  // Volver al menú principal de veterinarias
                 }
@@ -197,23 +196,24 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
         case "1":
             const nombrePaciente= readlineSync.question("Nombre del paciente: ");
             const especie = readlineSync.question("Especie del paciente: ");
-            
-            const paciente1 = new Paciente(nombrePaciente,especie,);
+            const idDuenio = readlineSync.questionInt("ID del dueño: ");
 
+            const paciente1 = new Paciente(nombrePaciente,especie,idDuenio);
+            veterinaria.agregarPaciente(paciente1);
 
-            console.log("Proveedores en la red después de agregar:", redVeterinaria.getProveedores());
+            console.log("Pacientes en la red después de agregar:", veterinaria.getPacientes());
             break;
         case "2":
-            const buscar = readlineSync.questionInt("ID del proveedor:");
-            const nuevoNombreProv = readlineSync.question("Nuevo nombre:");
-            const nuevaTelefono = readlineSync.question("Nuevo telefono:");
-            redVeterinaria.modificarProveedor(buscar,nuevoNombreProv,nuevaTelefono);
-            console.log("Lista actualizada:", redVeterinaria.getProveedores());
+            const buscar = readlineSync.questionInt("ID de la mascota:");
+            const nuevoNombreEspecie = readlineSync.question("Nuevo nombre:");
+            const nuevaEspecie = readlineSync.question("Nueva especie:");
+            veterinaria.modificarPaciente(buscar,nuevoNombreEspecie,nuevaEspecie);
+            console.log("Lista actualizada:", veterinaria.getPacientes());
             break;
         case "3":
-            const buscarIdProv = readlineSync.questionInt("ID del proveedor a eliminar:")
-            redVeterinaria.eliminarProveedor(buscarIdProv);
-            console.log("Lista actualizada:", redVeterinaria.getProveedores());
+            const buscarIdDuenio = readlineSync.questionInt("ID del paciente a eliminar:")
+            veterinaria.eliminarPaciente(buscarIdDuenio);
+            console.log("Lista actualizada:", veterinaria.getPacientes());
             break
 
         case "0":
@@ -224,7 +224,8 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
             break;
     } 
 
-   gestionarPacientes();
+   gestionarPacientes(veterinaria);
 }
+
 
 mostrarMenuPrincipal()

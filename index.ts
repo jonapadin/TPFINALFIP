@@ -241,3 +241,48 @@ function gestionarPacientes(): void {
 
 // Iniciar el menú
 mostrarMenuPrincipal();
+
+
+function gestionarPacientes(veterinaria: Veterinaria): void {
+ 
+    console.log("\n--- Gestión de Pacientes ---");
+    console.log("1. Agregar Pacientes");
+    console.log("2. Modificar Pacientes");
+    console.log("3. Eliminar Pacientes");
+    console.log("0. Volver");
+    const opcion = readlineSync.question("Seleccione una opción: ");
+
+    switch (opcion) {
+        case "1":
+            const nombrePaciente= readlineSync.question("Nombre del paciente: ");
+            const especie = readlineSync.question("Especie del paciente: ");
+            const idDuenio = readlineSync.questionInt("ID del dueño: ");
+
+            const paciente1 = new Paciente(nombrePaciente,especie,idDuenio);
+            veterinaria.agregarPaciente(paciente1);
+
+            console.log("Pacientes en la red después de agregar:", veterinaria.getPacientes());
+            break;
+        case "2":
+            const buscar = readlineSync.questionInt("ID de la mascota:");
+            const nuevoNombreEspecie = readlineSync.question("Nuevo nombre:");
+            const nuevaEspecie = readlineSync.question("Nueva especie:");
+            veterinaria.modificarPaciente(buscar,nuevoNombreEspecie,nuevaEspecie);
+            console.log("Lista actualizada:", veterinaria.getPacientes());
+            break;
+        case "3":
+            const buscarIdDuenio = readlineSync.questionInt("ID del paciente a eliminar:")
+            veterinaria.eliminarPaciente(buscarIdDuenio);
+            console.log("Lista actualizada:", veterinaria.getPacientes());
+            break
+
+        case "0":
+            mostrarMenuPrincipal();
+            return;
+        default:
+            console.log("Opción no válida.");
+            break;
+    } 
+
+   gestionarPacientes(veterinaria);
+}
