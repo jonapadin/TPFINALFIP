@@ -6,9 +6,10 @@ export class RedVeterinaria {
   private proveedores: Proveedor[];
 
 
-constructor (){}
-
-
+  constructor(veterinaria: Veterinaria[], proveedor: Proveedor[]) {
+    this.veterinarias = veterinaria;
+    this.proveedores = proveedor;
+  }
 
   public darAltaVeterinaria(veterinaria: Veterinaria) {
     this.veterinarias?.push(veterinaria)
@@ -47,6 +48,3 @@ constructor (){}
 
 
 }
-
-
-
