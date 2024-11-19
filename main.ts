@@ -16,7 +16,7 @@ function mostrarMenuPrincipal(): void {
 
     switch (opcion) {
         case "1":
-            gestionarVeterinarias();
+            gestionarVeterinarias(redVeterinaria);
             break;
         case "2":
             gestionarProveedores();
@@ -31,13 +31,11 @@ function mostrarMenuPrincipal(): void {
     }
 }
 
-function gestionarVeterinarias(): void {
+function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
     console.log("\n--- Gestión de Veterinarias ---");
     console.log("1. Agregar Veterinaria");
     console.log("2. Modificar Veterinaria");
     console.log("3. Eliminar Veterinaria");
-    console.log("4. Gestionar Clientes");
-    console.log("5. Gestionar Pacientes");
     console.log("0. Volver");
     const opcion = readlineSync.question("Seleccione una opción: ");
 
@@ -53,21 +51,27 @@ function gestionarVeterinarias(): void {
                 console.log("Veterinaria agregada correctamente.");
                 console.log("Veterinarias en la red después de agregar:", redVeterinaria.getVeterinarias());
 
-                const siguienteOpcion = readlineSync.question("¿Deseas gestionar clientes o pacientes para esta veterinaria? (c: clientes, p: pacientes, 0: volver): ");
+                const siguienteOpcion = readlineSync.question("¿Deseas gestionar clientes o pacientes para esta veterinaria? (1: clientes, 2: pacientes, 0: volver): ");
 
-                if (siguienteOpcion === "c") {
-                    gestionarClientes(nuevaVeterinaria);  // Si elige 'c', gestionar clientes para esta veterinaria
-                } else if (siguienteOpcion === "p") {
-                    gestionarPacientes(nuevaVeterinaria);  // Si elige 'p', gestionar pacientes para esta veterinaria
-                } else if (siguienteOpcion === "0") {
-                    gestionarVeterinarias();  // Volver al menú principal de veterinarias
+                switch (siguienteOpcion) {
+                    case "1": 
+                            gestionarClientes(nuevaVeterinaria);
+                        break;
+                    case "2":
+                        if(nuevaVeterinaria.getClientes().length === 0) {
+                            gestionarClientes(nuevaVeterinaria);  
+                            console.log("agregar cliente");
+                          } else {
+                            
+                            gestionarPacientes(nuevaVeterinaria)
+                          } 
+                        break;
+                
+                    default:
+                        gestionarVeterinarias(redVeterinaria);
+                        break;
                 }
-            } else {
-                console.log("Error al agregar la veterinaria. Intenta de nuevo.");
             }
-
-
-
             break;
         case "2":
             const buscar = readlineSync.questionInt("ID de la veterinaria a actualizar:");
@@ -91,7 +95,7 @@ function gestionarVeterinarias(): void {
     }
 
 
-    gestionarVeterinarias();
+    gestionarVeterinarias(redVeterinaria);
 
 }
 
