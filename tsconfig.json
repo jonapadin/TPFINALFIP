@@ -1,15 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext", // Usar módulos ESNext
-    "moduleResolution": "Node", // Asegura que se resuelvan correctamente los módulos
-    "strict": true,
-    "esModuleInterop": true, // Asegura compatibilidad con importaciones
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": [
-    "src/**/*.ts", // Incluye tus archivos TS
-    "models/**/*.ts"
-  ]
+    "target": "es6",           // Or "es2015" or higher
+    "lib": ["es2015", "dom"],   // Make sure es2015 is included
+    "strict": true,             // Optional, but recommended
+    "moduleResolution": "node"  // Optional, if you're using Node.js module resolution
+  }
 }

@@ -6,6 +6,11 @@ import { Proveedor } from "../models/Proveedor.js";
 export async function cargarDatosDesdeArchivo(archivo, red) {
   try {
     const response = await fetch(archivo);
+
+    if (!response.ok) {
+      throw new Error(`Error al cargar el archivo: ${response.status} ${response.statusText}`);
+    }
+    
     const data = await response.json();
 
     // Llenar la red de veterinarias y proveedores con los datos del archivo
