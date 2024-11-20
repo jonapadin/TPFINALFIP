@@ -1,9 +1,12 @@
+import { Paciente } from "./Paciente";
+
 export class Cliente {
   private id: number;
   private nombre: string;
   private telefono: string;
   private esVip: boolean;
   private cantVisitas: number;
+  private mascotas: Paciente[]
 
   constructor(nombre: string, telefono: string, esVip: boolean = false, cantVisitas: number = 0) {
     this.id = Math.floor(Math.random() * 1000);
@@ -11,6 +14,7 @@ export class Cliente {
     this.telefono = telefono;
     this.esVip = esVip;
     this.cantVisitas = cantVisitas;
+    this.mascotas=[];
   }
 
   public getId(): number {
