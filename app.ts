@@ -1,9 +1,10 @@
-import { RedVeterinaria } from './models/RedVeterinaria';
 import * as readlineSync from 'readline-sync';
 import { mostrarMenuGestor } from './menuGestor';
 import { menuVeterinaria } from './menuVet';
-import { Veterinaria } from './models';
+import { RedVeterinaria, Veterinaria } from './models';
 
+
+const redVeterinaria = new RedVeterinaria();
 
 export function menuPrincipal() {
     console.log("\n--- Gestión de Menu ---");
@@ -15,14 +16,13 @@ export function menuPrincipal() {
 
     switch (opcion) {
         case "1":
-            mostrarMenuGestor();
+            mostrarMenuGestor(redVeterinaria);
             break;
         case "2":
-            menuVeterinaria();
+              mostrarMenuGestor(redVeterinaria);
             break;
         case "0":
             process.exit();
-            return;
         default:
             console.log("Opción no válida.");
             break;
@@ -30,4 +30,4 @@ export function menuPrincipal() {
     menuPrincipal();
 }
 
-menuPrincipal();
+menuPrincipal()

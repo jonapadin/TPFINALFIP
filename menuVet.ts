@@ -1,22 +1,8 @@
 
 import { menuPrincipal } from "./app";
+import { agregarCliente } from "./funciones";
 import { Cliente, Paciente, Veterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -59,42 +45,42 @@ function gestionarClientes(): void {
      console.log("0. Volver");
     const opcion = readlineSync.question("Seleccione una opción: ");
 
-//     switch (opcion) {
-//         case "1":
-//             const nombreCliente= readlineSync.question("Nombre del Cliente: ");
-//             const telCliente  = readlineSync.question("Telefono: ");
-//             const cliente1 = new Cliente(nombreCliente,telCliente);
+    //  switch (opcion) {
+    //      case "1":
+    //         agregarCliente(veterinaria);
+    //         break;
 
-//             veterinaria.agregarCliente(cliente1);
 
-//            // if(nuevaVeterinaria)
+    //         veterinaria.agregarCliente(cliente1);
 
-//             // Verificar estado después de agregar
-//             console.log("Dedespués de agregar:", veterinaria.getClientes());
-//             break;
-//         case "2":
-//             const buscarIdCliente = readlineSync.questionInt("ID del cliente:");
-//             const nuevoNombreCliente = readlineSync.question("Nuevo nombre:");
-//             const nuevoTelefono = readlineSync.question("Nuevo telefono:");
-//             veterinaria.modificarCliente(buscarIdCliente,nuevoNombreCliente,nuevoTelefono);
-//             console.log("Lista actualizada:", veterinaria.getClientes());
-//             break;
-//         case "3":
-//             const buscarIdClient = readlineSync.questionInt("ID del cliente a eliminar:")
-//             veterinaria.eliminarCliente(buscarIdClient);
-//             console.log("Lista actualizada:", veterinaria);
-//             break
+    //        // if(nuevaVeterinaria)
 
-//         case "0":
-//             mostrarMenuPrincipal();
-//             return;
-//         default:
-//             console.log("Opción no válida.");
-//             break;
-//     } 
+    //         // Verificar estado después de agregar
+    //         console.log("Dedespués de agregar:", veterinaria.getClientes());
+    //         break;
+    //     case "2":
+    //         const buscarIdCliente = readlineSync.questionInt("ID del cliente:");
+    //         const nuevoNombreCliente = readlineSync.question("Nuevo nombre:");
+    //         const nuevoTelefono = readlineSync.question("Nuevo telefono:");
+    //         veterinaria.modificarCliente(buscarIdCliente,nuevoNombreCliente,nuevoTelefono);
+    //         console.log("Lista actualizada:", veterinaria.getClientes());
+    //         break;
+    //     case "3":
+    //         const buscarIdClient = readlineSync.questionInt("ID del cliente a eliminar:")
+    //         veterinaria.eliminarCliente(buscarIdClient);
+    //         console.log("Lista actualizada:", veterinaria);
+    //         break
+
+    //     case "0":
+    //         menuPrincipal();
+    //         return;
+    //     default:
+    //         console.log("Opción no válida.");
+    //     break;
+    //  } 
 
 //    gestionarClientes(veterinaria);
-// }
+}
 
 // function gestionarPacientes(veterinaria: Veterinaria): void {
  
@@ -130,7 +116,7 @@ function gestionarClientes(): void {
 //             break
 
 //         case "0":
-//             mostrarMenuPrincipal();
+//             menuPrincipal();
 //             return;
 //         default:
 //             console.log("Opción no válida.");
@@ -138,4 +124,4 @@ function gestionarClientes(): void {
 //     } 
 
 //    gestionarPacientes(veterinaria);
- }
+//  }

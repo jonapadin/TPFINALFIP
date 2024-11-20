@@ -1,10 +1,9 @@
 import { menuPrincipal } from "./app";
 import { agregarProveedor, agregarVeterinaria, eliminarProveedor, eliminarVeterinaria, modificarProveedor, modificarVeterinaria } from "./funciones";
-import { RedVeterinaria } from "./models";
+import { RedVeterinaria, Veterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
 
-const redVeterinaria = new RedVeterinaria();
-export function mostrarMenuGestor(): void {
+export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
     console.log("\n--- Menú Principal del Gestor ---");
     console.log("1. Gestionar Veterinarias");
     console.log("2. Gestionar Proveedores");
@@ -30,7 +29,7 @@ export function mostrarMenuGestor(): void {
                 break;
             default:
                 console.log("Opción no válida.");
-                mostrarMenuGestor();
+                mostrarMenuGestor(redVeterinaria);
                 break;
         }
     }
@@ -61,18 +60,18 @@ export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
             eliminarVeterinaria(redVeterinaria);
             break
         case "0":
-            mostrarMenuGestor();
+            mostrarMenuGestor(redVeterinaria);
             return;
         default:
             console.log("Opción no válida.");
             break;
     }
-    gestionarVeterinarias(redVeterinaria);
+    gestionarVeterinarias(redVeterinaria,);
 }
 
 
 
-export function gestionarProveedores(redVeterinaria: RedVeterinaria): void {
+export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
     console.log("\n--- Gestión de Proveedores ---");
     console.log("1. Agregar Proveedores");
     console.log("2. Modificar Proveedores");
@@ -92,7 +91,7 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria): void {
             break
 
         case "0":
-            mostrarMenuGestor();
+            mostrarMenuGestor(redVeterinaria);
             return;
         default:
             console.log("Opción no válida.");

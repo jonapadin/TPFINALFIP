@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "clientes": [],
+    "pacientes": [],
+    "id": 677,
+    "nombre": "asdsad",
+    "direccion": "sadsad"
+  }
+]

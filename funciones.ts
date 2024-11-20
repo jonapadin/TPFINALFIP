@@ -1,7 +1,7 @@
 import * as readlineSync from 'readline-sync';
 import * as fs from 'fs';
 
-import { Proveedor, RedVeterinaria, Veterinaria } from './models';
+import { Cliente, Proveedor, RedVeterinaria, Veterinaria } from './models';
 
 function guardarEnArchivo(nombreArchivo: string, datos: any[]): void {
     try {
@@ -47,6 +47,7 @@ export function agregarVeterinaria(redVeterinaria: RedVeterinaria) {
 
     // Guardar veterinarias
     guardarEnArchivo('veterinarias.txt', redVeterinaria.getVeterinarias());
+    return nuevaVeterinaria;
     
 }
 
@@ -105,4 +106,16 @@ export function eliminarProveedor(redVeterinaria: RedVeterinaria) {
 }
 
 
-//
+// Menu clientes 
+
+export function agregarCliente(veterinaria: Veterinaria) {
+    const nombreCliente= readlineSync.question("Nombre del Cliente: ");
+    const telCliente  = readlineSync.question("Telefono: ");
+     const cliente1 = new Cliente(nombreCliente,telCliente);
+
+     veterinaria.agregarCliente(cliente1);
+
+     guardarEnArchivo('proveedores.txt', veterinaria.getClientes());
+
+    }
+
