@@ -107,8 +107,8 @@ export function agregarProveedor(redVeterinaria: RedVeterinaria) {
 export function modificarProveedor(redVeterinaria: RedVeterinaria) {
     const buscar = readlineSync.questionInt("ID del proveedor:");
     const nuevoNombreProv = readlineSync.question("Nuevo nombre:");
-    const nuevaTelefono = readlineSync.question("Nuevo telefono:");
-    redVeterinaria.modificarProveedor(buscar,nuevoNombreProv,nuevaTelefono);
+    const nuevoTelefono = readlineSync.question("Nuevo telefono:");
+    redVeterinaria.modificarProveedor(buscar,nuevoNombreProv,nuevoTelefono);
     console.log("Lista actualizada:", redVeterinaria.getProveedores());
     guardarEnArchivo('proveedores.txt', redVeterinaria.getProveedores());
 }
@@ -135,3 +135,18 @@ export function agregarCliente(veterinaria: Veterinaria) {
 
     }
 
+    export function modificarCliente(veterinaria: Veterinaria) {
+        const buscar = readlineSync.questionInt("ID del clientes:");
+        const nuevoNombreCliente = readlineSync.question("Nuevo nombre:");
+        const nuevoTelefono = readlineSync.question("Nuevo telefono:");
+        veterinaria.modificarCliente(buscar,nuevoNombreCliente,nuevoTelefono);
+        console.log("Lista actualizada:", veterinaria.getClientes());
+        guardarEnArchivo('clientes.txt', veterinaria.getClientes());
+    }
+
+    export function eliminarCliente(veterinaria: Veterinaria) {
+        const buscarIdCliente = readlineSync.questionInt("ID del cliente a eliminar:")
+        veterinaria.eliminarCliente(buscarIdCliente);
+        console.log("Lista actualizada:", veterinaria.getClientes()); 
+        guardarEnArchivo('clientes.txt', veterinaria.getClientes());
+    }

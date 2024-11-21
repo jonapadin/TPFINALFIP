@@ -1,5 +1,5 @@
 import { menuPrincipal } from "./app";
-import { agregarCliente, leerVeterinarias } from "./funciones";
+import { agregarCliente, eliminarCliente, leerVeterinarias, modificarCliente } from "./funciones";
 import { Cliente, Paciente,Veterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
 import * as fs from "fs";
@@ -11,7 +11,6 @@ function menuVeterinaria() {
     console.log("\n--- Gestión de Veterinaria ---");
     console.log("1. Ver Lista de Veterinarias");
     console.log("2. Seleccionar Veterinaria");
-    console.log("3. Volver");
     console.log("0. Salir");
     const opcion = readlineSync.question("Eliga una opcion: ");
 
@@ -23,8 +22,11 @@ function menuVeterinaria() {
             const idSeleccionado = readlineSync.questionInt("Introduce el ID de la veterinaria a seleccionar: ");
             seleccionarVeterinaria(idSeleccionado)
             break;
+        case "0":
+                process.exit();    
         default:
             console.log("Opción no válida.");
+         
             break;
     }
 }
@@ -70,7 +72,7 @@ export function menu(veterinaria:Veterinaria): void {
     console.log("\n--- Menu Veterinaria---");
     console.log("1. Gestionar Clientes");
     console.log("2. Gestionar Pacientes");
-    console.log("3. Volver");
+    console.log("3. volver");
     console.log("0. Salir");
     const opcion = readlineSync.question("Seleccione una opción: ");
 
@@ -81,6 +83,9 @@ export function menu(veterinaria:Veterinaria): void {
         case "2":
            "gestionarPacientes";
             break;
+            case "3":
+                menuVeterinaria();
+                break;
         case "0":
            process.exit();
             return;
@@ -88,6 +93,7 @@ export function menu(veterinaria:Veterinaria): void {
             console.log("Opción no válida.");
             break;
     }
+    menu(veterinaria)
 }
 
 
@@ -107,13 +113,23 @@ function gestionarClientes(veterinaria:Veterinaria): void {
             
           break;
 
+          case "2":
+            modificarCliente(veterinaria);
+            break;
 
-//           
+           case "3":
+            eliminarCliente(veterinaria);
+            break 
+           case "0": 
+           menu(veterinaria);
+           break;
           default:
              console.log("Opción no válida.");
+             gestionarClientes(veterinaria);
+            
         break;
      } 
-
+     gestionarClientes(veterinaria);
 }
 
 // function gestionarPacientes(veterinaria: Veterinaria): void {
