@@ -1,7 +1,10 @@
+
 import * as readlineSync from 'readline-sync';
 import { mostrarMenuGestor } from './menuGestor';
-import { menuVeterinaria } from './menuVet';
-import { RedVeterinaria, Veterinaria } from './models';
+//import { menuVeterinaria } from './menuVet';
+import { RedVeterinaria } from './models';
+
+
 
 
 const redVeterinaria = new RedVeterinaria();

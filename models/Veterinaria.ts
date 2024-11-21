@@ -11,11 +11,12 @@ export class Veterinaria {
   private pacientes: Paciente[] = [];
 
 
-  constructor(nombre: string, direccion: string,) {
-    this.id = Math.floor(Math.random() * 1000);
+  constructor(nombre: string, direccion: string, id?: number) {
+
+    this.id = id ?? Math.floor(Math.random() * 1000);
     this.nombre = nombre;
     this.direccion = direccion;
-  }
+}
 
   agregarCliente(cliente: Cliente) {
     this.clientes.push(cliente);

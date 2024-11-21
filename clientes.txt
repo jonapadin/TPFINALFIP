@@ -1,0 +1,10 @@
+[
+  {
+    "id": 294,
+    "nombre": "juan",
+    "telefono": "23232323",
+    "esVip": false,
+    "cantVisitas": 0,
+    "mascotas": []
+  }
+]

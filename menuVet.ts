@@ -1,13 +1,73 @@
-
 import { menuPrincipal } from "./app";
-import { agregarCliente } from "./funciones";
-import { Cliente, Paciente, Veterinaria } from "./models";
+import { agregarCliente, leerVeterinarias } from "./funciones";
+import { Cliente, Paciente,Veterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
+import * as fs from "fs";
 
 
 
-export function menuVeterinaria(): void {
+
+function menuVeterinaria() {
     console.log("\n--- Gestión de Veterinaria ---");
+    console.log("1. Ver Lista de Veterinarias");
+    console.log("2. Seleccionar Veterinaria");
+    console.log("3. Volver");
+    console.log("0. Salir");
+    const opcion = readlineSync.question("Eliga una opcion: ");
+
+    switch(opcion) {
+        case "1":
+            leerVeterinarias();
+        break;
+        case "2":
+            const idSeleccionado = readlineSync.questionInt("Introduce el ID de la veterinaria a seleccionar: ");
+            seleccionarVeterinaria(idSeleccionado)
+            break;
+        default:
+            console.log("Opción no válida.");
+            break;
+    }
+}
+
+
+
+function seleccionarVeterinaria(id: number) {
+    fs.readFile('veterinarias.txt', 'utf-8', (err: NodeJS.ErrnoException | null, data: string) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            return;
+        }
+
+        try {
+            // Parseamos el contenido del archivo a un array de objetos
+            const veterinariasTxt: { nombre: string; direccion: string; id: number }[] = JSON.parse(data);
+
+            // Creamos un array de instancias de Veterinaria, pasando también el id
+            const veterinarias: Veterinaria[] = veterinariasTxt.map((vete) => 
+                new Veterinaria(vete.nombre, vete.direccion, vete.id) // Pasar el id aquí
+            );
+
+            // Buscar la veterinaria por ID
+            const veterinaria = veterinarias.find(v => v.getId() === id);
+
+            if (veterinaria) {
+                console.log("\nDetalles de la Veterinaria Seleccionada:");
+                console.log(`ID: ${veterinaria.getId()}`);
+                console.log(`Nombre: ${veterinaria.getNombre()}`);
+                console.log(`Dirección: ${veterinaria.getDireccion()}`);
+                menu(veterinaria);  // Aquí puedes hacer lo que necesites con la veterinaria seleccionada
+            } else {
+                console.log("No se encontró una veterinaria con ese ID.");
+            }
+        } catch (parseError) {
+            console.error('Error al parsear el contenido del archivo:', parseError);
+        }
+    });
+}
+
+menuVeterinaria();
+export function menu(veterinaria:Veterinaria): void {
+    console.log("\n--- Menu Veterinaria---");
     console.log("1. Gestionar Clientes");
     console.log("2. Gestionar Pacientes");
     console.log("3. Volver");
@@ -16,13 +76,11 @@ export function menuVeterinaria(): void {
 
     switch (opcion) {
         case "1":
-            gestionarClientes();
+            gestionarClientes(veterinaria)
             break;
         case "2":
            "gestionarPacientes";
             break;
-        case "3":
-            menuPrincipal(); 
         case "0":
            process.exit();
             return;
@@ -34,9 +92,7 @@ export function menuVeterinaria(): void {
 
 
 
-
-
-function gestionarClientes(): void {
+function gestionarClientes(veterinaria:Veterinaria): void {
  
    console.log("\n--- Gestión de Clientes ---");
      console.log("1. Agregar Clientes");
@@ -45,41 +101,19 @@ function gestionarClientes(): void {
      console.log("0. Volver");
     const opcion = readlineSync.question("Seleccione una opción: ");
 
-    //  switch (opcion) {
-    //      case "1":
-    //         agregarCliente(veterinaria);
-    //         break;
+      switch (opcion) {
+         case "1":
+            agregarCliente(veterinaria);
+            
+          break;
 
 
-    //         veterinaria.agregarCliente(cliente1);
+//           
+          default:
+             console.log("Opción no válida.");
+        break;
+     } 
 
-    //        // if(nuevaVeterinaria)
-
-    //         // Verificar estado después de agregar
-    //         console.log("Dedespués de agregar:", veterinaria.getClientes());
-    //         break;
-    //     case "2":
-    //         const buscarIdCliente = readlineSync.questionInt("ID del cliente:");
-    //         const nuevoNombreCliente = readlineSync.question("Nuevo nombre:");
-    //         const nuevoTelefono = readlineSync.question("Nuevo telefono:");
-    //         veterinaria.modificarCliente(buscarIdCliente,nuevoNombreCliente,nuevoTelefono);
-    //         console.log("Lista actualizada:", veterinaria.getClientes());
-    //         break;
-    //     case "3":
-    //         const buscarIdClient = readlineSync.questionInt("ID del cliente a eliminar:")
-    //         veterinaria.eliminarCliente(buscarIdClient);
-    //         console.log("Lista actualizada:", veterinaria);
-    //         break
-
-    //     case "0":
-    //         menuPrincipal();
-    //         return;
-    //     default:
-    //         console.log("Opción no válida.");
-    //     break;
-    //  } 
-
-//    gestionarClientes(veterinaria);
 }
 
 // function gestionarPacientes(veterinaria: Veterinaria): void {

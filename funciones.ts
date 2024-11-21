@@ -17,21 +17,40 @@ function guardarEnArchivo(nombreArchivo: string, datos: any[]): void {
     }
 }
 
-export function obtenerDatosDesdeArchivo(nombreArchivo: string): any[] {
-    try {
-        // Leer el archivo .json
-        const contenido = fs.readFileSync(nombreArchivo, 'utf8');
+// leer veterinarias
+export const leerVeterinarias = () => {
+    // Leemos el archivo veterinarias.txt
+    fs.readFile('veterinarias.txt', 'utf-8', (err: NodeJS.ErrnoException | null, data: string) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            return;
+        }
 
-        // Convertir el contenido JSON en un objeto JavaScript
-        const datos = JSON.parse(contenido);
+        // Intentamos convertir el contenido del archivo a un objeto JavaScript (JSON)
+        try {
+            // Parseamos el archivo JSON
+            const veterinariasTxt: { nombre: string; direccion: string; id: number }[] = JSON.parse(data);
+            
+            // Usamos map para convertir los objetos del JSON en instancias de la clase Veterinaria
+            const listaVeterinarias: Veterinaria[] = veterinariasTxt.map((vete) => 
+                new Veterinaria(vete.nombre, vete.direccion, vete.id) // Ahora pasamos el 'id' también
+            );
 
-        // Devolver los datos (ahora un array de objetos)
-        return datos;
-    } catch (err) {
-        console.error("Hubo un error al leer el archivo: ", err);
-        return []; // Devuelve un array vacío si hubo un error
-    }
-}
+            // Ahora tienes la lista de veterinarias, puedes recorrerla si lo necesitas
+            listaVeterinarias.forEach((veterinaria, i) => {
+                console.log(`Veterinaria ${i + 1}:`);
+                console.log(`ID: ${veterinaria.getId()}`);
+                console.log(`Nombre: ${veterinaria.getNombre()}`);
+                console.log(`Dirección: ${veterinaria.getDireccion()}`);
+                console.log('---');
+            });
+
+        } catch (parseError) {
+            console.error('Error al parsear el contenido del archivo:', parseError);
+        }
+    });
+};
+
 
 //Menu red veterinaria
 
@@ -47,13 +66,9 @@ export function agregarVeterinaria(redVeterinaria: RedVeterinaria) {
 
     // Guardar veterinarias
     guardarEnArchivo('veterinarias.txt', redVeterinaria.getVeterinarias());
-    return nuevaVeterinaria;
     
 }
 
-export function obtenerVeterinaria(nuevaVeterinaria:Veterinaria) {
-    return nuevaVeterinaria;
-}
 
 export function modificarVeterinaria(redVeterinaria: RedVeterinaria) {
     const buscar = readlineSync.questionInt("ID de la veterinaria a actualizar:");
@@ -115,7 +130,8 @@ export function agregarCliente(veterinaria: Veterinaria) {
 
      veterinaria.agregarCliente(cliente1);
 
-     guardarEnArchivo('proveedores.txt', veterinaria.getClientes());
+
+     guardarEnArchivo('clientes.txt', veterinaria.getClientes());
 
     }
 
