@@ -2,8 +2,8 @@ import { Proveedor } from "./Proveedor"
 import { Veterinaria } from "./Veterinaria";
 
 export class RedVeterinaria {
-   veterinarias: Veterinaria[] = [];
- proveedores: Proveedor[] = [];
+ private  veterinarias: Veterinaria[] = [];
+ private proveedores: Proveedor[] = [];
 
 
   constructor() {

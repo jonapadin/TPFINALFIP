@@ -1,7 +1,7 @@
 import * as readlineSync from 'readline-sync';
 import * as fs from 'fs';
 
-import { Cliente, Proveedor, RedVeterinaria, Veterinaria } from './models';
+import { Cliente, Paciente, Proveedor, RedVeterinaria, Veterinaria } from './models';
 
 function guardarEnArchivo(nombreArchivo: string, datos: any[]): void {
     try {
@@ -52,7 +52,7 @@ export const leerVeterinarias = () => {
 };
 
 
-//Menu red veterinaria
+//Funciones red veterinaria
 
 export function agregarVeterinaria(redVeterinaria: RedVeterinaria) {
     const nombre = readlineSync.question("Nombre de la veterinaria: ");
@@ -90,7 +90,7 @@ export function eliminarVeterinaria(redVeterinaria: RedVeterinaria) {
 }
 
 
-//Menu red Proveedores
+//Funciones red Proveedores
 
 export function agregarProveedor(redVeterinaria: RedVeterinaria) {
     const nombreProveedor= readlineSync.question("Nombre del proveedor: ");
@@ -121,16 +121,21 @@ export function eliminarProveedor(redVeterinaria: RedVeterinaria) {
 }
 
 
-// Menu clientes 
+// Funciones clientes 
 
 export function agregarCliente(veterinaria: Veterinaria) {
     const nombreCliente= readlineSync.question("Nombre del Cliente: ");
     const telCliente  = readlineSync.question("Telefono: ");
+    const visitas = readlineSync.questionInt("Cantidad de visitas iniciales: ");
      const cliente1 = new Cliente(nombreCliente,telCliente);
 
+
+
+     for (let i = 0; i < visitas; i++) {
+        cliente1.registrarVisita();
+    }
+
      veterinaria.agregarCliente(cliente1);
-
-
      guardarEnArchivo('clientes.txt', veterinaria.getClientes());
 
     }
@@ -150,3 +155,31 @@ export function agregarCliente(veterinaria: Veterinaria) {
         console.log("Lista actualizada:", veterinaria.getClientes()); 
         guardarEnArchivo('clientes.txt', veterinaria.getClientes());
     }
+
+    //Funciones pacientes
+
+    export function agregarPaciente(veterinaria: Veterinaria) {
+        const nombrePaciente= readlineSync.question("Nombre del paciente: ");
+        const especie = readlineSync.question("Especie del paciente: ");
+        const idDuenio = readlineSync.questionInt("ID del dueño: ");
+
+        const paciente1 = new Paciente(nombrePaciente,especie,idDuenio);
+        veterinaria.agregarPaciente(paciente1);
+    
+         guardarEnArchivo('pacientes.txt', veterinaria.getPacientes());
+    
+        }
+    
+        export function modificarPaciente(veterinaria: Veterinaria) {
+            const buscar = readlineSync.questionInt("ID de la mascota:");
+            const nuevoNombreEspecie = readlineSync.question("Nuevo nombre:");
+            const nuevaEspecie = readlineSync.question("Nueva especie:");
+            veterinaria.modificarPaciente(buscar,nuevoNombreEspecie,nuevaEspecie);
+            guardarEnArchivo('pacientes.txt', veterinaria.getPacientes());
+        }
+    
+        export function eliminarPaciente(veterinaria: Veterinaria) {
+            const buscarIdDuenio = readlineSync.questionInt("ID del paciente a eliminar:")
+            veterinaria.eliminarPaciente(buscarIdDuenio);
+            guardarEnArchivo('pacientes.txt', veterinaria.getPacientes());
+        }

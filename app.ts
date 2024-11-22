@@ -1,7 +1,7 @@
 
 import * as readlineSync from 'readline-sync';
 import { mostrarMenuGestor } from './menuGestor';
-//import { menuVeterinaria } from './menuVet';
+import { menuVeterinaria } from './menuVet';
 import { RedVeterinaria } from './models';
 
 
@@ -22,7 +22,7 @@ export function menuPrincipal() {
             mostrarMenuGestor(redVeterinaria);
             break;
         case "2":
-              mostrarMenuGestor(redVeterinaria);
+            menuVeterinaria();
             break;
         case "0":
             process.exit();

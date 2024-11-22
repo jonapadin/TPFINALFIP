@@ -4,10 +4,12 @@ export class Paciente {
   private especie: string;
   private idDuenio: number;
 
+
   constructor(nombre: string, especie: string, idDuenio: number) {
     this.nombre = nombre;
-    this.especie = (especie === "Perro" || especie === "Gato") ? especie : "Exotica";
+    this.especie = (especie.toLowerCase() === "perro" || especie.toLowerCase() === "gato") ? especie : "exotica";
     this.idDuenio = idDuenio;
+
   }
 
   public getNombre(): string {
@@ -33,4 +35,6 @@ export class Paciente {
   public setIdDuenio(idDuenio: number): void {
     this.idDuenio = idDuenio;
   }
+
+
 }

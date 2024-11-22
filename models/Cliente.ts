@@ -6,7 +6,8 @@ export class Cliente {
   private telefono: string;
   private esVip: boolean;
   private cantVisitas: number;
-  private mascotas: Paciente[]
+  private mascotas: Paciente [] = [];
+
 
   constructor(nombre: string, telefono: string, esVip: boolean = false, cantVisitas: number = 0) {
     this.id = Math.floor(Math.random() * 1000);
@@ -14,7 +15,7 @@ export class Cliente {
     this.telefono = telefono;
     this.esVip = esVip;
     this.cantVisitas = cantVisitas;
-    this.mascotas=[];
+    this.mascotas = [];
   }
 
   public getId(): number {
@@ -58,10 +59,19 @@ export class Cliente {
   }
 
 
+  public agregarMascota (mascota: Paciente) {
+    this.mascotas.push(mascota)
+  }
   public registrarVisita(): void {
     this.cantVisitas++;
     if (this.cantVisitas >= 5) {
       this.esVip = true;
     }
   }
+
+
 }
+
+
+
+
