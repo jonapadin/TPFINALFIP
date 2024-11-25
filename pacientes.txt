@@ -1,7 +1,0 @@
-[
-  {
-    "nombre": "rodolfo",
-    "especie": "exotica",
-    "idDuenio": 2323
-  }
-]

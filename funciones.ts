@@ -8,47 +8,75 @@ function guardarEnArchivo(nombreArchivo: string, datos: any[]): void {
         // Convertir los datos a formato JSON
         const contenido = JSON.stringify(datos, null, 2); // El "2" es para formatear el JSON con indentación para que sea legible
         
-        // Guardar el contenido en un archivo .json
+
         fs.writeFileSync(nombreArchivo, contenido, 'utf8');
         console.log(`El archivo se guardó correctamente como ${nombreArchivo}`);
     } catch (err) {
-        // Si ocurre un error, lo capturamos y mostramos el mensaje
+
         console.error("Hubo un error al guardar el archivo: ", err);
     }
 }
 
-// leer veterinarias
+function actualizarCliente(nombreArchivo: string, veterinaria: Veterinaria) {
+    // Leemos los datos existentes del archivo
+    let data;
+    try {
+        data = fs.readFileSync(nombreArchivo, 'utf-8');
+    } catch (error) {
+        data = '[]';  
+    }
+
+    const veterinariasTxt = JSON.parse(data);
+
+    // Buscamos si la veterinaria ya existe por su id
+    const index = veterinariasTxt.findIndex((v: any) => v.id === veterinaria.getId());
+
+    if (index === -1) {
+        // Si la veterinaria no existe, la agregamos junto con sus clientes y pacientes
+        veterinariasTxt.push({
+            id: veterinaria.getId(),
+            nombre: veterinaria.getNombre(),
+            direccion: veterinaria.getDireccion(),
+            clientes: veterinaria.getClientes(),  
+            pacientes: veterinaria.getPacientes()  
+        });
+    } else {
+        // Si existe, actualizamos los clientes y pacientes
+        veterinariasTxt[index].clientes = veterinaria.getClientes();
+        veterinariasTxt[index].pacientes = veterinaria.getPacientes();
+    }
+
+    // Guardamos los datos actualizados en el archivo
+    fs.writeFileSync(nombreArchivo, JSON.stringify(veterinariasTxt, null, 2), 'utf8');
+    console.log(`El archivo ${nombreArchivo} ha sido actualizado correctamente.`);
+}
+
+
 export const leerVeterinarias = () => {
-    // Leemos el archivo veterinarias.txt
-    fs.readFile('veterinarias.txt', 'utf-8', (err: NodeJS.ErrnoException | null, data: string) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            return;
-        }
+    try {
+        // Leemos el archivo veterinarias.txt de forma síncrona
+        const data = fs.readFileSync('veterinarias.txt', 'utf-8');
 
         // Intentamos convertir el contenido del archivo a un objeto JavaScript (JSON)
-        try {
-            // Parseamos el archivo JSON
-            const veterinariasTxt: { nombre: string; direccion: string; id: number }[] = JSON.parse(data);
-            
-            // Usamos map para convertir los objetos del JSON en instancias de la clase Veterinaria
-            const listaVeterinarias: Veterinaria[] = veterinariasTxt.map((vete) => 
-                new Veterinaria(vete.nombre, vete.direccion, vete.id) // Ahora pasamos el 'id' también
-            );
+        const veterinariasTxt: { nombre: string; direccion: string; id: number }[] = JSON.parse(data);
 
-            // Ahora tienes la lista de veterinarias, puedes recorrerla si lo necesitas
-            listaVeterinarias.forEach((veterinaria, i) => {
-                console.log(`Veterinaria ${i + 1}:`);
-                console.log(`ID: ${veterinaria.getId()}`);
-                console.log(`Nombre: ${veterinaria.getNombre()}`);
-                console.log(`Dirección: ${veterinaria.getDireccion()}`);
-                console.log('---');
-            });
+        // Convertimos los objetos del JSON en instancias de la clase Veterinaria
+        const listaVeterinarias: Veterinaria[] = veterinariasTxt.map((vete) => 
+            new Veterinaria(vete.nombre, vete.direccion, vete.id) // Creamos la instancia de Veterinaria pasando el id
+        );
 
-        } catch (parseError) {
-            console.error('Error al parsear el contenido del archivo:', parseError);
-        }
-    });
+        // Mostramos la información de las veterinarias
+        listaVeterinarias.forEach((veterinaria, i) => {
+            console.log(`Veterinaria ${i + 1}:`);
+            console.log(`ID: ${veterinaria.getId()}`);
+            console.log(`Nombre: ${veterinaria.getNombre()}`);
+            console.log(`Dirección: ${veterinaria.getDireccion()}`);
+            console.log('---');
+        });
+
+    } catch (err) {
+        console.error('Error al leer o parsear el archivo veterinarias.txt:', err);
+    }
 };
 
 
@@ -136,7 +164,8 @@ export function agregarCliente(veterinaria: Veterinaria) {
     }
 
      veterinaria.agregarCliente(cliente1);
-     guardarEnArchivo('clientes.txt', veterinaria.getClientes());
+
+     actualizarCliente('veterinarias.txt', veterinaria);
 
     }
 
@@ -146,14 +175,14 @@ export function agregarCliente(veterinaria: Veterinaria) {
         const nuevoTelefono = readlineSync.question("Nuevo telefono:");
         veterinaria.modificarCliente(buscar,nuevoNombreCliente,nuevoTelefono);
         console.log("Lista actualizada:", veterinaria.getClientes());
-        guardarEnArchivo('clientes.txt', veterinaria.getClientes());
+        actualizarCliente('veterinarias.txt', veterinaria);
     }
 
     export function eliminarCliente(veterinaria: Veterinaria) {
         const buscarIdCliente = readlineSync.questionInt("ID del cliente a eliminar:")
         veterinaria.eliminarCliente(buscarIdCliente);
         console.log("Lista actualizada:", veterinaria.getClientes()); 
-        guardarEnArchivo('clientes.txt', veterinaria.getClientes());
+        actualizarCliente('veterinarias.txt', veterinaria);
     }
 
     //Funciones pacientes
@@ -166,7 +195,8 @@ export function agregarCliente(veterinaria: Veterinaria) {
         const paciente1 = new Paciente(nombrePaciente,especie,idDuenio);
         veterinaria.agregarPaciente(paciente1);
     
-         guardarEnArchivo('pacientes.txt', veterinaria.getPacientes());
+         actualizarCliente('veterinarias.txt', veterinaria);
+
     
         }
     
@@ -175,11 +205,11 @@ export function agregarCliente(veterinaria: Veterinaria) {
             const nuevoNombreEspecie = readlineSync.question("Nuevo nombre:");
             const nuevaEspecie = readlineSync.question("Nueva especie:");
             veterinaria.modificarPaciente(buscar,nuevoNombreEspecie,nuevaEspecie);
-            guardarEnArchivo('pacientes.txt', veterinaria.getPacientes());
+            actualizarCliente('veterinarias.txt', veterinaria);
         }
     
         export function eliminarPaciente(veterinaria: Veterinaria) {
             const buscarIdDuenio = readlineSync.questionInt("ID del paciente a eliminar:")
             veterinaria.eliminarPaciente(buscarIdDuenio);
-            guardarEnArchivo('pacientes.txt', veterinaria.getPacientes());
+            actualizarCliente('veterinarias.txt', veterinaria);
         }

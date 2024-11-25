@@ -1,19 +1,17 @@
-import { menuPrincipal } from "./app";
+
 import { agregarProveedor, agregarVeterinaria, eliminarProveedor, eliminarVeterinaria, modificarProveedor, modificarVeterinaria } from "./funciones";
-import { RedVeterinaria, Veterinaria } from "./models";
+import { RedVeterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
 
 export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
     console.log("\n--- Menú Principal del Gestor ---");
     console.log("1. Gestionar Veterinarias");
     console.log("2. Gestionar Proveedores");
-    console.log("3. Volver");
     console.log("0. Salir");
     const opcion = readlineSync.question("Seleccione una opción: ");
-    if (!["1", "2", "0"].includes(opcion)) {
+    if (!["1", "2","3", "0"].includes(opcion)) {
         console.log("Opción no válida. Por favor, selecciona una opción correcta.");
     } else {
-        // Procesar la opción válida aquí
         switch (opcion) {
             case "1":
                 gestionarVeterinarias(redVeterinaria);
@@ -21,12 +19,8 @@ export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
             case "2":
                 gestionarProveedores(redVeterinaria);
                 break;
-            case "3":
-                menuPrincipal();
-            break
             case "0":
-                process.exit();
-                break;
+                return;
             default:
                 console.log("Opción no válida.");
                 mostrarMenuGestor(redVeterinaria);
