@@ -157,3 +157,5 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
         }
     
 }
+
+menuVeterinaria();

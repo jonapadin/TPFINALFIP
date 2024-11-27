@@ -3,6 +3,8 @@ import { agregarProveedor, agregarVeterinaria, eliminarProveedor, eliminarVeteri
 import { RedVeterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
 
+const redVetinaria = new RedVeterinaria();
+
 export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
     console.log("\n--- Menú Principal del Gestor ---");
     console.log("1. Gestionar Veterinarias");
@@ -93,3 +95,5 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
     }
     gestionarProveedores(redVeterinaria);
 }
+
+mostrarMenuGestor(redVetinaria);
