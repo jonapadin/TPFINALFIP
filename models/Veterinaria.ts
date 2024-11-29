@@ -1,5 +1,6 @@
 import { Cliente } from './Cliente';
-import { Paciente } from './Paciente'
+import { Paciente } from './Paciente';
+import * as readlineSync from 'readline-sync';
 
 export class Veterinaria {
 
@@ -17,6 +18,21 @@ export class Veterinaria {
     this.nombre = nombre;
     this.direccion = direccion;
 }
+
+  crearCliente(){
+    const nombreCliente= readlineSync.question("Nombre del Cliente: ");
+    const telCliente  = readlineSync.question("Telefono: ");
+    const visitas = readlineSync.questionInt("Cantidad de visitas iniciales: ");
+    const cliente1 = new Cliente(nombreCliente,telCliente);
+
+     for (let i = 0; i < visitas; i++) {
+        cliente1.registrarVisita();
+    }
+
+     this.agregarCliente(cliente1);
+
+    //  actualizarCliente('veterinarias.txt', veterinaria);
+  }
 
   agregarCliente(cliente: Cliente) {
     this.clientes.push(cliente);
@@ -80,5 +96,9 @@ export class Veterinaria {
   public getPacientes(){
     return this.pacientes;
   }
+}
+
+function actualizarCliente(arg0: string, veterinaria: any) {
+  throw new Error('Function not implemented.');
 }
 

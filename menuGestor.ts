@@ -1,7 +1,5 @@
-
-import { agregarProveedor, agregarVeterinaria, eliminarProveedor, eliminarVeterinaria, modificarProveedor, modificarVeterinaria } from "./funciones";
-import { RedVeterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
+import { RedVeterinaria } from './models/RedVeterinaria';
 
 const redVetinaria = new RedVeterinaria();
 
@@ -46,14 +44,17 @@ export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
 
     switch (opcion) {
         case "1":
-            agregarVeterinaria(redVeterinaria);
-
+            redVeterinaria.crearVeterinaria();
             break;
         case "2":
-            modificarVeterinaria(redVeterinaria);
+            const buscar = readlineSync.questionInt("ID de la veterinaria a actualizar:");
+            const nuevoNombre = readlineSync.question("Nuevo nombre:");
+            const nuevaDireccion = readlineSync.question("Nueva direccion:");
+            redVeterinaria.modificarVeterinaria(buscar,nuevoNombre,nuevaDireccion);
             break;
         case "3":
-            eliminarVeterinaria(redVeterinaria);
+            const buscarId = readlineSync.questionInt("ID de la veterinaria a eliminar:");
+            redVeterinaria.darBajaVeterinaria(buscarId)
             break
         case "0":
             mostrarMenuGestor(redVeterinaria);
@@ -77,13 +78,17 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
 
     switch (opcion) {
         case "1":
-            agregarProveedor(redVeterinaria);
+            redVeterinaria.crearProveedor();
             break;
         case "2":
-            modificarProveedor(redVeterinaria);
+            const buscar = readlineSync.questionInt("ID del proveedor:");
+            const nuevoNombreProv = readlineSync.question("Nuevo nombre:");
+            const nuevoTelefono = readlineSync.question("Nuevo telefono:");
+            redVeterinaria.modificarProveedor(buscar,nuevoNombreProv,nuevoTelefono);
             break;
         case "3":
-          eliminarProveedor(redVeterinaria);
+            const buscarIdProv = readlineSync.questionInt("ID del proveedor a eliminar:");
+            redVeterinaria.eliminarProveedor(buscarIdProv);
             break
 
         case "0":
