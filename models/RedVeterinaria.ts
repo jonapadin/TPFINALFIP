@@ -12,7 +12,7 @@ export class RedVeterinaria {
     this.proveedores = [];   
 }
 
-
+//Gestionar Veterinaria
   crearVeterinaria(){
     const nombre = readlineSync.question("Nombre de la veterinaria: ");
     const direccion = readlineSync.question("Dirección: ");
@@ -59,6 +59,9 @@ export class RedVeterinaria {
   }
 
 
+
+
+//Gestionar Proveedor
   crearProveedor(){
     const nombreProveedor = readlineSync.question("Nombre del proveedor: ");
     const Telefono = readlineSync.question("Telefono: ");

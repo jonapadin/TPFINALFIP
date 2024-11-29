@@ -1,4 +1,4 @@
-import { agregarPaciente, eliminarCliente, eliminarPaciente, leerVeterinarias, modificarCliente, modificarPaciente } from "./funciones";
+import {leerVeterinarias, } from "./funciones";
 import { Veterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
 import * as fs from "fs";
@@ -121,7 +121,8 @@ function gestionarClientes(veterinaria: Veterinaria): void {
                 veterinaria.modificarCliente(buscar,nuevoNombre,nuevaDireccion);
                 break;
             case "3":
-                eliminarCliente(veterinaria);
+                const buscarIdCliente = readlineSync.questionInt("ID del cliente a eliminar:");
+                veterinaria.eliminarCliente(buscarIdCliente);
                 break;
             case "0":
                 return;  
@@ -144,13 +145,17 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
 
         switch (opcion) {
             case "1":
-                agregarPaciente(veterinaria);
+                veterinaria.crearPaciente();
                 break;
             case "2":
-                modificarPaciente(veterinaria);
+                const buscar = readlineSync.questionInt("ID de la mascota:");
+                const nuevoNombreEspecie = readlineSync.question("Nuevo nombre:");
+                const nuevaEspecie = readlineSync.question("Nueva especie:");
+                veterinaria.modificarPaciente(buscar,nuevoNombreEspecie,nuevaEspecie);
                 break;
             case "3":
-                eliminarPaciente(veterinaria);
+                const buscarIdDuenio = readlineSync.questionInt("ID del paciente a eliminar:");
+                veterinaria.eliminarPaciente(buscarIdDuenio);
                 break;
             case "0":
                 return;  

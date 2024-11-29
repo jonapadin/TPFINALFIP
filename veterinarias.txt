@@ -1,9 +1,0 @@
-[
-  {
-    "clientes": [],
-    "pacientes": [],
-    "id": 917,
-    "nombre": "ombu",
-    "direccion": "devalle 2023"
-  }
-]

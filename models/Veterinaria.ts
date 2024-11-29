@@ -18,7 +18,7 @@ export class Veterinaria {
     this.nombre = nombre;
     this.direccion = direccion;
 }
-
+//Gestionar clientes
   crearCliente(){
     const nombreCliente= readlineSync.question("Nombre del Cliente: ");
     const telCliente  = readlineSync.question("Telefono: ");
@@ -47,6 +47,22 @@ export class Veterinaria {
   }
   eliminarCliente(id: number) {
     this.clientes = this.clientes.filter((c => c.getId() !== id));
+    console.log("Lista actualizada:", this.getClientes());
+    // actualizarCliente("veterinarias.txt", veterinaria);
+  }
+
+
+  //Gestionar Pacientes
+
+  crearPaciente(){
+    const nombrePaciente = readlineSync.question("Nombre del paciente: ");
+    const especie = readlineSync.question("Especie del paciente: ");
+    const idDuenio = readlineSync.questionInt("ID del dueño: ");
+
+    const paciente1 = new Paciente(nombrePaciente, especie, idDuenio);
+    this.agregarPaciente(paciente1);
+  
+    // actualizarCliente("veterinarias.txt", veterinaria);
   }
 
   agregarPaciente(pacientes: Paciente) {
@@ -59,6 +75,8 @@ export class Veterinaria {
       if (nombre) paciente.setNombre(nombre);
       if (especie) paciente.setEspecie(especie);
     }
+
+    // actualizarCliente("veterinarias.txt", veterinaria);
   }
 
   eliminarPaciente(id: number) {
