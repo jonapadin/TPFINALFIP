@@ -1,12 +1,9 @@
 import {leerVeterinarias, } from "./funciones";
-import { Veterinaria } from "./models";
 import * as readlineSync from 'readline-sync';
 import * as fs from "fs";
+import { Veterinaria } from './models/Veterinaria';
 
-
-
-
-export function menuVeterinaria() {
+export function menuVeterinaria(veterinaria?:Veterinaria) {
 
         console.log("\n--- Gestión de Veterinaria ---");
         console.log("1. Ver Lista de Veterinarias");
@@ -17,7 +14,7 @@ export function menuVeterinaria() {
 
         switch(opcion) {
             case "1":
-                leerVeterinarias();  // Muestra la lista de veterinarias
+                veterinaria?.leerArchivo();  // Muestra la lista de veterinarias
                 break;
             case "2":
                 const idSeleccionado = readlineSync.questionInt("Introduce el ID de la veterinaria a seleccionar: ");
@@ -164,6 +161,5 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
                 break;
         }
     
-}
-
-menuVeterinaria();
+    }
+    menuVeterinaria();

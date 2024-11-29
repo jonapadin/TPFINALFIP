@@ -1,8 +1,10 @@
+import { Fs } from '../interface';
 import { Cliente } from './Cliente';
 import { Paciente } from './Paciente';
 import * as readlineSync from 'readline-sync';
+import * as fs from "fs";
 
-export class Veterinaria {
+export class Veterinaria implements Fs{
 
 
   private id: number;
@@ -114,9 +116,39 @@ export class Veterinaria {
   public getPacientes(){
     return this.pacientes;
   }
-}
 
-function actualizarCliente(arg0: string, veterinaria: any) {
-  throw new Error('Function not implemented.');
-}
 
+guardarArchivo(nombreArchivo: string, datos: any[]):void{
+
+};
+leerArchivo():void{
+  try {
+    // Leemos el archivo veterinarias.txt de forma síncrona
+    const data = fs.readFileSync("veterinarias.txt", "utf-8");
+    console.log(data);
+    // Intentamos convertir el contenido del archivo a un objeto JavaScript (JSON)
+    const veterinariasTxt: { nombre: string; direccion: string; id: number }[] =
+      JSON.parse(data);
+
+    // Convertimos los objetos del JSON en instancias de la clase Veterinaria
+    const listaVeterinarias: Veterinaria[] = veterinariasTxt.map(
+      (vete) => new Veterinaria(vete.nombre, vete.direccion, vete.id) // Creamos la instancia de Veterinaria pasando el id
+    );
+
+    // Mostramos la información de las veterinarias
+    listaVeterinarias.forEach((veterinaria, i) => {
+      console.log(`Veterinaria ${i + 1}:`);
+      console.log(`ID: ${veterinaria.getId()}`);
+      console.log(`Nombre: ${veterinaria.getNombre()}`);
+      console.log(`Dirección: ${veterinaria.getDireccion()}`);
+      console.log("---");
+    });
+  } catch (err) {
+    console.error("Error al leer o parsear el archivo veterinarias.txt:", err);
+  }
+};
+actualizarArchivo():void{
+
+};
+
+}

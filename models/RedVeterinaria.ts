@@ -1,8 +1,10 @@
+import { Fs } from "../interface";
 import { Proveedor } from "./Proveedor"
 import { Veterinaria } from "./Veterinaria";
 import * as readlineSync from 'readline-sync';
+import * as fs from "fs";
 
-export class RedVeterinaria {
+export class RedVeterinaria implements Fs {
  private  veterinarias: Veterinaria[] = [];
  private proveedores: Proveedor[] = [];
 
@@ -22,7 +24,7 @@ export class RedVeterinaria {
     console.log("Veterinaria agregada", nuevaVeterinaria);
   
     // Guardar veterinarias
-    // guardarEnArchivo("veterinarias.txt", redVeterinaria.getVeterinarias());
+    this.guardarArchivo("veterinarias.txt", this.getVeterinarias());
   }
   public darAltaVeterinaria(veterinaria: Veterinaria) {
     this.veterinarias.push(veterinaria); 
@@ -41,7 +43,7 @@ export class RedVeterinaria {
     }
 
     console.log("Lista actualizada:", this.getVeterinarias());
-    // guardarEnArchivo("veterinarias.txt", redVeterinaria.getVeterinarias());
+    this.guardarArchivo("veterinarias.txt", this.getVeterinarias());
   }
 
   public modificarVeterinaria(id?: number, nombre?: string, direccion?: string) {
@@ -54,8 +56,7 @@ export class RedVeterinaria {
 
     
     console.log("Lista actualizada:", this.getVeterinarias());
-  
-    // guardarEnArchivo("veterinarias.txt", redVeterinaria.getVeterinarias());
+    this.guardarArchivo("veterinarias.txt", this.getVeterinarias());
   }
 
 
@@ -74,7 +75,7 @@ export class RedVeterinaria {
       this.getProveedores()
     );
   
-    // guardarEnArchivo("proveedores.txt", redVeterinaria.getProveedores());
+    this.guardarArchivo("proveedores.txt", this.getProveedores());
   }
 
   agregarProveedor(proveedor: Proveedor) {
@@ -105,4 +106,49 @@ export class RedVeterinaria {
   public getProveedores():Proveedor[] {
     return this.proveedores;
   }
+
+
+  guardarArchivo(nombreArchivo: string, datos: any[]):void{
+    try {
+      // Convertir los datos a formato JSON
+      const contenido = JSON.stringify(datos, null, 2); // El "2" es para formatear el JSON con indentación para que sea legible
+  
+      fs.writeFileSync(nombreArchivo, contenido, "utf8");
+      console.log(`El archivo se guardó correctamente como ${nombreArchivo}`);
+    } catch (err) {
+      console.error("Hubo un error al guardar el archivo: ", err);
+    }
+  };
+
+  leerArchivo():void{
+    try {
+      // Leemos el archivo veterinarias.txt de forma síncrona
+      const data = fs.readFileSync("veterinarias.txt", "utf-8");
+  
+      // Intentamos convertir el contenido del archivo a un objeto JavaScript (JSON)
+      const veterinariasTxt: { nombre: string; direccion: string; id: number }[] =
+        JSON.parse(data);
+  
+      // Convertimos los objetos del JSON en instancias de la clase Veterinaria
+      const listaVeterinarias: Veterinaria[] = veterinariasTxt.map(
+        (vete) => new Veterinaria(vete.nombre, vete.direccion, vete.id) // Creamos la instancia de Veterinaria pasando el id
+      );
+  
+      // Mostramos la información de las veterinarias
+      listaVeterinarias.forEach((veterinaria, i) => {
+        console.log(`Veterinaria ${i + 1}:`);
+        console.log(`ID: ${veterinaria.getId()}`);
+        console.log(`Nombre: ${veterinaria.getNombre()}`);
+        console.log(`Dirección: ${veterinaria.getDireccion()}`);
+        console.log("---");
+      });
+    } catch (err) {
+      console.error("Error al leer o parsear el archivo veterinarias.txt:", err);
+    }
+  };
+
+
+  actualizarArchivo():void{
+
+  };
 }

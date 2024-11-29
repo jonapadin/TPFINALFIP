@@ -1,0 +1,9 @@
+[
+  {
+    "clientes": [],
+    "pacientes": [],
+    "id": 461,
+    "nombre": "ombu",
+    "direccion": "del valle 1212"
+  }
+]
