@@ -1,10 +1,10 @@
-import { Fs } from "../interface";
+
 import { Proveedor } from "./Proveedor"
 import { Veterinaria } from "./Veterinaria";
 import * as readlineSync from 'readline-sync';
 import * as fs from "fs";
 
-export class RedVeterinaria implements Fs {
+export class RedVeterinaria {
  private  veterinarias: Veterinaria[] = [];
  private proveedores: Proveedor[] = [];
 
@@ -90,13 +90,13 @@ export class RedVeterinaria implements Fs {
     }
 
     console.log("Lista actualizada:", this.getProveedores());
-    // guardarEnArchivo("proveedores.txt", redVeterinaria.getProveedores());
+    this.guardarArchivo("proveedores.txt", this.getProveedores());
   }
 
   eliminarProveedor(id: number) {
     this.proveedores = this.proveedores.filter((pr) => pr.getId() !== id);
     console.log("Lista actualizada:", this.getProveedores());
-    // guardarEnArchivo("proveedores.txt", redVeterinaria.getProveedores());
+    this.guardarArchivo("proveedores.txt", this.getProveedores());
   }
 
   public getVeterinarias(): Veterinaria[] {

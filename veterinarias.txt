@@ -3,10 +3,17 @@
     "clientes": [
       {
         "id": 311,
-        "nombre": "elura",
-        "telefono": "434343",
+        "nombre": "Pedrito",
+        "telefono": "141516",
         "esVip": false,
         "cantVisitas": 3
+      },
+      {
+        "id": 531,
+        "nombre": "Marianito",
+        "telefono": "181818",
+        "visitas": 3,
+        "esVip": false
       }
     ],
     "pacientes": [],
