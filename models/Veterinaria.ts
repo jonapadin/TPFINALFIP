@@ -1,10 +1,10 @@
-import { Fs } from '../interface';
 import { Cliente } from './Cliente';
 import { Paciente } from './Paciente';
 import * as readlineSync from 'readline-sync';
 import * as fs from "fs";
 
-export class Veterinaria implements Fs{
+
+export class Veterinaria  {
 
 
   private id: number;
@@ -33,7 +33,7 @@ export class Veterinaria implements Fs{
 
      this.agregarCliente(cliente1);
 
-    //  actualizarCliente('veterinarias.txt', veterinaria);
+      this.actualizarCliente('veterinarias.txt',this.getId(),cliente1.getId(),cliente1.getNombre(),cliente1.getTelefono());
   }
 
   agregarCliente(cliente: Cliente) {
@@ -81,9 +81,55 @@ export class Veterinaria implements Fs{
     // actualizarCliente("veterinarias.txt", veterinaria);
   }
 
+
+
+
   eliminarPaciente(id: number) {
     this.pacientes = this.pacientes.filter((pac => pac.getIdDuenio() !== id));
   }
+
+
+ actualizarCliente(nombreArchivo: string, veterinariaId: number, clienteId: number, nuevoNombre: string, nuevoTelefono: string) {
+    // Leemos los datos existentes del archivo
+    let data: string;
+    try {
+        data = fs.readFileSync(nombreArchivo, "utf-8");
+    } catch (error) {
+        console.error("Error al leer el archivo:", error);
+        return;
+    }
+
+    // Parseamos los datos
+    const veterinariasTxt: { id: number, nombre: string, direccion: string, clientes: any[] }[] = JSON.parse(data);
+
+    // Buscamos la veterinaria por su id
+    const veterinariaIndex = veterinariasTxt.findIndex((v: any) => v.id === veterinariaId);
+
+    if (veterinariaIndex === -1) {
+        console.log("No se encontró una veterinaria con ese ID.");
+        return;
+    }
+
+    // Buscamos el cliente dentro de la veterinaria
+    const clienteIndex = veterinariasTxt[veterinariaIndex].clientes.findIndex((cliente: any) => cliente.id === clienteId);
+
+    if (clienteIndex === -1) {
+        console.log("No se encontró un cliente con ese ID.");
+        return;
+    }
+
+    // Actualizamos el cliente
+    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nuevoNombre;
+    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = nuevoTelefono;
+
+    // Guardamos los datos actualizados en el archivo
+    try {
+        fs.writeFileSync(nombreArchivo, JSON.stringify(veterinariasTxt, null, 2), "utf8");
+        console.log(`El archivo ${nombreArchivo} ha sido actualizado correctamente.`);
+    } catch (error) {
+        console.error("Error al guardar el archivo:", error);
+    }
+}
 
   public setId(id: number): void {
     this.id = id;
@@ -116,39 +162,4 @@ export class Veterinaria implements Fs{
   public getPacientes(){
     return this.pacientes;
   }
-
-
-guardarArchivo(nombreArchivo: string, datos: any[]):void{
-
-};
-leerArchivo():void{
-  try {
-    // Leemos el archivo veterinarias.txt de forma síncrona
-    const data = fs.readFileSync("veterinarias.txt", "utf-8");
-    console.log(data);
-    // Intentamos convertir el contenido del archivo a un objeto JavaScript (JSON)
-    const veterinariasTxt: { nombre: string; direccion: string; id: number }[] =
-      JSON.parse(data);
-
-    // Convertimos los objetos del JSON en instancias de la clase Veterinaria
-    const listaVeterinarias: Veterinaria[] = veterinariasTxt.map(
-      (vete) => new Veterinaria(vete.nombre, vete.direccion, vete.id) // Creamos la instancia de Veterinaria pasando el id
-    );
-
-    // Mostramos la información de las veterinarias
-    listaVeterinarias.forEach((veterinaria, i) => {
-      console.log(`Veterinaria ${i + 1}:`);
-      console.log(`ID: ${veterinaria.getId()}`);
-      console.log(`Nombre: ${veterinaria.getNombre()}`);
-      console.log(`Dirección: ${veterinaria.getDireccion()}`);
-      console.log("---");
-    });
-  } catch (err) {
-    console.error("Error al leer o parsear el archivo veterinarias.txt:", err);
-  }
-};
-actualizarArchivo():void{
-
-};
-
 }

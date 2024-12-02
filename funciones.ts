@@ -85,5 +85,7 @@ export const leerVeterinarias = () => {
     });
   } catch (err) {
     console.error("Error al leer o parsear el archivo veterinarias.txt:", err);
+    return [];
   }
+
 };
