@@ -23,7 +23,7 @@ export class Veterinaria  {
 //Gestionar clientes
   crearCliente(cliente?:Cliente | null){
     const readlineSync = require("readline-sync");
-    const fs = require("fs");
+
 
     const nombreCliente = readlineSync.question("Nombre del Cliente: ");
     const telCliente = readlineSync.question("Telefono: ");
@@ -197,6 +197,12 @@ export class Veterinaria  {
     const especie = readlineSync.question("Especie del paciente: ");
     const idDuenio = readlineSync.questionInt("ID del dueño: ");
 
+    // Validación de los datos
+    if (!nombrePaciente || !especie || idDuenio <= 0) {
+        console.error("Por favor, ingrese datos válidos.");
+        return;
+    }
+
     let data: string;
     try {
         data = fs.readFileSync("veterinarias.txt", "utf-8");
@@ -213,7 +219,7 @@ export class Veterinaria  {
         pacientes: { nombre: string, especie: string, idDuenio: number }[]
     }[] = JSON.parse(data);
 
-    // Buscamos el cliente por su id
+    // Verificación de cliente
     const clienteIndex = veterinariasTxt.findIndex((c) => c.idDuenio === cliente?.getId());
 
     if (clienteIndex === -1) {
@@ -221,7 +227,7 @@ export class Veterinaria  {
         return;
     }
 
-    // Si no se pasa un paciente, creamos uno nuevo
+    // Si no se pasa un paciente, lo creamos
     if (!paciente) {
         paciente = new Paciente(nombrePaciente, especie, idDuenio);
         veterinariasTxt[clienteIndex].pacientes.push({
@@ -230,17 +236,20 @@ export class Veterinaria  {
             idDuenio: paciente.getIdDuenio(),
         });
     } else {
-        // Buscamos el paciente existente por nombre
+        // Buscar si el paciente ya existe
         const pacienteIndex = veterinariasTxt[clienteIndex].pacientes.findIndex((p) => p.nombre === paciente?.getNombre());
+
         if (pacienteIndex === -1) {
             console.log("No se encontró un paciente con ese nombre.");
             return;
         }
 
-        // Actualizamos los datos del paciente
-        veterinariasTxt[clienteIndex].pacientes[pacienteIndex].nombre = nombrePaciente;
-        veterinariasTxt[clienteIndex].pacientes[pacienteIndex].especie = especie;
-        veterinariasTxt[clienteIndex].pacientes[pacienteIndex].idDuenio = idDuenio;
+        // Actualizar paciente
+        veterinariasTxt[clienteIndex].pacientes[pacienteIndex] = {
+            nombre: nombrePaciente,
+            especie: especie,
+            idDuenio: idDuenio,
+        };
     }
 
     // Guardamos los datos actualizados en el archivo
@@ -251,13 +260,14 @@ export class Veterinaria  {
         console.error("Error al guardar el archivo:", error);
     }
 
-    // paciente no sea null o undefined antes de agregarlo
+    // Aseguramos que el paciente sea válido antes de agregarlo
     if (paciente) {
-        this.agregarPaciente(paciente);
+        this.agregarPaciente(paciente); // Asegúrate de que esta función esté bien implementada
     } else {
         console.error("Error: El paciente no se pudo crear correctamente.");
     }
 }
+
 
   agregarPaciente(pacientes: Paciente) {
     this.pacientes.push(pacientes);

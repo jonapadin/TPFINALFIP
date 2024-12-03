@@ -14,11 +14,25 @@
         "telefono": "181818",
         "visitas": 3,
         "esVip": false
+      },
+      {
+        "id": 993,
+        "nombre": "pepe",
+        "telefono": "434343",
+        "visitas": 4,
+        "esVip": false
       }
     ],
     "pacientes": [],
     "id": 461,
     "nombre": "ombu",
     "direccion": "del valle 1212"
+  },
+  {
+    "id": 266,
+    "nombre": "pets",
+    "direccion": "rufino fal 3232",
+    "clientes": [],
+    "pacientes": []
   }
 ]
