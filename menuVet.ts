@@ -9,7 +9,7 @@ export function menuVeterinaria() {
     console.log("2. Seleccionar Veterinaria");
     console.log("0. Regresar al Menú Principal");
 
-    let opcion = readlineSync.question("Elija una opción: ");
+    let opcion = readlineSync.question("Elija una opcion: ");
 
     switch (opcion) {
         case "1":
@@ -82,13 +82,9 @@ export function menuVeterinaria() {
             console.log("Regresando al menú principal...");
             return;  // Regresamos al menú principal al elegir la opción 0
         default:
-            console.log("Opción no válida.");
+            console.log("Opcion no válida.");
             break;
     }
-
-}
-
-function seleccionarVeterinaria(id: number) {
 
 }
 
@@ -101,7 +97,7 @@ export function menu(veterinaria: Veterinaria): void {
     console.log("3. Volver");
     console.log("0. Salir");
 
-    let opcion = readlineSync.question("Seleccione una opción: ");
+    let opcion = readlineSync.question("Seleccione una opcion: ");
 
     switch (opcion) {
         case "1":
@@ -133,20 +129,20 @@ function gestionarClientes(veterinaria: Veterinaria): void {
     console.log("3. Eliminar Clientes");
     console.log("0. Volver");
 
-    let opcion = readlineSync.question("Seleccione una opción: ");
+    let opcion = readlineSync.question("Seleccione una opcion: ");
 
     switch (opcion) {
         case "1":
             veterinaria.crearCliente();
             break;
         case "2":
-            const buscar = readlineSync.questionInt("ID del cliente a actualizar:");
-            const nuevoNombre = readlineSync.question("Nuevo nombre:");
-            const nuevoTelefono = readlineSync.question("Nuevo telefono:");
+            const buscar = readlineSync.questionInt("ID del cliente a actualizar: ");
+            const nuevoNombre = readlineSync.question("Nuevo nombre: ");
+            const nuevoTelefono = readlineSync.question("Nuevo telefono: ");
             veterinaria.modificarCliente(buscar,nuevoNombre,nuevoTelefono);
             break;
         case "3":
-            const buscarIdCliente = readlineSync.questionInt("ID del cliente a eliminar:");
+            const buscarIdCliente = readlineSync.questionInt("ID del cliente a eliminar: ");
             veterinaria.eliminarCliente(buscarIdCliente);
             break;
         case "0":
@@ -166,20 +162,20 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
     console.log("3. Eliminar Pacientes");
     console.log("0. Volver");
 
-    let opcion = readlineSync.question("Seleccione una opción: ");
+    let opcion = readlineSync.question("Seleccione una opcion: ");
 
     switch (opcion) {
         case "1":
             veterinaria.crearPaciente();
             break;
         case "2":
-            const buscar = readlineSync.questionInt("ID de la mascota:");
-            const nuevoNombreEspecie = readlineSync.question("Nuevo nombre:");
-            const nuevaEspecie = readlineSync.question("Nueva especie:");
+            const buscar = readlineSync.questionInt("ID de la mascota: ");
+            const nuevoNombreEspecie = readlineSync.question("Nuevo nombre: ");
+            const nuevaEspecie = readlineSync.question("Nueva especie: ");
             veterinaria.modificarPaciente(buscar, nuevoNombreEspecie, nuevaEspecie);
             break;
         case "3":
-            const buscarIdDuenio = readlineSync.questionInt("ID del paciente a eliminar:");
+            const buscarIdDuenio = readlineSync.questionInt("ID del paciente a eliminar: ");
             veterinaria.eliminarPaciente(buscarIdDuenio);
             break;
         case "0":

@@ -82,7 +82,7 @@ export class Veterinaria  {
     // Guardamos los datos actualizados en el archivo
     try {
         fs.writeFileSync("veterinarias.txt", JSON.stringify(veterinariasTxt, null, 2), "utf8");
-        console.log("El archivo veterinarias.txt ha sido actualizado correctamente.");
+        console.log("El archivo veterinarias.txt ha sido actualizado correctamente. Cliente agregado exitosamente!");
     } catch (error) {
         console.error("Error al guardar el archivo:", error);
     }
@@ -131,7 +131,7 @@ export class Veterinaria  {
     }
 
     // Actualizamos el cliente
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;4
+    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
     veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono;
 
     // Guardamos los datos actualizados en el archivo
@@ -192,16 +192,72 @@ export class Veterinaria  {
 
   //Gestionar Pacientes
 
-  crearPaciente(){
+  crearPaciente(cliente?: Cliente, paciente?: Paciente | null) {
     const nombrePaciente = readlineSync.question("Nombre del paciente: ");
     const especie = readlineSync.question("Especie del paciente: ");
     const idDuenio = readlineSync.questionInt("ID del dueño: ");
 
-    const paciente1 = new Paciente(nombrePaciente, especie, idDuenio);
-    this.agregarPaciente(paciente1);
-  
-    // actualizarCliente("veterinarias.txt", veterinaria);
-  }
+    let data: string;
+    try {
+        data = fs.readFileSync("veterinarias.txt", "utf-8");
+    } catch (error) {
+        console.error("Error al leer el archivo:", error);
+        return;
+    }
+
+    // Parseamos los datos
+    const veterinariasTxt: {
+        nombre: string,
+        especie: string,
+        idDuenio: number,
+        pacientes: { nombre: string, especie: string, idDuenio: number }[]
+    }[] = JSON.parse(data);
+
+    // Buscamos el cliente por su id
+    const clienteIndex = veterinariasTxt.findIndex((c) => c.idDuenio === cliente?.getId());
+
+    if (clienteIndex === -1) {
+        console.log("No se encontró un cliente con ese ID.");
+        return;
+    }
+
+    // Si no se pasa un paciente, creamos uno nuevo
+    if (!paciente) {
+        paciente = new Paciente(nombrePaciente, especie, idDuenio);
+        veterinariasTxt[clienteIndex].pacientes.push({
+            nombre: paciente.getNombre(),
+            especie: paciente.getEspecie(),
+            idDuenio: paciente.getIdDuenio(),
+        });
+    } else {
+        // Buscamos el paciente existente por nombre
+        const pacienteIndex = veterinariasTxt[clienteIndex].pacientes.findIndex((p) => p.nombre === paciente?.getNombre());
+        if (pacienteIndex === -1) {
+            console.log("No se encontró un paciente con ese nombre.");
+            return;
+        }
+
+        // Actualizamos los datos del paciente
+        veterinariasTxt[clienteIndex].pacientes[pacienteIndex].nombre = nombrePaciente;
+        veterinariasTxt[clienteIndex].pacientes[pacienteIndex].especie = especie;
+        veterinariasTxt[clienteIndex].pacientes[pacienteIndex].idDuenio = idDuenio;
+    }
+
+    // Guardamos los datos actualizados en el archivo
+    try {
+        fs.writeFileSync("veterinarias.txt", JSON.stringify(veterinariasTxt, null, 2), "utf8");
+        console.log("El archivo veterinarias.txt ha sido actualizado correctamente. Paciente agregado!");
+    } catch (error) {
+        console.error("Error al guardar el archivo:", error);
+    }
+
+    // paciente no sea null o undefined antes de agregarlo
+    if (paciente) {
+        this.agregarPaciente(paciente);
+    } else {
+        console.error("Error: El paciente no se pudo crear correctamente.");
+    }
+}
 
   agregarPaciente(pacientes: Paciente) {
     this.pacientes.push(pacientes);
@@ -210,18 +266,106 @@ export class Veterinaria  {
   modificarPaciente(id: number, nombre?: string, especie?: string) {
     const paciente = this.pacientes.find(pac => pac.getIdDuenio() === id);
     if (paciente) {
-      if (nombre) paciente.setNombre(nombre);
-      if (especie) paciente.setEspecie(especie);
+        if (nombre) paciente.setNombre(nombre);
+        if (especie) paciente.setEspecie(especie);
     }
 
-    // actualizarCliente("veterinarias.txt", veterinaria);
+    // Leer datos existentes del archivo
+    let data: string;
+    try {
+        data = fs.readFileSync("veterinarias.txt", "utf-8");
+    } catch (error) {
+        console.error("Error al leer el archivo:", error);
+        return;
+    }
+
+    // Parsear datos
+    let veterinariasTxt: {
+        id: number;
+        nombre: string;
+        direccion: string;
+        pacientes: { idDuenio: number; nombre: string; especie: string }[];
+    }[];
+    try {
+        veterinariasTxt = JSON.parse(data);
+    } catch (error) {
+        console.error("Error al parsear el contenido del archivo:", error);
+        return;
+    }
+
+    // Buscar la veterinaria por su ID
+    const veterinariaIndex = veterinariasTxt.findIndex(v => v.id === this.getId());
+    if (veterinariaIndex === -1 || !veterinariasTxt[veterinariaIndex].pacientes) {
+        console.error("Veterinaria no encontrada o no tiene pacientes.");
+        return;
+    }
+
+    // Buscar el paciente dentro de la veterinaria
+    const pacienteIndex = veterinariasTxt[veterinariaIndex].pacientes.findIndex(p => p.idDuenio === id);
+    if (pacienteIndex === -1) {
+        console.error("No se encontró un paciente con ese ID.");
+        return;
+    }
+
+    // Actualizar los datos del paciente
+    if (nombre) veterinariasTxt[veterinariaIndex].pacientes[pacienteIndex].nombre = nombre;
+    if (especie) veterinariasTxt[veterinariaIndex].pacientes[pacienteIndex].especie = especie;
+
+    // Guardar los datos actualizados en el archivo
+    try {
+        fs.writeFileSync("veterinarias.txt", JSON.stringify(veterinariasTxt, null, 2), "utf8");
+        console.log("El archivo veterinarias.txt ha sido actualizado correctamente. Paciente modificado con éxito!");
+    } catch (error) {
+        console.error("Error al guardar el archivo:", error);
+    }
   }
 
 
 
 
   eliminarPaciente(id: number) {
-    this.pacientes = this.pacientes.filter((pac => pac.getIdDuenio() !== id));
+    let data: string;
+    try {
+      data = fs.readFileSync("veterinarias.txt", "utf-8");
+    } catch (error) {
+      console.error("Error al leer el archivo:", error);
+      return;
+    }
+
+    const veterinariasTxt: {
+      nombre: string,
+      especie: string,
+      idDuenio: number,
+      paciente: {nombre: string, especie: string, idDuenio: number}[]
+  }[] = JSON.parse(data);
+
+      // Buscar la veterinaria que contiene al paciente
+      const veterinariaIndex = veterinariasTxt.findIndex(vet =>
+        vet.paciente.some(paciente => paciente.idDuenio === id)
+    );
+
+    if (veterinariaIndex === -1) {
+        console.log("No se encontró ninguna veterinaria que contenga al paciente con ese ID.");
+        return;
+    }
+
+    // Eliminar el cliente de la lista de pacientes
+    const pacienteIndex = veterinariasTxt[veterinariaIndex].paciente.findIndex(paciente => paciente.idDuenio === id);
+
+    if (pacienteIndex === -1) {
+        console.log("No se encontró el paciente con ese ID.");
+        return;
+    }
+
+    veterinariasTxt[veterinariaIndex].paciente.splice(pacienteIndex, 1);
+
+    // Guardar los datos actualizados en el archivo
+    try {
+        fs.writeFileSync("veterinarias.txt", JSON.stringify(veterinariasTxt, null, 2), "utf8");
+        console.log("Paciente eliminado y archivo actualizado correctamente.");
+    } catch (error) {
+        console.error("Error al guardar el archivo:", error);
+    }
   }
 
   public setId(id: number): void {

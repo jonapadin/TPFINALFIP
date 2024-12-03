@@ -8,9 +8,9 @@ export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
     console.log("1. Gestionar Veterinarias");
     console.log("2. Gestionar Proveedores");
     console.log("0. Salir");
-    const opcion = readlineSync.question("Seleccione una opción: ");
+    const opcion = readlineSync.question("Seleccione una opcion: ");
     if (!["1", "2","3", "0"].includes(opcion)) {
-        console.log("Opción no válida. Por favor, selecciona una opción correcta.");
+        console.log("Opcion no valida. Por favor, selecciona una opción correcta.");
     } else {
         switch (opcion) {
             case "1":
@@ -22,7 +22,7 @@ export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
             case "0":
                 return;
             default:
-                console.log("Opción no válida.");
+                console.log("Opcion no valida.");
                 mostrarMenuGestor(redVeterinaria);
                 break;
         }
@@ -40,7 +40,7 @@ export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
     console.log("2. Modificar Veterinaria");
     console.log("3. Eliminar Veterinaria");
     console.log("0. Volver");
-    const opcion = readlineSync.question("Seleccione una opción: ");
+    const opcion = readlineSync.question("Seleccione una opcion: ");
 
     switch (opcion) {
         case "1":
@@ -60,7 +60,7 @@ export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
             mostrarMenuGestor(redVeterinaria);
             return;
         default:
-            console.log("Opción no válida.");
+            console.log("Opcion no válida.");
             break;
     }
     gestionarVeterinarias(redVeterinaria,);
@@ -74,7 +74,7 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
     console.log("2. Modificar Proveedores");
     console.log("3. Eliminar Proveedores");
     console.log("0. Volver");
-    const opcion = readlineSync.question("Seleccione una opción: ");
+    const opcion = readlineSync.question("Seleccione una opcion: ");
 
     switch (opcion) {
         case "1":
@@ -95,7 +95,7 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
             mostrarMenuGestor(redVeterinaria);
             return;
         default:
-            console.log("Opción no válida.");
+            console.log("Opcion no válida.");
             break;
     }
     gestionarProveedores(redVeterinaria);
