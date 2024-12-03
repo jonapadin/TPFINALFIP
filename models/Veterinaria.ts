@@ -333,31 +333,31 @@ export class Veterinaria  {
     }
 
     const veterinariasTxt: {
+      id: number,
       nombre: string,
-      especie: string,
-      idDuenio: number,
-      paciente: {nombre: string, especie: string, idDuenio: number}[]
+      direccion: string,
+      pacientes: {nombre: string, especie: string, idDuenio:number }[]
   }[] = JSON.parse(data);
 
       // Buscar la veterinaria que contiene al paciente
       const veterinariaIndex = veterinariasTxt.findIndex(vet =>
-        vet.paciente.some(paciente => paciente.idDuenio === id)
+        vet.pacientes.some(paciente => paciente.idDuenio === id)
     );
 
     if (veterinariaIndex === -1) {
-        console.log("No se encontró ninguna veterinaria que contenga al paciente con ese ID.");
+        console.log("No se encontró ninguna veterinaria que contenga al cliente con ese ID.");
         return;
     }
 
-    // Eliminar el cliente de la lista de pacientes
-    const pacienteIndex = veterinariasTxt[veterinariaIndex].paciente.findIndex(paciente => paciente.idDuenio === id);
+    // Eliminar el paciente de la lista 
+    const pacienteIndex = veterinariasTxt[veterinariaIndex].pacientes.findIndex(paciente => paciente.idDuenio === id);
 
     if (pacienteIndex === -1) {
         console.log("No se encontró el paciente con ese ID.");
         return;
     }
 
-    veterinariasTxt[veterinariaIndex].paciente.splice(pacienteIndex, 1);
+    veterinariasTxt[veterinariaIndex].pacientes.splice(pacienteIndex, 1);
 
     // Guardar los datos actualizados en el archivo
     try {

@@ -16,13 +16,7 @@
         "esVip": false
       }
     ],
-    "pacientes": [
-      {
-        "nombre": "sultan",
-        "especie": "gato",
-        "idDuenio": 531
-      }
-    ],
+    "pacientes": [],
     "id": 461,
     "nombre": "ombu",
     "direccion": "del valle 1212"
