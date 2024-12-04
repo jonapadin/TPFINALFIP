@@ -89,6 +89,11 @@ export class RedVeterinaria {
     let data: string;
     try {
         data = fs.readFileSync("veterinarias.txt", "utf-8");
+        if (!data) {
+          console.log("El archivo veterinarias.txt está vacío, inicializándolo...");
+          data = "[]"; // Inicializamos el archivo con un arreglo vacío
+        }
+    
     } catch (error) {
         console.error("Error al leer el archivo:", error);
         return [];
@@ -117,7 +122,7 @@ export class RedVeterinaria {
       }
      }else {
       console.log("Veterinaria no encontrada.");
-  }
+     }
      
 
   }
@@ -171,10 +176,57 @@ export class RedVeterinaria {
 //Gestionar Proveedor
   crearProveedor(){
     const nombreProveedor = readlineSync.question("Nombre del proveedor: ");
-    const Telefono = readlineSync.question("Telefono: ");
-    const proveedor1 = new Proveedor(nombreProveedor, Telefono);
+    const Telefono = readlineSync.question("Telefono: ")
+    
+    const nuevoProveedor = new Proveedor(nombreProveedor, Telefono);
+
+    let data: string;
+    try {
+        data = fs.readFileSync("proveedores.txt", "utf-8");
+
+        if (!data) {
+          console.log("El archivo proveedores.txt está vacío, inicializándolo...");
+          data = "[]"; 
+        }
+    
+    } catch (error) {
+        console.error("Error al leer el archivo:", error);
+        return;
+    }
+
+    const proveedoresTxt: {
+      id: number,
+      nombre: string,
+      telefono: string,
+     }[] = JSON.parse(data);
   
 
+     const proveedorExistente = proveedoresTxt.find(prov => prov.nombre === nombreProveedor);
+
+
+     if (proveedorExistente) {
+      console.log("Ya existe un proveedor con ese nombre.");
+      return [];
+     }
+
+       // Agregamos la nueva veterinaria al arreglo
+       const nuevoProveedorData = {
+        id: nuevoProveedor.getId(),
+        nombre: nuevoProveedor.getNombre(),
+        telefono: nuevoProveedor.getTelefono(),
+    };
+
+      proveedoresTxt.push(nuevoProveedorData);
+
+     // Guardamos los datos actualizados en el archivo
+     try {
+       fs.writeFileSync("proveedores.txt", JSON.stringify(proveedoresTxt, null, 2), "utf8");
+       console.log("Proveedor creada exitosamente!");
+     } catch (error) {
+        console.error("Error al guardar el archivo:", error);
+     }
+
+     this.agregarProveedor(nuevoProveedor)
   }
 
   agregarProveedor(proveedor: Proveedor) {
@@ -188,11 +240,76 @@ export class RedVeterinaria {
       if (telefono) proveedor.setTelefono(telefono);
     }
 
+    let data: string;
+    try {
+        data = fs.readFileSync("proveedores.txt", "utf-8");
+    
+    } catch (error) {
+        console.error("Error al leer el archivo:", error);
+        return [];
+    }
+
+    const proveedoresTxt: {
+      id: number,
+      nombre: string,
+      telefono: string,
+     }[] = JSON.parse(data);
+  
+
+     const index = proveedoresTxt.findIndex(prov => prov.id === id);
+
+
+     if (index !== -1) {
+      if (nombre) proveedoresTxt[index].nombre = nombre;
+      if (telefono) proveedoresTxt[index].telefono = telefono;
+
+      // Guardamos los cambios en el archivo
+      try {
+          fs.writeFileSync("proveedores.txt", JSON.stringify(proveedoresTxt, null, 2), "utf8");
+          console.log("Proveedor modificado con éxito!");
+      } catch (error) {
+          console.error("Error al guardar el archivo:", error);
+      }
+     }else {
+      console.log("Proveedor no encontrada.");
+     }
+     
+
 
   }
 
   eliminarProveedor(id: number) {
-    this.proveedores = this.proveedores.filter((pr) => pr.getId() !== id);
+
+    let data: string;
+    try {
+      data = fs.readFileSync("proveedores.txt", "utf-8");
+    } catch (error) {
+      console.error("Error al leer el archivo:", error);
+      return;
+    }
+
+    const proveedoresTxt: {
+      id: number,
+      nombre: string,
+      telefono: string,
+     }[] = JSON.parse(data);
+  
+
+     const proveedorIndex = proveedoresTxt.findIndex(prov => prov.id === id);
+
+     if (proveedorIndex === -1) {
+      console.error("No se encontró el proveedor con el ID proporcionado.");
+      return;
+     }
+
+     const proveedorEliminado = proveedoresTxt.splice(proveedorIndex, 1);
+
+     try {
+      fs.writeFileSync("proveedores.txt", JSON.stringify(proveedoresTxt, null, 2), "utf8");
+      console.log(`Proveedor ${proveedorEliminado[0].nombre} eliminado con éxito.`);
+    } catch (error) {
+        console.error("Error al guardar el archivo:", error);
+    }
 
   }
 

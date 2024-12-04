@@ -337,6 +337,7 @@ export class Veterinaria  {
     let data: string;
     try {
       data = fs.readFileSync("veterinarias.txt", "utf-8");
+      
     } catch (error) {
       console.error("Error al leer el archivo:", error);
       return;
