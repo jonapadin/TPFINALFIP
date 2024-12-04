@@ -10,7 +10,7 @@ export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
     console.log("0. Salir");
     const opcion = readlineSync.question("Seleccione una opcion: ");
     if (!["1", "2","3", "0"].includes(opcion)) {
-        console.log("Opcion no valida. Por favor, selecciona una opción correcta.");
+        console.log("Opcion no valida. Por favor, selecciona una opcion correcta.");
     } else {
         switch (opcion) {
             case "1":
@@ -27,10 +27,7 @@ export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
                 break;
         }
     }
-    
 }
-
-
 
 
 export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
@@ -39,6 +36,7 @@ export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
     console.log("1. Agregar Veterinaria");
     console.log("2. Modificar Veterinaria");
     console.log("3. Eliminar Veterinaria");
+    console.log("4. Ver lista de veterinarias");
     console.log("0. Volver");
     const opcion = readlineSync.question("Seleccione una opcion: ");
 
@@ -56,6 +54,9 @@ export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
             const buscarId = readlineSync.questionInt("ID de la veterinaria a eliminar:");
             redVeterinaria.darBajaVeterinaria(buscarId)
             break
+        case "4":
+            redVeterinaria.getVeterinarias();
+            break
         case "0":
             mostrarMenuGestor(redVeterinaria);
             return;
@@ -66,13 +67,12 @@ export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
     gestionarVeterinarias(redVeterinaria,);
 }
 
-
-
 export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
     console.log("\n--- Gestión de Proveedores ---");
     console.log("1. Agregar Proveedores");
     console.log("2. Modificar Proveedores");
     console.log("3. Eliminar Proveedores");
+    console.log("4. Ver lista de proveedores");
     console.log("0. Volver");
     const opcion = readlineSync.question("Seleccione una opcion: ");
 
@@ -81,16 +81,18 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
             redVeterinaria.crearProveedor();
             break;
         case "2":
-            const buscar = readlineSync.questionInt("ID del proveedor:");
-            const nuevoNombreProv = readlineSync.question("Nuevo nombre:");
-            const nuevoTelefono = readlineSync.question("Nuevo telefono:");
+            const buscar = readlineSync.questionInt("ID del proveedor: ");
+            const nuevoNombreProv = readlineSync.question("Nuevo nombre: ");
+            const nuevoTelefono = readlineSync.question("Nuevo telefono: ");
             redVeterinaria.modificarProveedor(buscar,nuevoNombreProv,nuevoTelefono);
             break;
         case "3":
-            const buscarIdProv = readlineSync.questionInt("ID del proveedor a eliminar:");
+            const buscarIdProv = readlineSync.questionInt("ID del proveedor a eliminar: ");
             redVeterinaria.eliminarProveedor(buscarIdProv);
             break
-
+        case "4":
+            redVeterinaria.getProveedores();
+            break
         case "0":
             mostrarMenuGestor(redVeterinaria);
             return;
@@ -102,4 +104,3 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
 }
 
 mostrarMenuGestor(redVetinaria);
-

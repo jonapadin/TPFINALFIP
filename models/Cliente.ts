@@ -1,5 +1,3 @@
-import { Paciente } from "./Paciente";
-
 export class Cliente {
   private id: number;
   private nombre: string;
@@ -63,9 +61,4 @@ export class Cliente {
     }
   }
 
-
 }
-
-
-
-

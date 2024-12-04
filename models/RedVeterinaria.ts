@@ -1,15 +1,11 @@
-
 import { Proveedor } from "./Proveedor"
 import { Veterinaria } from "./Veterinaria";
 import * as readlineSync from 'readline-sync';
 import * as fs from "fs";
 
-
-
 export class RedVeterinaria {
  private  veterinarias: Veterinaria[] = [];
  private proveedores: Proveedor[] = [];
-
 
   constructor() {
     this.veterinarias = [];  
@@ -20,10 +16,10 @@ export class RedVeterinaria {
  public crearVeterinaria(){
 
     const nombre = readlineSync.question("Nombre de la veterinaria: ");
-    const direccion = readlineSync.question("Dirección: ");
+    const direccion = readlineSync.question("Direccion: ");
 
     if (!nombre || !direccion) {
-      console.error("Por favor ingresa datos válidos.");
+      console.error("Por favor ingresa datos validos.");
       return;
   }
 
@@ -45,7 +41,7 @@ export class RedVeterinaria {
       pacientes: { nombre: string, especie: string, idDuenio: number }[]
      }[] = JSON.parse(data);
 
-      // Verificamos si ya existe una veterinaria con el mismo nombre
+    // Verificamos si ya existe una veterinaria con el mismo nombre
     const veterinariaExistente = veterinariasTxt.find(vet => vet.nombre === nombre);
 
     if (veterinariaExistente) {
@@ -124,10 +120,7 @@ export class RedVeterinaria {
       console.log("Veterinaria no encontrada.");
      }
      
-
   }
-
-
 
   public darAltaVeterinaria(veterinaria: Veterinaria) {
     this.veterinarias.push(veterinaria); 
@@ -168,9 +161,6 @@ export class RedVeterinaria {
 
 
   }
-
-
-
 
 
 //Gestionar Proveedor
@@ -313,17 +303,72 @@ export class RedVeterinaria {
 
   }
 
-  public getVeterinarias(): Veterinaria[] {
-    return this.veterinarias; 
+  public getVeterinarias() {
+    try {
+      // Leemos el archivo veterinarias.txt de forma síncrona
+      const data = fs.readFileSync("veterinarias.txt", "utf-8");
+
+      if (!data) {
+          console.log("El archivo esta vacio")
+          return [];
+      }
+
+      // Intentamos convertir el contenido del archivo a un objeto JavaScript (JSON)
+      const veterinariasTxt: { nombre: string; direccion: string; id: number }[] =
+          JSON.parse(data);
+
+      // Convertimos los objetos del JSON en instancias de la clase Veterinaria
+      const listaVeterinarias: Veterinaria[] = veterinariasTxt.map(
+          (vete) => new Veterinaria(vete.nombre, vete.direccion, vete.id) // Creamos la instancia de Veterinaria pasando el id
+      );
+
+      // Mostramos la información de las veterinarias
+      listaVeterinarias.forEach((veterinaria, i) => {
+          console.log("---");
+          console.log(`Veterinaria ${i + 1}:`);
+          console.log(`ID: ${veterinaria.getId()}`);
+          console.log(`Nombre: ${veterinaria.getNombre()}`);
+          console.log(`Dirección: ${veterinaria.getDireccion()}`);
+          console.log("---");
+      });
+  } catch (err) {
+      console.error("Error al leer o parsear el archivo veterinarias.txt:", err);
+      return [];
+  }
   }
 
-  public getProveedores():Proveedor[] {
-    return this.proveedores;
+  public getProveedores(){
+    try {
+      // Leemos el archivo proveedores.txt de forma síncrona
+      const data = fs.readFileSync("proveedores.txt", "utf-8");
+
+      if (!data) {
+          console.log("El archivo esta vacio")
+          return [];
+      }
+
+      // Intentamos convertir el contenido del archivo a un objeto JavaScript (JSON)
+      const proveedoresTxt: {id: number, nombre: string; telefono: string }[] =
+          JSON.parse(data);
+
+      // Convertimos los objetos del JSON en instancias de la clase proveedores
+      const listaProveedores: Proveedor[] = proveedoresTxt.map(
+          (prov) => new Proveedor( prov.nombre, prov.telefono) // Creamos la instancia de proveedores pasando el id
+      );
+
+      // Mostramos la información de las proveedores
+      listaProveedores.forEach((proveedor, i) => {
+          console.log("---");
+          console.log(`Proveedor ${i + 1}:`);
+          console.log(`ID: ${proveedor.getId()}`);
+          console.log(`Nombre: ${proveedor.getNombre()}`);
+          console.log(`Telefono: ${proveedor.getTelefono()}`);
+          console.log("---");
+      });
+  } catch (err) {
+      console.error("Error al leer o parsear el archivo proveedores.txt:", err);
+      return [];
   }
-
-
-
-
-
+  }
 
 }

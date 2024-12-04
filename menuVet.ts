@@ -33,6 +33,7 @@ export function menuVeterinaria() {
 
                 // Mostramos la información de las veterinarias
                 listaVeterinarias.forEach((veterinaria, i) => {
+                    console.log("---");
                     console.log(`Veterinaria ${i + 1}:`);
                     console.log(`ID: ${veterinaria.getId()}`);
                     console.log(`Nombre: ${veterinaria.getNombre()}`);
@@ -88,7 +89,7 @@ export function menuVeterinaria() {
 
 }
 
-// Menú de gestión de veterinaria seleccionada
+// Menú de gestion de veterinaria seleccionada
 export function menu(veterinaria: Veterinaria): void {
 
     console.log("\n--- Menú Veterinaria ---");
@@ -186,7 +187,5 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
     }
 
 }
-
-
 
 menuVeterinaria();

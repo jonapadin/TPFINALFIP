@@ -36,5 +36,4 @@ export class Paciente {
     this.idDuenio = idDuenio;
   }
 
-
 }

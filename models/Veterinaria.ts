@@ -260,9 +260,9 @@ export class Veterinaria  {
         console.error("Error al guardar el archivo:", error);
     }
 
-    // Aseguramos que el paciente sea válido antes de agregarlo
+    // nos aseguramos que el paciente sea valido antes de agregarlo
     if (paciente) {
-        this.agregarPaciente(paciente); // Asegúrate de que esta función esté bien implementada
+        this.agregarPaciente(paciente);
     } else {
         console.error("Error: El paciente no se pudo crear correctamente.");
     }
@@ -396,8 +396,6 @@ export class Veterinaria  {
   public getNombre(): string {
     return this.nombre;
   }
-
-
 
   public getDireccion(): string {
     return this.direccion;
