@@ -95,11 +95,12 @@ export class Veterinaria  {
     this.clientes.push(cliente);
   }
 
-  modificarCliente(id: number, nombre?: string, telefono?: string) {
+  modificarCliente(id: number, nombre?: string, telefono?: string, cantVisitas?: number) {
     const cliente = this.clientes.find(c => c.getId() === id);
     if (cliente) {
       if (nombre) cliente.setNombre(nombre);
       if (telefono) cliente.setTelefono(telefono);
+      if (cantVisitas) cliente.setCantVisitas(cantVisitas)
     }
 
     // Leemos los datos existentes del archivo
@@ -133,6 +134,7 @@ export class Veterinaria  {
     // Actualizamos el cliente
     veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
     veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono;
+    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].cantVisitas = cantVisitas;
 
     // Guardamos los datos actualizados en el archivo
     try {

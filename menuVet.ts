@@ -140,7 +140,8 @@ function gestionarClientes(veterinaria: Veterinaria): void {
             const buscar = readlineSync.questionInt("ID del cliente a actualizar: ");
             const nuevoNombre = readlineSync.question("Nuevo nombre: ");
             const nuevoTelefono = readlineSync.question("Nuevo telefono: ");
-            veterinaria.modificarCliente(buscar,nuevoNombre,nuevoTelefono);
+            const nuevoCantVisitas = readlineSync.questionInt("Nueva cantidad de visitas: ");
+            veterinaria.modificarCliente(buscar,nuevoNombre,nuevoTelefono, nuevoCantVisitas);
             break;
         case "3":
             const buscarIdCliente = readlineSync.questionInt("ID del cliente a eliminar: ");
