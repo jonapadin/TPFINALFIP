@@ -87,7 +87,7 @@ export class RedVeterinaria {
         data = fs.readFileSync("veterinarias.txt", "utf-8");
         if (!data) {
           console.log("El archivo veterinarias.txt está vacío, inicializándolo...");
-          data = "[]"; // Inicializamos el archivo con un arreglo vacío
+          data = "[]"; 
         }
     
     } catch (error) {
@@ -165,9 +165,21 @@ export class RedVeterinaria {
 
 //Gestionar Proveedor
   crearProveedor(){
-    const nombreProveedor = readlineSync.question("Nombre del proveedor: ");
-    const Telefono = readlineSync.question("Telefono: ")
+    let nombreProveedor:string = readlineSync.question("Nombre del proveedor: ");
+
+
+    while (!nombreProveedor) {
+      nombreProveedor = readlineSync.question("Por favor, ingresa un nombre para el proveedor: ");
+    }
     
+
+    let Telefono:string = readlineSync.question("Teléfono: ");
+
+    while (!/^\d{8}$/.test(Telefono)) {
+      Telefono = readlineSync.question("Por favor, ingresa un teléfono válido (8 dígitos): ");
+    }
+    
+    // Crear un nuevo proveedor
     const nuevoProveedor = new Proveedor(nombreProveedor, Telefono);
 
     let data: string;
