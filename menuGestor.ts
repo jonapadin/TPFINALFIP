@@ -106,37 +106,29 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
             break;
         case "2":
 
-            const buscar = readlineSync.questionInt("ID del proveedor: ");
-            const nuevoNombreProv = readlineSync.question("Nuevo nombre: ");
-            const nuevoTelefono = readlineSync.question("Nuevo telefono: ");
-            redVeterinaria.modificarProveedor(buscar,nuevoNombreProv,nuevoTelefono);
-            break;
-        case "3":
-            const buscarIdProv = readlineSync.questionInt("ID del proveedor a eliminar: ");
-
-            const buscar: number = readlineSync.questionInt("ID del proveedor:");
-
-
-            if (buscar <= 0) {
+            let buscarProv:number = readlineSync.questionInt("ID del proveedor: ");
+            
+            if (isNaN(buscarProv) || buscarProv <= 0) {
                 console.log("ID no válido.");
                 return;
             }
-            
-            let nuevoNombreProv: string = readlineSync.question("Nuevo nombre: ");
-            let nuevoTelefono: string = readlineSync.question("Nuevo telefono: ");
-            
+
+            let nuevoNombreProv = readlineSync.question("Nuevo nombre: ");
+            let nuevoTelefono = readlineSync.question("Nuevo telefono: ");
 
             while (!nuevoNombreProv) {
                 nuevoNombreProv = readlineSync.question("El nombre no puede estar vacío. Nuevo nombre: ");
             }
             
 
-            while (!/^\d{8}$/.test(nuevoTelefono)) {
-                nuevoTelefono = readlineSync.question("El teléfono debe tener exactamente 8 dígitos. Nuevo teléfono: ");
+            while (!nuevoTelefono) {
+                nuevoTelefono = readlineSync.question("El Telefono no puede estar vacío. Nueva direccion: ");
             }
+            
 
-            redVeterinaria.modificarProveedor(buscar, nuevoNombreProv, nuevoTelefono);
+            redVeterinaria.modificarProveedor(buscarProv,nuevoNombreProv,nuevoTelefono);
             break;
+     
         case "3":
             const buscarIdProv = readlineSync.questionInt("ID del proveedor a eliminar:");
             if (isNaN(buscarIdProv) || buscarIdProv <= 0) {

@@ -139,13 +139,7 @@ function gestionarClientes(veterinaria: Veterinaria): void {
         case "2":
             const buscar = readlineSync.questionInt("ID del cliente a actualizar: ");
 
-            const nuevoNombre = readlineSync.question("Nuevo nombre: ");
-            const nuevoTelefono = readlineSync.question("Nuevo telefono: ");
-            const nuevoCantVisitas = readlineSync.questionInt("Nueva cantidad de visitas: ");
-            veterinaria.modificarCliente(buscar,nuevoNombre,nuevoTelefono, nuevoCantVisitas);
-
-
-
+            
             if (isNaN(buscar) || buscar <= 0) {
                 console.log("ID no válido.");
                 return;
@@ -153,24 +147,28 @@ function gestionarClientes(veterinaria: Veterinaria): void {
 
             let nuevoNombre:string = readlineSync.question("Nuevo nombre: ");
             let nuevoTelefono:string = readlineSync.question("Nuevo telefono: ");
-            let nuevaVisita:number = readlineSync.questionInt("Cantidad de visitas: ");
+            let nuevoCantVisitas:number = readlineSync.questionInt("Nueva cantidad de visitas: ");
+
             
 
             while (!nuevoNombre) {
-                nuevoNombre = readlineSync.question("Nuevo nombre: ");
+                nuevoNombre = readlineSync.question("El nombre no puede estar vacio, Nombre: ");
             }
             
 
             while (!/^\d{8}$/.test(nuevoTelefono)) {
-                nuevoTelefono = readlineSync.question("El telefono debe tener exactamente 8 digitos. Nuevo telefono: ");
+                nuevoTelefono = readlineSync.question("El telefono debe tener exactamente 8 digitos. Telefono: ");
             }
             
             
 
-            if (nuevaVisita < 0) {
+            if (nuevoCantVisitas < 0) {
                 console.log("La cantidad de visitas debe ser un número positivo.");
                 return;
             }
+
+            veterinaria.modificarCliente(buscar,nuevoNombre,nuevoTelefono, nuevoCantVisitas);
+
 
             break;
         case "3":
