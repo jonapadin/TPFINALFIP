@@ -113,18 +113,10 @@ export class Veterinaria  {
     this.clientes.push(cliente);
   }
 
-<<<<<<< HEAD
-  modificarCliente(id: number, nombre?: string, telefono?: string, cantVisitas?: number) {
-    const cliente = this.clientes.find(c => c.getId() === id);
-    if (cliente) {
-      if (nombre) cliente.setNombre(nombre);
-      if (telefono) cliente.setTelefono(telefono);
-      if (cantVisitas) cliente.setCantVisitas(cantVisitas)
-    }
-=======
+
+
   modificarCliente(id: number, nombre?: string, telefono?: string, visitas?: number, esVip?: boolean) {
-    console.log("Buscando cliente con ID:", id);
->>>>>>> cd9683d (actualizacion)
+
 
     // Leemos los datos existentes del archivo
     let data: string;
@@ -161,12 +153,12 @@ export class Veterinaria  {
         return;
     }
 
-<<<<<<< HEAD
+
     // Actualizamos el cliente
     veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
     veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono;
     veterinariasTxt[veterinariaIndex].clientes[clienteIndex].cantVisitas = cantVisitas;
-=======
+
     // Cliente encontrado, ahora podemos modificarlo
     console.log(`Cliente encontrado: ${veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre}`);
 
@@ -188,7 +180,7 @@ export class Veterinaria  {
         cliente.registrarVisita();
         veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip = cliente.getEsVip();
     }
->>>>>>> cd9683d (actualizacion)
+
 
     // Guardamos los datos actualizados en el archivo
     try {
