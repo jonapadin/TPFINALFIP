@@ -116,8 +116,6 @@ export class Veterinaria  {
 
 
   modificarCliente(id: number, nombre?: string, telefono?: string, visitas?: number, esVip?: boolean) {
-
-
     // Leemos los datos existentes del archivo
     let data: string;
     try {
@@ -153,34 +151,24 @@ export class Veterinaria  {
         return;
     }
 
+    // Aseguramos que 'nombre' y 'telefono' no sean undefined
+    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre || veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre;
+    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono || veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono;
 
-    // Actualizamos el cliente
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono;
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].cantVisitas = cantVisitas;
-
-    // Cliente encontrado, ahora podemos modificarlo
-    console.log(`Cliente encontrado: ${veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre}`);
-
-    // Actualizamos los datos del cliente
-    if (nombre) veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
-    if (telefono) veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono;
-
-    // Actualizamos las visitas
+    // Si 'cantVisitas' existe, actualizamos las visitas
     if (visitas !== undefined) {
         veterinariasTxt[veterinariaIndex].clientes[clienteIndex].visitas = visitas;
-
         veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip = visitas >= 5;
 
-
-        const cliente = new Cliente(veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre, 
-                                    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono, 
-                                    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip, 
-                                    visitas);
+        const cliente = new Cliente(
+            veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre, 
+            veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono, 
+            veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip, 
+            visitas
+        );
         cliente.registrarVisita();
         veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip = cliente.getEsVip();
     }
-
 
     // Guardamos los datos actualizados en el archivo
     try {
