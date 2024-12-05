@@ -105,7 +105,7 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
             redVeterinaria.crearProveedor();
             break;
         case "2":
-<<<<<<< HEAD
+
             const buscar = readlineSync.questionInt("ID del proveedor: ");
             const nuevoNombreProv = readlineSync.question("Nuevo nombre: ");
             const nuevoTelefono = readlineSync.question("Nuevo telefono: ");
@@ -113,7 +113,7 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
             break;
         case "3":
             const buscarIdProv = readlineSync.questionInt("ID del proveedor a eliminar: ");
-=======
+
             const buscar: number = readlineSync.questionInt("ID del proveedor:");
 
 
@@ -143,7 +143,7 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
                 console.log("ID no válido.");
                 return;
             }
->>>>>>> cd9683d (actualizacion)
+
             redVeterinaria.eliminarProveedor(buscarIdProv);
             break
         case "4":

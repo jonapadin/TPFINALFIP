@@ -138,12 +138,12 @@ function gestionarClientes(veterinaria: Veterinaria): void {
             break;
         case "2":
             const buscar = readlineSync.questionInt("ID del cliente a actualizar: ");
-<<<<<<< HEAD
+
             const nuevoNombre = readlineSync.question("Nuevo nombre: ");
             const nuevoTelefono = readlineSync.question("Nuevo telefono: ");
             const nuevoCantVisitas = readlineSync.questionInt("Nueva cantidad de visitas: ");
             veterinaria.modificarCliente(buscar,nuevoNombre,nuevoTelefono, nuevoCantVisitas);
-=======
+
 
 
             if (isNaN(buscar) || buscar <= 0) {
@@ -171,7 +171,7 @@ function gestionarClientes(veterinaria: Veterinaria): void {
                 console.log("La cantidad de visitas debe ser un número positivo.");
                 return;
             }
->>>>>>> cd9683d (actualizacion)
+
             break;
         case "3":
             const buscarIdCliente:number = readlineSync.questionInt("ID del cliente a eliminar: ");
