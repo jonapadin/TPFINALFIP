@@ -1,38 +1,23 @@
 [
   {
+    "id": 962,
+    "nombre": "cacho",
+    "direccion": "brown 2323",
     "clientes": [
       {
-        "id": 311,
-        "nombre": "Pedrito",
-        "telefono": "141516",
-        "esVip": false,
-        "cantVisitas": 3
-      },
-      {
-        "id": 531,
-        "nombre": "Marianito",
-        "telefono": "181818",
-        "visitas": 3,
-        "esVip": false
-      },
-      {
-        "id": 993,
-        "nombre": "pepe",
-        "telefono": "434343",
+        "id": 624,
+        "nombre": "pepito",
+        "telefono": "23342343",
         "visitas": 4,
         "esVip": false
       }
     ],
-    "pacientes": [],
-    "id": 461,
-    "nombre": "ombu",
-    "direccion": "del valle 1212"
-  },
-  {
-    "id": 266,
-    "nombre": "pets",
-    "direccion": "rufino fal 3232",
-    "clientes": [],
-    "pacientes": []
+    "pacientes": [
+      {
+        "nombre": "lolo",
+        "especie": "gato",
+        "idDuenio": 624
+      }
+    ]
   }
 ]

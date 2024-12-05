@@ -137,12 +137,41 @@ function gestionarClientes(veterinaria: Veterinaria): void {
             break;
         case "2":
             const buscar = readlineSync.questionInt("ID del cliente a actualizar: ");
-            const nuevoNombre = readlineSync.question("Nuevo nombre: ");
-            const nuevoTelefono = readlineSync.question("Nuevo telefono: ");
-            veterinaria.modificarCliente(buscar,nuevoNombre,nuevoTelefono);
+
+
+            if (isNaN(buscar) || buscar <= 0) {
+                console.log("ID no válido.");
+                return;
+            }
+
+            let nuevoNombre:string = readlineSync.question("Nuevo nombre: ");
+            let nuevoTelefono:string = readlineSync.question("Nuevo telefono: ");
+            let nuevaVisita:number = readlineSync.questionInt("Cantidad de visitas: ");
+            
+
+            while (!nuevoNombre) {
+                nuevoNombre = readlineSync.question("Nuevo nombre: ");
+            }
+            
+
+            while (!/^\d{8}$/.test(nuevoTelefono)) {
+                nuevoTelefono = readlineSync.question("El telefono debe tener exactamente 8 digitos. Nuevo telefono: ");
+            }
+            
+            
+
+            if (nuevaVisita < 0) {
+                console.log("La cantidad de visitas debe ser un número positivo.");
+                return;
+            }
             break;
         case "3":
-            const buscarIdCliente = readlineSync.questionInt("ID del cliente a eliminar: ");
+            const buscarIdCliente:number = readlineSync.questionInt("ID del cliente a eliminar: ");
+
+            if (isNaN(buscarIdCliente) || buscarIdCliente <= 0) {
+                console.log("ID no válido.");
+                return;
+            }
             veterinaria.eliminarCliente(buscarIdCliente);
             break;
         case "0":
@@ -169,13 +198,34 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
             veterinaria.crearPaciente();
             break;
         case "2":
-            const buscar = readlineSync.questionInt("ID de la mascota: ");
-            const nuevoNombreEspecie = readlineSync.question("Nuevo nombre: ");
-            const nuevaEspecie = readlineSync.question("Nueva especie: ");
-            veterinaria.modificarPaciente(buscar, nuevoNombreEspecie, nuevaEspecie);
+           const buscar:number = readlineSync.questionInt("ID del paciente a actualizar: ");
+
+            // Validate ID input
+            if (buscar <= 0) {
+                console.log("ID no válido.");
+                return;
+            }
+            
+            let nuevoNombreEspecie:string = readlineSync.question("Nuevo nombre: ");
+            let nuevaEspecie:string = readlineSync.question("Nueva especie: ");
+            
+
+            while (nuevoNombreEspecie === "") {
+                nuevoNombreEspecie = readlineSync.question("El nombre no puede estar vacío. Nuevo nombre: ");
+            }
+            
+
+            while (nuevaEspecie === "") {
+                nuevaEspecie = readlineSync.question("La especie no puede estar vacía. Nueva especie: ");
+            }
             break;
         case "3":
-            const buscarIdDuenio = readlineSync.questionInt("ID del paciente a eliminar: ");
+            const buscarIdDuenio:number = readlineSync.questionInt("ID del paciente a eliminar: ");
+            if (isNaN(buscarIdDuenio) || buscarIdDuenio <= 0) {
+                console.log("ID no válido.");
+                return;
+            }
+
             veterinaria.eliminarPaciente(buscarIdDuenio);
             break;
         case "0":

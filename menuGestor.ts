@@ -31,8 +31,6 @@ export function mostrarMenuGestor(redVeterinaria: RedVeterinaria): void {
 }
 
 
-
-
 export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
  
     console.log("\n--- Gestión de Veterinarias ---");
@@ -47,13 +45,37 @@ export function gestionarVeterinarias(redVeterinaria: RedVeterinaria): void {
             redVeterinaria.crearVeterinaria();
             break;
         case "2":
-            const buscar = readlineSync.questionInt("ID de la veterinaria a actualizar:");
-            const nuevoNombre = readlineSync.question("Nuevo nombre:");
-            const nuevaDireccion = readlineSync.question("Nueva direccion:");
-            redVeterinaria.modificarVeterinaria(buscar,nuevoNombre,nuevaDireccion);
+            const buscar:number = readlineSync.questionInt("ID de la veterinaria a actualizar:");
+
+            if (buscar <= 0) {
+                console.log("ID no válido.");
+                return;
+            }
+            
+            let nuevoNombre:string = readlineSync.question("Nuevo nombre: ");
+            let nuevaDireccion:string = readlineSync.question("Nueva direccion: ");
+            
+
+            while (!nuevoNombre) {
+                nuevoNombre = readlineSync.question("El nombre no puede estar vacío. Nuevo nombre: ");
+            }
+            
+
+            while (!nuevaDireccion) {
+                nuevaDireccion = readlineSync.question("La direccion no puede estar vacía. Nueva direccion: ");
+            }
+            
+
+            redVeterinaria.modificarVeterinaria(buscar, nuevoNombre, nuevaDireccion);
+
+
             break;
         case "3":
-            const buscarId = readlineSync.questionInt("ID de la veterinaria a eliminar:");
+            const buscarId:number = readlineSync.questionInt("ID de la veterinaria a eliminar:");
+            if (isNaN(buscarId) || buscarId <= 0) {
+                console.log("ID no válido.");
+                return;
+            }
             redVeterinaria.darBajaVeterinaria(buscarId)
             break
         case "0":
@@ -81,13 +103,35 @@ export function gestionarProveedores(redVeterinaria: RedVeterinaria, ): void {
             redVeterinaria.crearProveedor();
             break;
         case "2":
-            const buscar = readlineSync.questionInt("ID del proveedor:");
-            const nuevoNombreProv = readlineSync.question("Nuevo nombre:");
-            const nuevoTelefono = readlineSync.question("Nuevo telefono:");
-            redVeterinaria.modificarProveedor(buscar,nuevoNombreProv,nuevoTelefono);
+            const buscar: number = readlineSync.questionInt("ID del proveedor:");
+
+
+            if (buscar <= 0) {
+                console.log("ID no válido.");
+                return;
+            }
+            
+            let nuevoNombreProv: string = readlineSync.question("Nuevo nombre: ");
+            let nuevoTelefono: string = readlineSync.question("Nuevo telefono: ");
+            
+
+            while (!nuevoNombreProv) {
+                nuevoNombreProv = readlineSync.question("El nombre no puede estar vacío. Nuevo nombre: ");
+            }
+            
+
+            while (!/^\d{8}$/.test(nuevoTelefono)) {
+                nuevoTelefono = readlineSync.question("El teléfono debe tener exactamente 8 dígitos. Nuevo teléfono: ");
+            }
+
+            redVeterinaria.modificarProveedor(buscar, nuevoNombreProv, nuevoTelefono);
             break;
         case "3":
             const buscarIdProv = readlineSync.questionInt("ID del proveedor a eliminar:");
+            if (isNaN(buscarIdProv) || buscarIdProv <= 0) {
+                console.log("ID no válido.");
+                return;
+            }
             redVeterinaria.eliminarProveedor(buscarIdProv);
             break
 

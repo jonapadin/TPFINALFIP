@@ -22,12 +22,30 @@ export class Veterinaria  {
 }
 //Gestionar clientes
   crearCliente(cliente?:Cliente | null){
-    const readlineSync = require("readline-sync");
 
 
-    const nombreCliente = readlineSync.question("Nombre del Cliente: ");
-    const telCliente = readlineSync.question("Telefono: ");
-    const visitas = readlineSync.questionInt("Cantidad de visitas iniciales: ");
+
+    let nombreCliente = readlineSync.question("Nombre del Cliente: ");
+    let telCliente = readlineSync.question("Telefono: ");
+    let visitas = readlineSync.questionInt("Cantidad de visitas iniciales: ");
+    
+
+    while (!nombreCliente) {
+        nombreCliente = readlineSync.question("El nombre del cliente no puede estar vacio. Nombre del Cliente: ");
+    }
+    
+    while (!telCliente || !/^\d+$/.test(telCliente)) {  
+        telCliente = readlineSync.question("El teléfono debe ser un número válido. Telefono: ");
+    }
+    
+
+    while (telCliente.length !== 8) {
+        telCliente = readlineSync.question("El teléfono debe tener exactamente 8 dígitos. Telefono: ");
+    }
+    
+    while (visitas < 0 || isNaN(visitas)) {
+        visitas = readlineSync.questionInt("La cantidad de visitas debe ser un número positivo. Cantidad de visitas iniciales: ");
+    }
 
     let data: string;
     try {
@@ -95,12 +113,8 @@ export class Veterinaria  {
     this.clientes.push(cliente);
   }
 
-  modificarCliente(id: number, nombre?: string, telefono?: string) {
-    const cliente = this.clientes.find(c => c.getId() === id);
-    if (cliente) {
-      if (nombre) cliente.setNombre(nombre);
-      if (telefono) cliente.setTelefono(telefono);
-    }
+  modificarCliente(id: number, nombre?: string, telefono?: string, visitas?: number, esVip?: boolean) {
+    console.log("Buscando cliente con ID:", id);
 
     // Leemos los datos existentes del archivo
     let data: string;
@@ -112,11 +126,18 @@ export class Veterinaria  {
     }
 
     // Parseamos los datos
-    const veterinariasTxt: { id: number, nombre: string, direccion: string, clientes: any[] }[] = JSON.parse(data);
+    const veterinariasTxt: { 
+        id: number, 
+        nombre: string, 
+        direccion: string, 
+        clientes: { id: number, nombre: string, telefono: string, visitas: number, esVip: boolean }[] 
+    }[] = JSON.parse(data);
 
-    // Buscamos la veterinaria por su id
-    const veterinariaIndex = veterinariasTxt.findIndex((v: any) => v.id === this.getId());
+    // Imprimimos las veterinarias y sus clientes para depuración
+    console.log("Veterinarias en el archivo:", veterinariasTxt);
 
+    // Buscamos la veterinaria por su id (cambia 135 por el id real de la veterinaria)
+    const veterinariaIndex = veterinariasTxt.findIndex((v: any) => v.id === 135); // Usa el ID correcto
     if (veterinariaIndex === -1) {
         console.log("No se encontró una veterinaria con ese ID.");
         return;
@@ -126,23 +147,40 @@ export class Veterinaria  {
     const clienteIndex = veterinariasTxt[veterinariaIndex].clientes.findIndex((cliente: any) => cliente.id === id);
 
     if (clienteIndex === -1) {
-        console.log("No se encontró un cliente con ese ID.");
+        console.log("No se encontró un cliente con ese ID dentro de la veterinaria.");
         return;
     }
 
-    // Actualizamos el cliente
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono;
+    // Cliente encontrado, ahora podemos modificarlo
+    console.log(`Cliente encontrado: ${veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre}`);
+
+    // Actualizamos los datos del cliente
+    if (nombre) veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
+    if (telefono) veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono;
+
+    // Actualizamos las visitas
+    if (visitas !== undefined) {
+        veterinariasTxt[veterinariaIndex].clientes[clienteIndex].visitas = visitas;
+
+        veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip = visitas >= 5;
+
+
+        const cliente = new Cliente(veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre, 
+                                    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono, 
+                                    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip, 
+                                    visitas);
+        cliente.registrarVisita();
+        veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip = cliente.getEsVip();
+    }
 
     // Guardamos los datos actualizados en el archivo
     try {
         fs.writeFileSync("veterinarias.txt", JSON.stringify(veterinariasTxt, null, 2), "utf8");
-        console.log(`El archivo ${"veterinarias.txt"} ha sido actualizado correctamente.`);
+        console.log(`El archivo "veterinarias.txt" ha sido actualizado correctamente.`);
     } catch (error) {
         console.error("Error al guardar el archivo:", error);
     }
-  }
-
+}
   eliminarCliente(id:number) {
   
     let data: string;
@@ -191,16 +229,21 @@ export class Veterinaria  {
 
 
   //Gestionar Pacientes
-
   crearPaciente(cliente?: Cliente, paciente?: Paciente | null) {
-    const nombrePaciente = readlineSync.question("Nombre del paciente: ");
-    const especie = readlineSync.question("Especie del paciente: ");
-    const idDuenio = readlineSync.questionInt("ID del dueño: ");
-
-    // Validación de los datos
-    if (!nombrePaciente || !especie || idDuenio <= 0) {
-        console.error("Por favor, ingrese datos válidos.");
-        return;
+    let nombrePaciente: string = readlineSync.question("Nombre del paciente: ");
+    let especie: string = readlineSync.question("Especie del paciente: ");
+    let idDuenio: number = readlineSync.questionInt("ID del dueño: ");
+    
+    while (!nombrePaciente) {
+        nombrePaciente = readlineSync.question("El nombre del paciente no puede estar vacío. Nombre del paciente: ");
+    }
+    
+    while (!especie) {
+        especie = readlineSync.question("La especie no puede estar vacía. Especie del paciente: ");
+    }
+    
+    while (idDuenio <= 0) {
+        idDuenio = readlineSync.questionInt("El ID del dueño debe ser un número mayor a 0. ID del dueño: ");
     }
 
     let data: string;
@@ -220,11 +263,11 @@ export class Veterinaria  {
     }[] = JSON.parse(data);
 
     // Verificación de cliente
-    const clienteIndex = veterinariasTxt.findIndex((c) => c.idDuenio === cliente?.getId());
+    const clienteIndex = veterinariasTxt.findIndex((c) => c.idDuenio === idDuenio);  // Cambié esto para buscar por idDuenio
 
     if (clienteIndex === -1) {
         console.log("No se encontró un cliente con ese ID.");
-        return;
+        return;  // Si el cliente no existe, no permitimos crear el paciente
     }
 
     // Si no se pasa un paciente, lo creamos
