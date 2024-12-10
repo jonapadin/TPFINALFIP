@@ -5,8 +5,12 @@ export class Cliente {
   private esVip: boolean;
   private cantVisitas: number;
 
-
-  constructor(nombre: string, telefono: string, esVip: boolean = false, cantVisitas: number = 0) {
+  constructor(
+    nombre: string,
+    telefono: string,
+    esVip: boolean = false,
+    cantVisitas: number = 0
+  ) {
     this.id = Math.floor(Math.random() * 1000);
     this.nombre = nombre;
     this.telefono = telefono;
@@ -60,5 +64,4 @@ export class Cliente {
       this.esVip = true;
     }
   }
-
 }
