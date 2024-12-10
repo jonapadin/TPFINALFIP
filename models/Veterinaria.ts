@@ -18,7 +18,10 @@ export class Veterinaria {
   //Gestionar clientes
   public crearCliente(cliente?: Cliente | null): void {
     const readlineSync = require("readline-sync");
-
+    let nombreCliente = readlineSync.question("Nombre del Cliente: ");
+    let telCliente = readlineSync.question("Telefono: ");
+    let visitas = readlineSync.questionInt("Cantidad de visitas iniciales: ");
+    
     while (!nombreCliente) {
         nombreCliente = readlineSync.question("El nombre del cliente no puede estar vacio. Nombre del Cliente: ");
     }

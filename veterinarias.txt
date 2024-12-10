@@ -1,8 +1,8 @@
 [
   {
-    "id": 962,
-    "nombre": "cacho",
-    "direccion": "brown 2323",
+    "id": 461,
+    "nombre": "ombu",
+    "direccion": "del valle 1212",
     "clientes": [
       {
         "id": 624,
@@ -10,32 +10,21 @@
         "telefono": "23342343",
         "visitas": 4,
         "esVip": false
+      },
+      {
+        "id": 151,
+        "nombre": "Jonathan",
+        "telefono": "15656565",
+        "visitas": 5,
+        "esVip": true
       }
     ],
     "pacientes": [
       {
-<<<<<<< HEAD
         "nombre": "Monito",
         "especie": "exotica",
         "idDuenio": 531
       }
-    ],
-    "id": 461,
-    "nombre": "ombu",
-    "direccion": "del valle 1212"
-  },
-  {
-    "id": 266,
-    "nombre": "pets",
-    "direccion": "rufino fal 3232",
-    "clientes": [],
-    "pacientes": []
-=======
-        "nombre": "lolo",
-        "especie": "gato",
-        "idDuenio": 624
-      }
     ]
->>>>>>> cd9683d (actualizacion)
   }
 ]
