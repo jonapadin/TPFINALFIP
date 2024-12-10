@@ -19,9 +19,22 @@ export class Veterinaria {
   public crearCliente(cliente?: Cliente | null): void {
     const readlineSync = require("readline-sync");
 
-    const nombreCliente = readlineSync.question("Nombre del Cliente: ");
-    const telCliente = readlineSync.question("Telefono: ");
-    const visitas = readlineSync.questionInt("Cantidad de visitas iniciales: ");
+    while (!nombreCliente) {
+        nombreCliente = readlineSync.question("El nombre del cliente no puede estar vacio. Nombre del Cliente: ");
+    }
+    
+    while (!telCliente || !/^\d+$/.test(telCliente)) {  
+        telCliente = readlineSync.question("El teléfono debe ser un número válido. Telefono: ");
+    }
+    
+
+    while (telCliente.length !== 8) {
+        telCliente = readlineSync.question("El teléfono debe tener exactamente 8 dígitos. Telefono: ");
+    }
+    
+    while (visitas < 0 || isNaN(visitas)) {
+        visitas = readlineSync.questionInt("La cantidad de visitas debe ser un número positivo. Cantidad de visitas iniciales: ");
+    }
 
     let data: string;
     try {
