@@ -175,7 +175,7 @@ while (visitas < 0 || isNaN(visitas)) {
     veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono =
       telefono;
     veterinariasTxt[veterinariaIndex].clientes[clienteIndex].cantVisitas =
-      cantVisitas;
+    visitas;
 
     // Guardamos los datos actualizados en el archivo
     try {
