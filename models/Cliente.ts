@@ -1,7 +1,7 @@
 export class Cliente {
   private id: number;
   private nombre: string;
-  private telefono: string;
+  private telefono: string ;
   private esVip: boolean;
   private cantVisitas: number;
 
@@ -19,6 +19,9 @@ export class Cliente {
   }
 
   public setId(id: number): void {
+    if (id < 0) {
+      throw new Error("ID no puede ser negativo");
+    }
     this.id = id;
   }
 
@@ -27,6 +30,9 @@ export class Cliente {
   }
 
   public setNombre(nombre: string): void {
+    if (!nombre || nombre.trim() === "") {
+      throw new Error("El nombre no puede estar vacío");
+    }
     this.nombre = nombre;
   }
 
@@ -35,6 +41,10 @@ export class Cliente {
   }
 
   public setTelefono(telefono: string): void {
+    const telefonoRegex = /^[0-9]{10}$/;
+    if (!telefonoRegex.test(telefono)) {
+      throw new Error("El teléfono debe tener 10 dígitos numéricos");
+    }
     this.telefono = telefono;
   }
 
@@ -51,6 +61,9 @@ export class Cliente {
   }
 
   public setCantVisitas(cantVisitas: number): void {
+    if (cantVisitas < 0) {
+      throw new Error("La cantidad de visitas no puede ser negativa");
+    }
     this.cantVisitas = cantVisitas;
   }
 

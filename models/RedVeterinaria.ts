@@ -42,7 +42,7 @@ export class RedVeterinaria {
      }[] = JSON.parse(data);
 
     // Verificamos si ya existe una veterinaria con el mismo nombre
-    const veterinariaExistente = veterinariasTxt.find(vet => vet.nombre === nombre);
+    const veterinariaExistente = veterinariasTxt.find(vet => vet.nombre == nombre);
 
     if (veterinariaExistente) {
         console.log("Ya existe una veterinaria con ese nombre.");
@@ -76,7 +76,7 @@ export class RedVeterinaria {
 
   public modificarVeterinaria(id?: number, nombre?: string, direccion?: string) {
 
-    const veterinaria = this.veterinarias.find(veterinaria => veterinaria.getId() === id);
+    const veterinaria = this.veterinarias.find(veterinaria => veterinaria.getId() == id);
     if (veterinaria) {
       if (nombre) veterinaria.setNombre(nombre);
       if (direccion) veterinaria.setDireccion(direccion);
@@ -103,7 +103,7 @@ export class RedVeterinaria {
       pacientes: { nombre: string, especie: string, idDuenio: number }[]
      }[] = JSON.parse(data);
 
-     const index = veterinariasTxt.findIndex(vet => vet.id === id);
+     const index = veterinariasTxt.findIndex(vet => vet.id == id);
 
      if (index !== -1) {
       if (nombre) veterinariasTxt[index].nombre = nombre;
@@ -143,9 +143,9 @@ export class RedVeterinaria {
       pacientes: { nombre: string, especie: string, idDuenio: number }[]
      }[] = JSON.parse(data);
 
-     const veterinariaIndex = veterinariasTxt.findIndex(vet => vet.id === id);
+     const veterinariaIndex = veterinariasTxt.findIndex(vet => vet.id == id);
 
-     if (veterinariaIndex === -1) {
+     if (veterinariaIndex == -1) {
       console.error("No se encontró la veterinaria con el ID proporcionado.");
       return;
      }
@@ -203,7 +203,7 @@ export class RedVeterinaria {
      }[] = JSON.parse(data);
   
 
-     const proveedorExistente = proveedoresTxt.find(prov => prov.nombre === nombreProveedor);
+     const proveedorExistente = proveedoresTxt.find(prov => prov.nombre == nombreProveedor);
 
 
      if (proveedorExistente) {
@@ -236,7 +236,7 @@ export class RedVeterinaria {
   }
 
   modificarProveedor(id: number, nombre?: string, telefono?: string) {
-    const proveedor = this.proveedores.find(pr => pr.getId() === id);
+    const proveedor = this.proveedores.find(pr => pr.getId() == id);
     if (proveedor) {
       if (nombre) proveedor.setNombre(nombre);
       if (telefono) proveedor.setTelefono(telefono);
@@ -258,7 +258,7 @@ export class RedVeterinaria {
      }[] = JSON.parse(data);
   
 
-     const index = proveedoresTxt.findIndex(prov => prov.id === id);
+     const index = proveedoresTxt.findIndex(prov => prov.id == id);
 
 
      if (index !== -1) {
@@ -297,9 +297,9 @@ export class RedVeterinaria {
      }[] = JSON.parse(data);
   
 
-     const proveedorIndex = proveedoresTxt.findIndex(prov => prov.id === id);
+     const proveedorIndex = proveedoresTxt.findIndex(prov => prov.id == id);
 
-     if (proveedorIndex === -1) {
+     if (proveedorIndex == -1) {
       console.error("No se encontró el proveedor con el ID proporcionado.");
       return;
      }

@@ -1,17 +1,23 @@
 [
   {
-    "id": 962,
-    "nombre": "cacho",
-    "direccion": "brown 2323",
+    "id": 588,
+    "nombre": "ombu",
+    "direccion": "devalle 2323",
     "clientes": [
       {
-        "id": 624,
-        "nombre": "pepito",
-        "telefono": "23342343",
-        "visitas": 4,
+        "id": 155,
+        "nombre": "ruben",
+        "telefono": "12345678",
+        "visitas": 2,
         "esVip": false
       }
     ],
-    "pacientes": []
+    "pacientes": [
+      {
+        "nombre": "pepito",
+        "especie": "gato",
+        "idDuenio": 155
+      }
+    ]
   }
 ]

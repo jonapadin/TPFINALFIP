@@ -1,14 +1,18 @@
 export class Paciente {
 
-  private nombre: string;
-  private especie: string;
+  private nombre: string ;
+  private especie: string ;
   private idDuenio: number;
 
 
   constructor(nombre: string, especie: string, idDuenio: number) {
     this.nombre = nombre;
-    this.especie = (especie.toLowerCase() === "perro" || especie.toLowerCase() === "gato") ? especie : "exotica";
+    this.especie = (especie.toLowerCase() == "perro" || especie.toLowerCase() == "gato") ? especie : "exotica";
     this.idDuenio = idDuenio;
+
+    this.setNombre(nombre);
+    this.setEspecie(especie);
+    this.setIdDuenio(idDuenio);
 
   }
 
@@ -17,6 +21,9 @@ export class Paciente {
   }
 
   public setNombre(nombre: string): void {
+    if (!nombre) {
+      throw new Error("El nombre no puede ser vacío");
+    }
     this.nombre = nombre;
   }
 
@@ -25,6 +32,9 @@ export class Paciente {
   }
 
   public setEspecie(especie: string): void {
+    if (!especie) {
+      throw new Error("La especie no puede ser vacía");
+    }
     this.especie = especie;
   }
 
@@ -33,7 +43,9 @@ export class Paciente {
   }
 
   public setIdDuenio(idDuenio: number): void {
+    if (idDuenio < 0) {
+      throw new Error("El ID del dueño no puede ser negativo");
+    }
     this.idDuenio = idDuenio;
   }
-
 }
