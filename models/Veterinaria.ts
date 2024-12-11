@@ -500,19 +500,7 @@ while (visitas < 0 || isNaN(visitas)) {
   }
 
   public getPacientes(): Paciente[] {
-  public getPacientes(): Paciente[] {
     return this.pacientes;
   }
 
-  public setId(id: number): void {
-    this.id = id;
-  }
-
-  public setNombre(nombre: string): void {
-    this.nombre = nombre;
-  }
-
-  public setDireccion(direccion: string): void {
-    this.direccion = direccion;
-  }
 }
