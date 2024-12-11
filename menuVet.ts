@@ -131,11 +131,11 @@ function gestionarClientes(veterinaria: Veterinaria): void {
             const data = fs.readFileSync("veterinarias.txt", "utf-8");
         
             if (!data) {
-                console.log("El archivo está vacío");
+                console.log("El archivo esta vacio");
                 return;
             }
         
-            // Intentamos convertir el contenido del archivo a un objeto JavaScript (JSON)
+            // Intentamos convertir el contenido del archivo a un JSON
             const veterinariasTxt: { id: number; nombre: string; direccion: string; clientes: any[]; pacientes: any[] }[] =
                 JSON.parse(data);
         
@@ -145,8 +145,7 @@ function gestionarClientes(veterinaria: Veterinaria): void {
         
                 if (veterinaria.clientes.length > 0) {
                     veterinaria.clientes.forEach((cliente, index) => {
-                        // Asumiendo que cliente tiene propiedades como "nombre" y "telefono"
-                        console.log(`Cliente ${index + 1}: ${cliente.nombre}, Teléfono: ${cliente.telefono}`);
+                        console.log(`Cliente ${index + 1}: ${cliente.nombre}, Telefono: ${cliente.telefono}`);
                     });
                 } else {
                     console.log("No hay clientes.");
@@ -166,18 +165,18 @@ function gestionarClientes(veterinaria: Veterinaria): void {
             case "3":
             let idCliente = readlineSync.questionInt("Id de cliente a modificar: ");
             let nombre = readlineSync.question("Nuevo nombre del cliente (dejar vacío para no modificar): ");
-            let telefono = readlineSync.question("Nuevo teléfono del cliente (dejar vacío para no modificar): ");
+            let telefono = readlineSync.question("Nuevo telefono del cliente (dejar vacio para no modificar): ");
             let visitas = readlineSync.questionInt("Cantidad de visitas del cliente (dejar en 0 para no modificar): ");
-            let esVip = readlineSync.keyInYNStrict("¿Es el cliente VIP? (s/n): ");
+            let esVip = readlineSync.keyInYNStrict("¿Es el cliente VIP?: ");
             
             // Llamamos a la función modificarCliente
             veterinaria.modificarCliente(
-                veterinaria.getId(),  // Usamos veterinaria.id en lugar de veterinaria.getId()
+                veterinaria.getId(), 
                 idCliente, 
-                nombre || undefined,  // Si nombre está vacío, pasamos undefined
-                telefono || undefined,  // Lo mismo para el teléfono
-                visitas === 0 ? undefined : visitas,  // Si visitas es 0, pasamos undefined
-                esVip  // esVip ya es un booleano, no hace falta convertirlo
+                nombre || undefined,  
+                telefono || undefined,  
+                visitas === 0 ? undefined : visitas,  
+                esVip
             );
             gestionarClientes(veterinaria);
             break;
@@ -276,13 +275,13 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
             // Solicitar el nuevo nombre
             let nuevoNombreEspecie: string = readlineSync.question("Nuevo nombre: ");
             while (nuevoNombreEspecie == "") {
-                nuevoNombreEspecie = readlineSync.question("El nombre no puede estar vacío. Nuevo nombre: ");
+                nuevoNombreEspecie = readlineSync.question("El nombre no puede estar vacio. Nuevo nombre: ");
             }
             
             // Solicitar la nueva especie
             let nuevaEspecie: string = readlineSync.question("Nueva especie: ");
             while (nuevaEspecie == "") {
-                nuevaEspecie = readlineSync.question("La especie no puede estar vacía. Nueva especie: ");
+                nuevaEspecie = readlineSync.question("La especie no puede estar vacia. Nueva especie: ");
             }
             
             // Llamar a la función para modificar el paciente

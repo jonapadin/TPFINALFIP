@@ -6,11 +6,11 @@
     "clientes": [
       {
         "id": 155,
-        "nombre": "pepe",
-        "telefono": "12345678",
+        "nombre": "Pablo",
+        "telefono": "15161819",
         "visitas": 2,
-        "esVip": true,
-        "cantVisitas": 5
+        "esVip": false,
+        "cantVisitas": 4
       }
     ],
     "pacientes": [
