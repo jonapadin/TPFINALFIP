@@ -15,12 +15,14 @@ export class RedVeterinaria {
   //Gestionar Veterinaria
   public crearVeterinaria(): void {
     const nombre = readlineSync.question("Nombre de la veterinaria: ");
-    const direccion = readlineSync.question("Direccion: ");
-
-    if (!nombre || !direccion) {
-      console.error("Por favor ingresa datos validos.");
-      return;
+    while(!nombre) {
+      readlineSync.question("Ingrese nombre de la veterinaria: ");
     }
+    const direccion = readlineSync.question("Direccion: ");
+    while(!nombre) {
+      readlineSync.question("Ingrese direccion de la veterinaria: ");
+    }
+
     const nuevaVeterinaria: Veterinaria = new Veterinaria(nombre, direccion);
 
     let data: string;
@@ -189,11 +191,22 @@ export class RedVeterinaria {
 
   //Gestionar Proveedor
   public crearProveedor() {
-    const nombreProveedor: string = readlineSync.question(
+    let nombreProveedor: string = readlineSync.question(
       "Nombre del proveedor: "
     );
-    const Telefono: string = readlineSync.question("Telefono: ");
 
+    while(!nombreProveedor) {
+      nombreProveedor = readlineSync.question(
+        "Ingrese nombre del proveedor: "
+      );
+    }
+    let Telefono: string = readlineSync.question("Telefono: ");
+
+    while(!nombreProveedor) {
+      nombreProveedor = readlineSync.question(
+        "Ingrese telefono del proveedor: "
+      );
+    }
     const nuevoProveedor: Proveedor = new Proveedor(nombreProveedor, Telefono);
 
     let data: string;
