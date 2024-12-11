@@ -41,7 +41,7 @@ export class Proveedor {
     // Validamos si el teléfono es un número válido con una expresión regular
     const telefonoRegex = /^[0-9]{10}$/;  // Asegura que tenga 10 dígitos numéricos
     if (!telefonoRegex.test(telefono)) {
-      throw new Error("El teléfono debe tener exactamente 10 dígitos numéricos.");
+      console.error("El teléfono debe tener exactamente 10 dígitos numéricos.");
     }
     this.telefono = telefono;
   }

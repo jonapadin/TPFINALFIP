@@ -200,14 +200,13 @@ export class RedVeterinaria {
         "Ingrese nombre del proveedor: "
       );
     }
-    let Telefono: string = readlineSync.question("Telefono: ");
+    let telefono: string = readlineSync.question("Telefono: ");
 
-    while(!nombreProveedor) {
-      nombreProveedor = readlineSync.question(
-        "Ingrese telefono del proveedor: "
-      );
+    while (!telefono || telefono.length !== 10 || !/^\d{10}$/.test(telefono)) {
+      telefono = readlineSync.question("Ingrese telefono del proveedor (10 dígitos): ");
     }
-    const nuevoProveedor: Proveedor = new Proveedor(nombreProveedor, Telefono);
+    
+    const nuevoProveedor: Proveedor = new Proveedor(nombreProveedor, telefono);
 
     let data: string;
     try {
