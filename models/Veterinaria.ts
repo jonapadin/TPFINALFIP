@@ -134,7 +134,7 @@ while (visitas < 0 || isNaN(visitas)) {
 
 
 
-  public modificarCliente(id: number, nombre?: string, telefono?: string, visitas?: number, esVip?: boolean) {
+  public modificarCliente(idVeterinaria: number, idCliente: number, nombre?: string, telefono?: string, visitas?: number, esVip?: boolean) {
     // Leemos los datos existentes del archivo
     let data: string;
     try {
@@ -152,30 +152,34 @@ while (visitas < 0 || isNaN(visitas)) {
       clientes: any[];
     }[] = JSON.parse(data);
 
-    // Imprimimos las veterinarias y sus clientes para depuración
-    console.log("Veterinarias en el archivo:", veterinariasTxt);
-
     // Buscamos la veterinaria por su id 
-    const veterinariaIndex = veterinariasTxt.findIndex((v: any) => v.id == id); 
-    if (veterinariaIndex == -1) {
+    const veterinariaIndex = veterinariasTxt.findIndex((v) => v.id === idVeterinaria); 
+    if (veterinariaIndex === -1) {
         console.log("No se encontró una veterinaria con ese ID.");
         return;
     }
 
     // Buscamos el cliente dentro de la veterinaria
-    const clienteIndex = veterinariasTxt[veterinariaIndex].clientes.findIndex((cliente: any) => cliente.id == id);
+    const clienteIndex = veterinariasTxt[veterinariaIndex].clientes.findIndex((cliente) => cliente.id === idCliente);
 
-    if (clienteIndex == -1) {
+    if (clienteIndex === -1) {
         console.log("No se encontró un cliente con ese ID dentro de la veterinaria.");
         return;
     }
 
     // Actualizamos el cliente
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono =
-      telefono;
-    veterinariasTxt[veterinariaIndex].clientes[clienteIndex].cantVisitas =
-    visitas;
+    if (nombre !== undefined) {
+        veterinariasTxt[veterinariaIndex].clientes[clienteIndex].nombre = nombre;
+    }
+    if (telefono !== undefined) {
+        veterinariasTxt[veterinariaIndex].clientes[clienteIndex].telefono = telefono;
+    }
+    if (visitas !== undefined) {
+        veterinariasTxt[veterinariaIndex].clientes[clienteIndex].cantVisitas = visitas;
+    }
+    if (esVip !== undefined) {
+        veterinariasTxt[veterinariaIndex].clientes[clienteIndex].esVip = esVip;
+    }
 
     // Guardamos los datos actualizados en el archivo
     try {
@@ -184,9 +188,7 @@ while (visitas < 0 || isNaN(visitas)) {
         JSON.stringify(veterinariasTxt, null, 2),
         "utf8"
       );
-      console.log(
-        `El archivo ${"veterinarias.txt"} ha sido actualizado correctamente.`
-      );
+      console.log(`El archivo "veterinarias.txt" ha sido actualizado correctamente.`);
     } catch (error) {
       console.error("Error al guardar el archivo:", error);
     }
@@ -342,74 +344,60 @@ while (visitas < 0 || isNaN(visitas)) {
     this.pacientes.push(pacientes);
   }
 
- public modificarPaciente(id: number, nombre?: string, especie?: string) {
-    const paciente = this.pacientes.find(pac => pac.getIdDuenio() == id);
-    if (paciente) {
-      if (nombre) paciente.setNombre(nombre);
-      if (especie) paciente.setEspecie(especie);
-    }
-
-    // Leer datos existentes del archivo
+  public modificarPaciente(id: number, nombre?: string, especie?: string) {
+    // Leer los datos del archivo veterinarias.txt
     let data: string;
     try {
       data = fs.readFileSync("veterinarias.txt", "utf-8");
+      if (!data) {
+        console.log("El archivo veterinarias.txt está vacío, inicializándolo...");
+        data = "[]"; // Inicializamos el archivo con un arreglo vacío si no hay datos
+      }
     } catch (error) {
       console.error("Error al leer el archivo:", error);
       return;
     }
 
-    // Parsear datos
-    let veterinariasTxt: {
+    // Parsear el archivo JSON para obtener las veterinarias y sus pacientes
+    const veterinariasTxt: {
       id: number;
       nombre: string;
       direccion: string;
-      pacientes: { idDuenio: number; nombre: string; especie: string }[];
-    }[];
-    try {
-      veterinariasTxt = JSON.parse(data);
-    } catch (error) {
-      console.error("Error al parsear el contenido del archivo:", error);
-      return;
+      clientes: {
+        id: number;
+        nombre: string;
+        telefono: string;
+        visitas: number;
+        esVip: boolean;
+      }[];
+      pacientes: { nombre: string; especie: string; idDuenio: number }[];
+    }[] = JSON.parse(data);
+
+    // Buscar la veterinaria en el arreglo
+    for (let i = 0; i < veterinariasTxt.length; i++) {
+        // Buscar al paciente dentro de la veterinaria
+        const pacienteIndex = veterinariasTxt[i].pacientes.findIndex(paciente => paciente.idDuenio === id);
+
+        if (pacienteIndex !== -1) {
+            // Si encontramos al paciente, modificamos sus datos
+            if (nombre) veterinariasTxt[i].pacientes[pacienteIndex].nombre = nombre;
+            if (especie) veterinariasTxt[i].pacientes[pacienteIndex].especie = especie;
+
+            // Guardar los cambios en el archivo
+            try {
+              fs.writeFileSync("veterinarias.txt", JSON.stringify(veterinariasTxt, null, 2), "utf8");
+              console.log("Paciente modificado con éxito.");
+            } catch (error) {
+              console.error("Error al guardar el archivo:", error);
+            }
+
+            return; // Salir de la función una vez que se haya modificado el paciente
+        }
     }
 
-    // Buscar la veterinaria por su ID
-    const veterinariaIndex = veterinariasTxt.findIndex(v => v.id == this.getId());
-    if (veterinariaIndex == -1 || !veterinariasTxt[veterinariaIndex].pacientes) {
-        console.error("Veterinaria no encontrada o no tiene pacientes.");
-        return;
-    }
-
-    // Buscar el paciente dentro de la veterinaria
-    const pacienteIndex = veterinariasTxt[veterinariaIndex].pacientes.findIndex(p => p.idDuenio == id);
-    if (pacienteIndex == -1) {
-        console.error("No se encontró un paciente con ese ID.");
-        return;
-    }
-
-    // Actualizar los datos del paciente
-    if (nombre)
-      veterinariasTxt[veterinariaIndex].pacientes[pacienteIndex].nombre =
-        nombre;
-    if (especie)
-      veterinariasTxt[veterinariaIndex].pacientes[pacienteIndex].especie =
-        especie;
-
-    // Guardar los datos actualizados en el archivo
-    try {
-      fs.writeFileSync(
-        "veterinarias.txt",
-        JSON.stringify(veterinariasTxt, null, 2),
-        "utf8"
-      );
-      console.log(
-        "El archivo veterinarias.txt ha sido actualizado correctamente. Paciente modificado con éxito!"
-      );
-    } catch (error) {
-      console.error("Error al guardar el archivo:", error);
-    }
-  }
-
-
+    // Si no encontramos el paciente
+    console.log("Paciente no encontrado.");
+}
 
 
   public eliminarPaciente(id: number) {

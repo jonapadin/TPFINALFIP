@@ -163,38 +163,22 @@ function gestionarClientes(veterinaria: Veterinaria): void {
             veterinaria.crearCliente();
             gestionarClientes(veterinaria);
             break;
-        case "3":
-            const buscar = readlineSync.questionInt("ID del cliente a actualizar: ");
-
+            case "3":
+            let idCliente = readlineSync.questionInt("Id de cliente a modificar: ");
+            let nombre = readlineSync.question("Nuevo nombre del cliente (dejar vacío para no modificar): ");
+            let telefono = readlineSync.question("Nuevo teléfono del cliente (dejar vacío para no modificar): ");
+            let visitas = readlineSync.questionInt("Cantidad de visitas del cliente (dejar en 0 para no modificar): ");
+            let esVip = readlineSync.keyInYNStrict("¿Es el cliente VIP? (s/n): ");
             
-            if (isNaN(buscar) || buscar <= 0) {
-                console.log("ID no válido.");
-                return;
-            }
-
-            let nuevoNombre:string = readlineSync.question("Nuevo nombre: ");
-              
-
-            while (!nuevoNombre) {
-                nuevoNombre = readlineSync.question("El nombre no puede estar vacio, Nombre: ");
-            }
-            
-            let nuevoTelefono:string = readlineSync.question("Nuevo telefono: ");
-           
-            while (!/^\d{8}$/.test(nuevoTelefono)) {
-                nuevoTelefono = readlineSync.question("El telefono debe tener exactamente 8 digitos. Telefono: ");
-            }
-            
-            
-            let nuevoCantVisitas:number = readlineSync.questionInt("Nueva cantidad de visitas: ");
-
-            if (nuevoCantVisitas < 0) {
-                console.log("La cantidad de visitas debe ser un número positivo.");
-                return;
-            }
-
-            veterinaria.modificarCliente(buscar,nuevoNombre,nuevoTelefono, nuevoCantVisitas);
-
+            // Llamamos a la función modificarCliente
+            veterinaria.modificarCliente(
+                veterinaria.getId(),  // Usamos veterinaria.id en lugar de veterinaria.getId()
+                idCliente, 
+                nombre || undefined,  // Si nombre está vacío, pasamos undefined
+                telefono || undefined,  // Lo mismo para el teléfono
+                visitas === 0 ? undefined : visitas,  // Si visitas es 0, pasamos undefined
+                esVip  // esVip ya es un booleano, no hace falta convertirlo
+            );
             gestionarClientes(veterinaria);
             break;
         case "4":
@@ -281,34 +265,28 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
             veterinaria.crearPaciente();
             break;
         case "3":
-           const buscar:number = readlineSync.questionInt("ID del paciente a actualizar: ");
+            const buscar: number = readlineSync.questionInt("ID del paciente a actualizar: ");
 
-            // Validate ID input
+            // Validar el ID
             if (buscar <= 0) {
                 console.log("ID no válido.");
                 return;
             }
             
-            let nuevoNombreEspecie:string = readlineSync.question("Nuevo nombre: ");
-         
+            // Solicitar el nuevo nombre
+            let nuevoNombreEspecie: string = readlineSync.question("Nuevo nombre: ");
             while (nuevoNombreEspecie == "") {
                 nuevoNombreEspecie = readlineSync.question("El nombre no puede estar vacío. Nuevo nombre: ");
             }
             
-            let nuevaEspecie:string = readlineSync.question("Nueva especie: ");
+            // Solicitar la nueva especie
+            let nuevaEspecie: string = readlineSync.question("Nueva especie: ");
             while (nuevaEspecie == "") {
-                nuevaEspecie = readlineSync.question("La especie no puede estar vacia. Nueva especie: ");
+                nuevaEspecie = readlineSync.question("La especie no puede estar vacía. Nueva especie: ");
             }
-            gestionarPacientes(veterinaria);
-            break;
-        case "4":
-            const buscarIdDuenio:number = readlineSync.questionInt("ID del paciente a eliminar: ");
-            if (isNaN(buscarIdDuenio) || buscarIdDuenio <= 0) {
-                console.log("ID no valido.");
-                return;
-            }
-
-            veterinaria.eliminarPaciente(buscarIdDuenio);
+            
+            // Llamar a la función para modificar el paciente
+            veterinaria.modificarPaciente(buscar, nuevoNombreEspecie, nuevaEspecie);
 
             gestionarPacientes(veterinaria);
             break;

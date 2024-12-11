@@ -1,28 +1,22 @@
 [
   {
     "id": 588,
-    "nombre": "ombu",
-    "direccion": "devalle 2323",
+    "nombre": "patita",
+    "direccion": "colon3231",
     "clientes": [
       {
         "id": 155,
-        "nombre": "ruben",
+        "nombre": "pepe",
         "telefono": "12345678",
         "visitas": 2,
-        "esVip": false
-      },
-      {
-        "id": 151,
-        "nombre": "Jonathan",
-        "telefono": "15656565",
-        "visitas": 5,
-        "esVip": true
+        "esVip": true,
+        "cantVisitas": 5
       }
     ],
     "pacientes": [
       {
-        "nombre": "pepito",
-        "especie": "gato",
+        "nombre": "sadsad",
+        "especie": "caballo",
         "idDuenio": 155
       }
     ]
