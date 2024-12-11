@@ -10,6 +10,13 @@
         "telefono": "12345678",
         "visitas": 2,
         "esVip": false
+      },
+      {
+        "id": 151,
+        "nombre": "Jonathan",
+        "telefono": "15656565",
+        "visitas": 5,
+        "esVip": true
       }
     ],
     "pacientes": [

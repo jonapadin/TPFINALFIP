@@ -1,5 +1,4 @@
 export class Proveedor {
-
   private id: number;
   private nombre: string;
   private telefono: string;

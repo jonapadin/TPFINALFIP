@@ -1,25 +1,24 @@
-import * as readlineSync from 'readline-sync';
+import * as readlineSync from "readline-sync";
 import * as fs from "fs";
-import { Veterinaria } from './models/Veterinaria';
+import { Veterinaria } from "./models/Veterinaria";
 
 export function menuVeterinaria() {
+  console.log("\n--- Gestión de Veterinaria ---");
+  console.log("1. Ver Lista de Veterinarias");
+  console.log("2. Seleccionar Veterinaria");
+  console.log("0. Regresar al Menú Principal");
 
-    console.log("\n--- Gestión de Veterinaria ---");
-    console.log("1. Ver Lista de Veterinarias");
-    console.log("2. Seleccionar Veterinaria");
-    console.log("0. Regresar al Menú Principal");
-
-    let opcion = readlineSync.question("Elija una opcion: ");
+  let opcion = readlineSync.question("Elija una opcion: ");
 
     switch (opcion) {
         case "1":
             try {
                 const data = fs.readFileSync("veterinarias.txt", "utf-8");
 
-                if (!data) {
-                    console.log("El archivo esta vacio")
-                    return [];
-                }
+        if (!data) {
+          console.log("El archivo esta vacio");
+          return [];
+        }
 
                 const veterinariasTxt: { nombre: string; direccion: string; id: number }[] =
                     JSON.parse(data);
@@ -91,7 +90,7 @@ export function menu(veterinaria: Veterinaria): void {
     console.log("2. Gestionar Pacientes");
     console.log("3. Volver");
 
-    let opcion = readlineSync.question("Seleccione una opcion: ");
+  let opcion = readlineSync.question("Seleccione una opcion: ");
 
     switch (opcion) {
         case "1":
@@ -123,7 +122,7 @@ function gestionarClientes(veterinaria: Veterinaria): void {
     console.log("4. Eliminar Clientes");
     console.log("0. Volver");
 
-    let opcion = readlineSync.question("Seleccione una opcion: ");
+  let opcion = readlineSync.question("Seleccione una opcion: ");
 
     switch (opcion) {
         case "1": 
@@ -228,7 +227,7 @@ function gestionarPacientes(veterinaria: Veterinaria): void {
     console.log("4. Eliminar Pacientes");
     console.log("0. Volver");
 
-    let opcion = readlineSync.question("Seleccione una opcion: ");
+  let opcion = readlineSync.question("Seleccione una opcion: ");
 
     switch (opcion) {
         case "1": 
